@@ -57,7 +57,7 @@ body {
 	<h2>ระบบทะเบียนข้อมูลคลังปัญญาผู้สูงอายุ</h2>
 </div>
 
-  <form class="form-signin" method="post" action="users/admin/auth/check_login">
+  <form class="form-signin" method="post" action="home/check_login">
     <h2 class="form-signin-heading">Login</h2>
     <label for="inputUsername" class="sr-only">Username</label>
     <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>

@@ -2,7 +2,7 @@
 
 <table class="tbadd">
 <tr>
-  <th>ปีงบประมาณ</th>
+  <th>ปีงบประมาณ <span class="Txt_red_12">*</span></th>
   <td>
     <select name="select" class="form-control" style="width:auto;">
       <option>+ เลือกปีงบประมาณ +</option>
@@ -10,7 +10,7 @@
 </td>
 </tr>
 <tr>
-  <th>โครงการ / จังหวัด</th>
+  <th>โครงการ <span class="Txt_red_12">*</span> / จังหวัด <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName" placeholder="โครงการ" style="width:500px;" /> 
     /
@@ -26,7 +26,7 @@
     </td>
 </tr>
 <tr>
-  <th>ผู้รับผิดชอบโครงการ </th>
+  <th>ผู้รับผิดชอบโครงการ  <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName18" placeholder="ชื่อ-สกุล" style="width:350px;" />
     /
@@ -34,7 +34,7 @@
   </span></td>
   </tr>
 <tr>
-  <th>โทรศัพท์ / มือถือ / e-mail</th>
+  <th>โทรศัพท์ <span class="Txt_red_12">*</span> / มือถือ <span class="Txt_red_12">*</span> / e-mail <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName18" placeholder="โทรศัพท์" style="width:250px;" /> /
     <input type="text" class="form-control " id="exampleInputName18" placeholder="มือถือ" style="width:250px;" /> /
@@ -117,25 +117,25 @@
 
 
 <!-- This contains the hidden content for inline calls -->
-<div style='display:none'>
+<div style='display:block'>
       <div id='inline_activity' style='padding:10px; background:#fff;'>
       <h3>บันทึกรายละเอียดกิจกรรม</h3>
       
       <table class="tbadd">
 <tr>
-  <th><span style="width:25%">ชื่อกิจกรรม</span></th>
+  <th><span style="width:25%">ชื่อกิจกรรม<span class="Txt_red_12"> *</span></span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName3" placeholder="ชื่อกิจกรรม" style="width:500px;" />
   </span></td>
 </tr>
 <tr>
-  <th><span style="width:20%">ชื่อวิทยากรภูมิปัญญา</span></th>
+  <th><span style="width:20%">ชื่อวิทยากรภูมิปัญญา<span class="Txt_red_12"> *</span></span></th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName" placeholder="ชื่อวิทยากรภูมิปัญญา" style="width:500px;" />
-    <img src="images/add.png" width="16" height="16" class="vtip" title="เพิ่มชื่อวิทยากร" /></span></td>
+    <input type="text" class="form-control " id="exampleInputName" placeholder="ชื่อวิทยากรภูมิปัญญา (auto complete)" style="width:500px;" />
+    <img src="images/add.png" width="16" height="16" class="vtip" title="เพิ่มชื่อวิทยากร" /><span class="note">* ดึงข้อมูลจาก คปญ.01 ถ้ากรณีที่ไม่มีข้อมูลใน คปญ.01 ให้สามารถใส่ข้อมูลเองได้</span></span></td>
 </tr>
 <tr>
-  <th><span style="width:25%">จำนวนผู้ได้รับประโยชน์ ชาย / หญิง</span></th>
+  <th><span style="width:25%">จำนวนผู้ได้รับประโยชน์ ชาย / หญิง<span class="Txt_red_12"> *</span></span></th>
   <td><span class="form-inline">
     <div style="margin-bottom:10px;">
     0-18  ปี 
@@ -160,13 +160,13 @@
     </td>
 </tr>
 <tr>
-  <th>วันที่ดำเนินการ </th>
+  <th>วันที่ดำเนินการ <span class="Txt_red_12"> *</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control" id="exampleInputName12" value="" style="width:120px;" />
     <img src="images/calendar.png" alt="" width="24" height="24" /></span></td>
   </tr>
 <tr>
-  <th>งบประมาณโครงการ/จำนวน</th>
+  <th>งบประมาณโครงการ/จำนวน<span class="Txt_red_12"> *</span></th>
   <td>
     <span class="form-inline"><input type="text" class="form-control " id="exampleInputName18" placeholder="จำนวน" style="width:250px;" /> บาท </span>
   </td>

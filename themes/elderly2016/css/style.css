@@ -7,9 +7,11 @@ img { border:0;}
 .Txt_red_12 { font-size:12px; color:#C00}
 h3 { text-transform:uppercase; }
 .txtNowrap { white-space: nowrap;}
+.note { font-size:11px; color:#F60; padding-left:20px;}
 
 #search { padding:10px; border:1px dotted #ccc; margin:10px 0; background:url(../images/bg_search.gif) repeat-x #ECF5FF;}
 #search img { margin-right:5px;}
+#search #searchBox span { margin:3px 0; width:180px; display:inline-block; white-space:nowrap;}
 
 
 #newMailL { display:inline-block; float:left; width:30%;padding:0 20px; margin-top:45px;}
@@ -30,6 +32,20 @@ h3 { text-transform:uppercase; }
 #btnBoxAdd { padding-left:20%; padding-top:10px; padding-bottom:10px;}
 .chkPermiss span { text-transform:uppercase;}
 .chkPermiss input#checkbox { margin-top:0px;}
+
+
+
+.center-div
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 250px;
+  bottom: 100px;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
 
 
 /************************* PAGINATION **************************************/
@@ -126,7 +142,7 @@ padding-left: 9px;
 {
 	color:#333;
 	padding:5px;
-	height:40px;
+	height:30px;
 	border-top: 0px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	border-left: 0px solid #ccc;
@@ -144,10 +160,46 @@ padding-left: 9px;
 .tblist tr.odd { background:#EAFFFF}
 
 
+.tblistReport
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 11px;
+	background: #fff;
+	margin:0;
+	margin-bottom:10px;
+	width:auto;
+	border-collapse: collapse;
+	text-align: left;
+}
+.tblistReport th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 10px 5px 3px 5px;
+	border-top: 2px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	text-align:center;
+	color:#336;
+}
+.tblistReport td
+{
+	color:#333;
+	padding:5px;
+	height:30px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+
+
 .tbadd
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	font-size: 13px;
+	font-size: 14px;
 	background: #fff;
 	margin: 0;
 	width: 100%;
@@ -175,7 +227,7 @@ padding-left: 9px;
 {
 	color:#595959;
 	padding: 7px;
-	height:30px;
+	height:50px;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	border-left: 0px solid #ccc;
@@ -193,18 +245,18 @@ padding-left: 9px;
 .tbadd td strong { font-weight:700;}
 .tbadd td.red { color:#F00;}
 .tbadd td label2 { float:left; width:100px;}
-/*.tbadd td span { padding-right:20px; margin:0; display:inline-block; white-space:nowrap;}*/
+.tbadd td span { padding-right:20px; margin:5px 0; display:inline-block; white-space:nowrap;}
 
 .tbadd td.line div { border-bottom:1px solid #ccc; padding:5px 0;}
 
-.tbadd .topic { background:#FCC; border-top:1px dashed #ccc; width:100%; color:#000;}
+.tbadd .topic { background:#f1f1f1; border-top:1px dashed #ccc; width:100%; color:#000;}
 .tbadd .paddL40 { padding-left:40px;}
 
 
 .tbSublist
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	font-size: 14px;
+	font-size: 13px;
 	background: #fff;
 	margin:0;
 	margin-bottom:10px;
@@ -214,14 +266,14 @@ padding-left: 9px;
 }
 .tbSublist th
 {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: normal;
 	padding: 10px 5px 3px 5px;
 	border-top: 1px solid #ccc;
-	border-bottom: 2px solid #ccc;
-	border-left: 0px solid #ccc;
-	border-right: 0px solid #ccc;
-	text-align:left;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	text-align:center;
 	background-color:#f1f1f1;
 	color:#336;
 }
@@ -232,13 +284,46 @@ padding-left: 9px;
 	height:30px;
 	border-top: 0px solid #ccc;
 	border-bottom: 1px solid #ccc;
-	border-left: 0px solid #ccc;
-	border-right: 0px solid #ccc; 
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc; 
+}
+
+
+
+.tbSublist2
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 14px;
+	background: #fff;
+	margin:0;
+	margin-bottom:10px;
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+.tbSublist2 th
+{
+	font-size: 16px;
+	font-weight: normal;
+	padding: 10px 5px 3px 5px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	text-align:left;
+	background-color:#f1f1f1;
+	color:#336;
+}
+.tbSublist2 td
+{
+	color:#333;
+	padding:5px;
+	height:30px;
+	border-top: 0px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc; 
 	width:10%
 }
 
-.form-inline {
-  > .date { width: 110px; }
-}
-
-label.error{color:#F44336;}
+.error{color:#C00;}

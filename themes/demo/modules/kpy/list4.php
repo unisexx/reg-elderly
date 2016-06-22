@@ -2,9 +2,11 @@
 <div id="search">
 <div id="searchBox">
 <form class="form-inline">
-  <div class="col-xs-4">
-    <input type="text" class="form-control " id="exampleInputName2" placeholder="ชื่อกิจกรรม">
-  </div>
+    <select name="select" class="form-control" style="width:180px">
+      <option selected="selected">-- เลือกปีงบประมาณ --</option>
+      <option>2559</option>
+    </select>
+    <input type="text" class="form-control " id="exampleInputName2" placeholder="ชื่อกิจกรรม" style="width:400px;">
   <button type="submit" class="btn btn-info"><img src="images/search.png" width="16" height="16" />ค้นหา</button>
 </form>
 </div>
@@ -34,6 +36,7 @@
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
+  <th>ปีงบประมาณ</th>
   <th>ชื่อกิจกรรม</th>
   <th>วัน/เดือน/ปี </th>
   <th>งบประมาณ</th>
@@ -44,6 +47,7 @@
   </tr>
 <tr>
   <td>1</td>
+  <td>2560</td>
   <td>กิจกรรม abcabcabcabcabc</td>
   <td>10/06/59</td>
   <td>50,000</td>
@@ -60,10 +64,12 @@
   <td>&nbsp;</td>
   <td>&nbsp;</td>
   <td>&nbsp;</td>
+  <td>&nbsp;</td>
   <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
   </tr>
 <tr>
   <td>3</td>
+  <td class="odd">&nbsp;</td>
   <td class="odd">&nbsp;</td>
   <td class="odd">&nbsp;</td>
   <td class="odd cursor">&nbsp;</td>
@@ -80,10 +86,12 @@
   <td>&nbsp;</td>
   <td>&nbsp;</td>
   <td>&nbsp;</td>
+  <td>&nbsp;</td>
   <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
   </tr>
 <tr>
   <td>5</td>
+  <td class="odd">&nbsp;</td>
   <td class="odd">&nbsp;</td>
   <td class="odd">&nbsp;</td>
   <td>&nbsp;</td>

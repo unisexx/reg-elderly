@@ -38,7 +38,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav">
-          	<li><a href="#">Log file</a></li>
+          	<li><a href="logfile.php">Log file</a></li>
           </ul>	
          <ul class="nav navbar-nav navbar-right">
           	<!-- <li class="dropdown">
@@ -53,7 +53,7 @@
                 <li><a href="dep_province.php">หน่วยงาน [จังหวัด]</a></li>
               </ul>
             </li>-->
-          <li><a href="user.php?act=form" class="vtip" title="นายชูศักดิ์  เกียรติเฉลิมคุณ <br>กลุ่มแผนงานและงบประมาณ > กองยุทธศาสตร์และแผนงาน "><img src="images/user.png" width="24" height="24" /></a></li>
+          <li><a href="user.php?act=form" class="vtip" title="นายชูศักดิ์  เกียรติเฉลิมคุณ (สำนักงานส่วนกลาง กทม.) "><img src="images/user.png" width="24" height="24" /></a></li>
             <li><a href="product.php" style="color:#C30">Log out</a></li>
           </ul>
           

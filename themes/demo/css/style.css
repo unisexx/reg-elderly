@@ -11,6 +11,7 @@ h3 { text-transform:uppercase; }
 
 #search { padding:10px; border:1px dotted #ccc; margin:10px 0; background:url(../images/bg_search.gif) repeat-x #ECF5FF;}
 #search img { margin-right:5px;}
+#search #searchBox span { margin:3px 0; width:180px; display:inline-block; white-space:nowrap;}
 
 
 #newMailL { display:inline-block; float:left; width:30%;padding:0 20px; margin-top:45px;}

@@ -2,16 +2,22 @@
 
 <table class="tbadd">
   <tr>
-    <th>หน่วยงาน</th>
-    <td>
-      <select name="select3" class="form-control" style="width:auto;">
+    <th>ปีงบประมาณ <span class="Txt_red_12">*</span></th>
+    <td><select name="select" class="form-control" style="width:auto;">
+      <option>+ เลือกปีงบประมาณ +</option>
+      <option>2560</option>
+    </select></td>
+  </tr>
+  <tr>
+    <th> หน่วยงาน <span class="Txt_red_12">*</span></th>
+    <td><select name="select3" class="form-control" style="width:auto;">
         <option selected="selected">+ เลือกหน่วยงาน +</option>
         <option>สํานักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัดปทุมธานี</option>
       </select>
     </td>
   </tr>
 <tr>
-  <th>ผู้แจ้งข้อมูล / โทรศัพท์ </th>
+  <th>ผู้แจ้งข้อมูล  <span class="Txt_red_12">*</span> / โทรศัพท์  <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName18" placeholder="ชื่อผู้แจ้งข้อมูล" style="width:300px;" />
     /
@@ -71,13 +77,13 @@
       
       <table class="tbadd">
 <tr>
-  <th><span style="width:25%">ชื่อกิจกรรม</span></th>
+  <th><span style="width:25%">ชื่อกิจกรรม  <span class="Txt_red_12">*</span></span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName3" placeholder="ชื่อกิจกรรม" style="width:500px;" />
   </span></td>
 </tr>
 <tr>
-  <th><span style="width:30%">กลุ่มเป้าหมาย/พื้นที่</span>  </th>
+  <th><span style="width:30%">กลุ่มเป้าหมาย/พื้นที่</span>   <span class="Txt_red_12">*</span></th>
   <td>
     <textarea name="exampleInputName2" rows="4" class="form-control " id="exampleInputName2" style="width:600px;" placeholder="รายละเอียดกลุ่มเป้าหมาย/พื้นที่"></textarea>
     </td>
@@ -89,7 +95,7 @@
     <img src="images/calendar.png" alt="" width="24" height="24" /></span></td>
   </tr>
 <tr>
-  <th>งบประมาณ</th>
+  <th>งบประมาณ  <span class="Txt_red_12">*</span></th>
   <td>
     <span class="form-inline"><input type="text" class="form-control " id="exampleInputName18" placeholder="จำนวน" style="width:250px;" /> บาท </span>
   </td>

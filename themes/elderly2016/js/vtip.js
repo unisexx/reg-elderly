@@ -15,7 +15,7 @@ this.vtip = function() {
             
             $('body').append( '<p id="vtip"><img id="vtipArrow" />' + this.t + '</p>' );
                         
-            $('p#vtip #vtipArrow').attr("src", 'themes/admin/images/vtip_arrow.png');
+            $('p#vtip #vtipArrow').attr("src", 'themes/elderly2016/images/vtip_arrow.png');
             $('p#vtip').css("top", this.top+"px").css("left", this.left+"px").fadeIn("fast");
             
         },

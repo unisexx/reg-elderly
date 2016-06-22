@@ -2,10 +2,20 @@
 <div id="search">
 <div id="searchBox">
 <form class="form-inline">
-  <div class="col-xs-4">
-    <input type="text" class="form-control " id="exampleInputName2" placeholder="ชื่อโครงการ (auto complete)">
-  </div>
-  <button type="submit" class="btn btn-info"><img src="images/search.png" width="16" height="16" />ค้นหา</button><span class="note">** กรุณาค้นหาโครงการก่อน</span>
+    <select name="select" class="form-control" style="width:170px">
+      <option>-- เลือกปีงบประมาณ --</option>
+      <option selected="selected">2559</option>
+    </select>  
+    <select name="select3" class="form-control" style="width:180px;">
+      <option>-- เลือกจังหวัด --</option>
+      <option selected="selected">กระบี่</option>
+      <option>กรุงเทพฯ</option>
+    </select>
+    <select name="select2" class="form-control" style="width:500px;">
+      <option>-- เลือกโครงการ --</option>
+      <option selected="selected">โครงการถ่ายทอดคลังปัญญาผู้สูงอายุ</option>
+    </select>
+  <button type="submit" class="btn btn-info"><img src="images/search.png" width="16" height="16" />ค้นหา</button>
 </form>
 </div>
 </div>

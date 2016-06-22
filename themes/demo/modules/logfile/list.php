@@ -35,14 +35,14 @@
   <td>1</td>
   <td nowrap="nowrap">21/01/2559 12:30</td>
   <td nowrap="nowrap">นายชูศักดิ์  เกียรติเฉลิมคุณ</td>
-  <td>เพิ่ม Quotation (QT5901595)</td>
+  <td>เพิ่ม คปญ.1 [นางเครือน้อย ใจกล้า]</td>
   <td>1.10.194.123</td>
   </tr>
 <tr>
   <td>2</td>
   <td nowrap="nowrap" class="odd cursor">21/01/2559 12:20</td>
   <td nowrap="nowrap" class="odd cursor">นางสุมาลี  ดลสุขวงศาวัฒน์</td>
-  <td class="odd cursor">ลบ Product Item (1-69-87)</td>
+  <td class="odd cursor">ล็อกอินเข้าใช้งาน</td>
   <td class="odd cursor">1.10.194.123</td>
   </tr>
 <tr class="odd">

@@ -10,7 +10,7 @@
     <div role="tabpanel" class="tab-pane active" id="data">
 <table class="tbadd">
 <tr>
-  <th>วัน/เดือน/ปีขึ้นทะเบียน // จังหวัด</th>
+  <th>วัน/เดือน/ปีขึ้นทะเบียน <span class="Txt_red_12">*</span> // จังหวัด <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control" id="exampleInputName" value="" style="width:120px;" />
   <img src="images/calendar.png" width="24" height="24" /> // 
@@ -20,7 +20,7 @@
   </span></td>
 </tr>
 <tr>
-  <th>ชื่อ - สกุล</th>
+  <th>ชื่อ - สกุล <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <select name="select3" class="form-control" style="width:auto;">
       <option>+ เลือกคำนำหน้า +</option>
@@ -29,13 +29,35 @@
     </span></td>
 </tr>
 <tr>
-  <th>วัน/เดือน/ปีเกิด (อายุ)</th>
-  <td><span class="form-inline">
-    <input type="text" class="form-control" id="exampleInputName12" value="" style="width:120px;" />
-    <img src="images/calendar.png" alt="" width="24" height="24" /></span> (xx ปี)</td>
+  <th>รูปภาพ</th>
+  <td><input type="file" name="fileField" id="fileField" /></td>
 </tr>
 <tr>
-  <th>เลขประจำตัวประชาชน / วันที่ออกบัตร / วันที่บัตรหมดอายุ / สถานที่ออกบัตร</th>
+  <th>วัน/เดือน/ปีเกิด <span class="Txt_red_12">*</span> (อายุ) </th>
+  <td><span class="form-inline">
+    <select name="select" class="form-control" style="width:auto;">
+      <option>+ วัน +</option>
+    </select>
+    /
+    <select name="select2" class="form-control" style="width:auto;">
+      <option>+ เดือน +</option>
+    </select>
+    /
+    <select name="select4" class="form-control" style="width:auto;">
+      <option>+ ปี +</option>
+    </select>
+  </span>(xx ปี) </td>
+</tr>
+<tr>
+  <th>สถานภาพ <span class="Txt_red_12">*</span></th>
+  <td><span class="form-inline"><span>
+    <input name="radio" type="radio" id="radio" value="radio" checked="checked" />
+มีชีวิต </span> <span>
+<input type="radio" name="radio" id="radio2" value="radio" />
+เสียชีวิต </span></span></td>
+</tr>
+<tr>
+  <th>เลขประจำตัวประชาชน <span class="Txt_red_12">*</span> / วันที่ออกบัตร / วันที่บัตรหมดอายุ / สถานที่ออกบัตร</th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName13" placeholder="เลขประจำตัวประชาชน" style="width:160px;" maxlength="13" />
   / 
@@ -71,7 +93,7 @@
   </span></td>
 </tr>
 <tr>
-  <th>ที่อยู่ตามทะเบียนบ้าน</th>
+  <th>ที่อยู่ตามทะเบียนบ้าน <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName21" placeholder="บ้านเลขที่" style="width:100px;" />
     <input type="text" class="form-control " id="exampleInputName21" placeholder="หมู่ที่" style="width:70px;" />
@@ -90,7 +112,7 @@
     </span></td>
 </tr>
 <tr>
-  <th>ที่อยู่ปัจจุบัน</th>
+  <th>ที่อยู่ปัจจุบัน <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName23" placeholder="บ้านเลขที่" style="width:100px;" />
     <input type="text" class="form-control " id="exampleInputName23" placeholder="หมู่ที่" style="width:70px;" />
@@ -162,7 +184,7 @@
 </table>
 </div>
 
-<div role="tabpanel" class="tab-pane active" id="know">
+<div role="tabpanel" class="tab-pane" id="know">
 <table class="tbadd">
 <tr>
 <th>1. การศึกษา</th>
