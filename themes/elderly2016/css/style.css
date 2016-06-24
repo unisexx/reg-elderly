@@ -245,7 +245,7 @@ padding-left: 9px;
 .tbadd td strong { font-weight:700;}
 .tbadd td.red { color:#F00;}
 .tbadd td label2 { float:left; width:100px;}
-.tbadd td span { padding-right:20px; margin:5px 0; display:inline-block; white-space:nowrap;}
+/*.tbadd td span { padding-right:20px; margin:5px 0; display:inline-block; white-space:nowrap;}*/
 
 .tbadd td.line div { border-bottom:1px solid #ccc; padding:5px 0;}
 
@@ -327,3 +327,4 @@ padding-left: 9px;
 }
 
 .error{color:#C00;}
+.input-group.date{width:150px;}

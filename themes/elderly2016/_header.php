@@ -23,7 +23,7 @@
             </li>
           </ul>
            <ul class="nav navbar-nav">
-          	<li><a href="kpy.php">ประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑)</a></li>
+          	<li><a href="home/histories">ประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑)</a></li>
           </ul>	
           <ul class="nav navbar-nav">
           	<li><a href="home/users">ผู้ใช้งาน</a></li>

@@ -85,13 +85,22 @@ jQuery(function($){
 <![endif]-->
 
 
+<link rel="stylesheet" href="media/js/bootstrap-datepicker-thai-thai/css/datepicker.css" />
+<script src="media/js/bootstrap-datepicker-thai-thai/js/bootstrap-datepicker.js"></script>
+<script src="media/js/bootstrap-datepicker-thai-thai/js/bootstrap-datepicker-thai.js"></script>
+<script src="media/js/bootstrap-datepicker-thai-thai/js/locales/bootstrap-datepicker.th.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".datepickerTH").datepicker({ autoclose: true });
+	});
+</script>
 
 
-
-
-
-
-
-
-
-
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script>window.jQuery || document.write('<script src="themes/elderly2016/js/jquery.min.js"><\/script>')</script>
+<script src="themes/elderly2016/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="themes/elderly2016/js/ie10-viewport-bug-workaround.js"></script>
