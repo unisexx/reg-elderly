@@ -54,18 +54,7 @@
   <input type="button" title="เพิ่มโครงการ" value="เพิ่มรายการ" onclick="document.location='home/histories/form'" class="btn btn-warning vtip" />
 </div>
 
-<div class="paginationTG">
-	<ul>
-    <li style="margin-right:10px;">หน้าที่</li>
-	<li class="currentpage">1</li><li ><a href=''>2</a></li>
-	<li><a href="">3</a></li>
-	<li><a href="">4</a></li>
-	<li><a href="">5</a></li>
-	<li><a href="">6</a></li>
-	<li><a href="">7</a></li> . . . <li ><a href="">19</a></li>
-	<li><a href="">20</a></li><li ><a href="">21</a></li>
-	</ul>
-</div>
+<?=$rs->pagination();?>
 
 <table class="tblist">
 <tr>
@@ -78,68 +67,60 @@
   <th style="width:35%">ข้อมูลติดต่อ</th>
   <th>จัดการ</th>
   </tr>
-<tr>
-  <td>1</td>
-  <td>10/05/2555</td>
-  <td>ลำพูน</td>
-  <td>นางเครือน้อย ใจกล้า</td>
-  <td>70</td>
-  <td><img src="themes/elderly2016/images/star.png" width="32" height="32" class="vtip" title="1.การแพทย์และสาธารณสุข <br> 2.วิทยาศาสตร์และเทคโนโลยี <br> 3.ศาสนา จริยธรรม" /></td>
-  <td>691 หมู่ 24 ถนนดอยเขาควาย ตำบลรอบเวียง อำเภอเมือง เชียงราย 57000<br />
-    0-5375-6032</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
+  <?foreach($rs as $key=>$row):?>
+	<tr class="<?=alternator('','odd');?>">
+  <td><?=($key+1)+$rs->paged->current_row?></td>
+  <td><?=mysql_to_th($row->regis_date)?></td>
+  <td><?=get_province_name($row->regis_province_id)?></td>
+  <td><?=$row->title?><?=$row->name?></td>
+  <td><?=calculate_age($row->birth_day,$row->birth_month,$row->birth_year)?></td>
+  <td><img src="themes/elderly2016/images/star.png" width="32" height="32" class="vtip" title="<?=wisdom_list($row)?>" /></td>
+  <td>
+  	<?=$row->now_home_no?>
+  	<?=$row->now_moo != "" ? " หมู่ที่ ".$row->now_moo : "" ;?>
+  	<?=$row->now_soi != "" ? " ซอย".$row->now_soi : "" ;?>
+  	<?=$row->now_district_id != "" ? " ตำบล".get_district_name($row->now_district_id) : "" ;?>
+  	<?=$row->now_amphur_id != "" ? " อำเภอ".get_amphur_name($row->now_amphur_id) : "" ;?>
+  	<?=$row->now_province_id != "" ? get_province_name($row->now_province_id) : "" ;?>
+  	<?=$row->now_post_code != "" ? $row->now_post_code : "" ;?>
+  </td>
+  <td>
+  	<a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a>
+  	<a href="home/histories/form/<?=$row->id?>"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a>
+  	<a href="home/histories/delete/<?=$row->id?>"><img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้" onclick="return confirm('<?php echo "ยืนยันการลบ?";?>')"  /></a>
+  </td>
   </tr>
-<tr class="odd">
-  <td>2</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td class="odd cursor"><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr class="odd">
-  <td>4</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
+	<?endforeach;?>
 </table>
 
-<div class="paginationTG">
-	<ul>
-    <li style="margin-right:10px;">หน้าที่</li>
-	<li class="currentpage">1</li><li ><a href=''>2</a></li>
-	<li><a href="">3</a></li>
-	<li><a href="">4</a></li>
-	<li><a href="">5</a></li>
-	<li><a href="">6</a></li>
-	<li><a href="">7</a></li> . . . <li ><a href="">19</a></li>
-	<li><a href="">20</a></li><li ><a href="">21</a></li>
-  </ul>
-</div>
+<?=$rs->pagination();?>
+
+<?
+function wisdom_list($row){
+	$txt = '';
+	if($row->wis_study != ""){ $txt .= "- การศึกษา<br>";}
+	if($row->wis_medical != ""){ $txt .= "- การแพทย์และสาธารณสุข<br>";}
+	if($row->wis_agriculture != ""){ $txt .= "- การเกษตร<br>";}
+	if($row->wis_natural != ""){ $txt .= "- ทรัพยากรธรรมชาติและสิ่งแวดล้อม<br>";}
+	if($row->wis_science != ""){ $txt .= "- วิทยาศาสตร์และเทคโนโลยี<br>";}
+	if($row->wis_engineer != ""){ $txt .= "- วิศวกรรม<br>";}
+	if($row->wis_architecture != ""){ $txt .= "- สถาปัตยกรรม<br>";}
+	if($row->wis_social != ""){ $txt .= "- พัฒนาสังคม สังคมสงเคราะห์  จัดสวัสดิการชุมชนฯ<br>";}
+	if($row->wis_law != ""){ $txt .= "- กฎหมาย<br>";}
+	if($row->wis_politics != ""){ $txt .= "- การเมืองการปกครอง<br>";}
+	if($row->wis_art != ""){ $txt .= "- ศิลปะ วัฒนธรรม ประเพณี<br>";}
+	if($row->wis_religion != ""){ $txt .= "- ศาสนา จริยธรรม<br>";}
+	if($row->wis_commercial != ""){ $txt .= "- พาณิชย์และบริการ<br>";}
+	if($row->wis_security != ""){ $txt .= "- ความมั่นคง<br>";}
+	if($row->wis_management != ""){ $txt .= "- บริหารจัดการและบริหารธุรกิจ<br>";}
+	if($row->wis_publicity != ""){ $txt .= "- การประชาสัมพันธ์<br>";}
+	if($row->wis_transport != ""){ $txt .= "- คมนาคมและการสื่อสาร<br>";}
+	if($row->wis_energy != ""){ $txt .= "- พลังงาน<br>";}
+	if($row->wis_foreign != ""){ $txt .= "- ต่างประเทศ<br>";}
+	if($row->wis_materials != ""){ $txt .= "- อุตสาหกรรม หัตถกรรม จักสารและโอท็อป<br>";}
+	if($row->wis_language != ""){ $txt .= "- ภาษา วรรณคดี วรรณศิลป์<br>";}
+	if($row->wis_rhetoric != ""){ $txt .= "- วาทศิลป์<br>";}
+	if($row->wis_other != ""){ $txt .= "- อื่นๆ<br>";}
+	return $txt;
+}
+?>

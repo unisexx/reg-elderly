@@ -18,7 +18,7 @@
     <div class="input-group date">
 	  <input type="text" class="form-control datepickerTH" name="regis_date" data-date-language="th-th" value="<?=DB2Date($rs->regis_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> // 
-	  <?=form_dropdown('regis_province_id',get_option('id','name','province order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+	  <?=form_dropdown('regis_province_id',get_option('id','name','province order by name asc'),@$rs->regis_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
     </span>
   </td>
 </tr>
@@ -68,9 +68,9 @@
 <tr>
   <th>สถานภาพ <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline"><span>
-    <input name="status" type="radio" id="radio" value="radio" value="มีชีวิต" <?=$rs->status == 'มีชีวิต'?'checked=checked':'';?> />
+    <input name="status" type="radio" id="radio" value="มีชีวิต" <?=$rs->status == 'มีชีวิต'?'checked=checked':'';?> />
 มีชีวิต </span> <span>
-<input name="status" type="radio" id="radio2" value="radio" value="เสียชีวิต" <?=$rs->status == 'เสียชีวิต'?'checked=checked':'';?> />
+<input name="status" type="radio" id="radio2" value="เสียชีวิต" <?=$rs->status == 'เสียชีวิต'?'checked=checked':'';?> />
 เสียชีวิต </span></span></td>
 </tr>
 <tr>
@@ -82,7 +82,7 @@
 	  <input type="text" class="form-control datepickerTH" placeholder="วันออกบัตร" name="issue_date" data-date-language="th-th" value="<?=DB2Date($rs->issue_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> / 
   <div class="input-group date">
-	  <input type="text" class="form-control datepickerTH" placeholder="วันบัตรหมดอายุ" name="issue_date" data-date-language="th-th" value="<?=DB2Date($rs->expire_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+	  <input type="text" class="form-control datepickerTH" placeholder="วันบัตรหมดอายุ" name="expire_date" data-date-language="th-th" value="<?=DB2Date($rs->expire_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> /
   <input type="text" class="form-control " id="exampleInputName16" placeholder="สถานที่ออกบัตร" name="issue_place" value="<?=$rs->issue_place?>" style="width:300px;" />
   </span></td>
@@ -118,7 +118,9 @@
     <input type="text" class="form-control " id="exampleInputName21" placeholder="หมู่ที่" style="width:70px;" name="reg_moo" value="<?=$rs->reg_moo?>" />
     <input type="text" class="form-control " id="exampleInputName21" placeholder="ซอย" style="width:200px;" name="reg_soi" value="<?=$rs->reg_soi?>" />
     <div style="margin-top:10px;">
-      <?=form_dropdown('reg_province_id',get_option('id','name','province order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+	  <span class="spanProvince">
+      	<?=form_dropdown('reg_province_id',get_option('id','name','province order by name asc'),@$rs->reg_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+      </span>
       <span class="spanAmphur">
 			<select name="reg_amphur_id" class="form-control" style="width:auto;" disabled="disabled">
 				<option>+ เลือกอำเภอ +</option>
@@ -139,14 +141,16 @@
     <input type="text" class="form-control " id="exampleInputName23" placeholder="หมู่ที่" style="width:70px;" name="now_moo" value="<?=$rs->now_moo?>" />
     <input type="text" class="form-control " id="exampleInputName23" placeholder="ซอย" style="width:200px;" name="now_soi" value="<?=$rs->now_soi?>" />
     <div style="margin-top:10px;">
-      <?=form_dropdown('now_province_id',get_option('id','name','province order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+      <span class="spanProvince">
+      	<?=form_dropdown('now_province_id',get_option('id','name','province order by name asc'),@$rs->now_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+      </span>
       <span class="spanAmphur">
-			<select name="now_amphur_id" class="form-control" style="width:auto;">
+			<select name="now_amphur_id" class="form-control" style="width:auto;" disabled="disabled">
 				<option>+ เลือกอำเภอ +</option>
 			</select>
       </span>
       <span class="spanDistrict">
-      		<select name="now_amphur_id" class="form-control" style="width:auto;">
+      		<select name="now_district_id" class="form-control" style="width:auto;" disabled="disabled">
 	        	<option>+ เลือกตำบล +</option>
 	        </select>
       </span>
@@ -156,37 +160,39 @@
 </tr>
 <tr>
   <th>สถานภาพ</th>
-  <td><form class="form-inline">
-    <span><input type="radio" name="marital_status" value="โสด" <?=$rs->marital_status = 'โสด'?'checked="checked"':'';?>/> โสด</span>
-    <span><input type="radio" name="marital_status" value="สมรสอยู่ด้วยกัน" <?=$rs->marital_status = 'สมรสอยู่ด้วยกัน'?'checked="checked"':'';?> /> สมรสอยู่ด้วยกัน</span>
-    <span><input type="radio" name="marital_status" value="สมรสแยกกันอยู่" <?=$rs->marital_status = 'สมรสแยกกันอยู่'?'checked="checked"':'';?> /> สมรสแยกกันอยู่</span>
-    <span><input type="radio" name="marital_status" value="หม้าย / แยกกันอยู่" <?=$rs->marital_status = 'หม้าย / แยกกันอยู่'?'checked="checked"':'';?> /> หม้าย / แยกกันอยู่</span>
-    <span><input type="radio" name="marital_status" value="หม้ายคู่สมรสเสียชีวิต" <?=$rs->marital_status = 'หม้ายคู่สมรสเสียชีวิต'?'checked="checked"':'';?> /> หม้ายคู่สมรสเสียชีวิต</span>
-    <span><input type="radio" name="marital_status" value="อยู่ด้วยกันโดยไม่สมรส" <?=$rs->marital_status = 'อยู่ด้วยกันโดยไม่สมรส'?'checked="checked"':'';?> /> อยู่ด้วยกันโดยไม่สมรส</span>
-    <span><input type="radio" name="marital_status" value="อื่นๆ" <?=$rs->marital_status = 'อื่นๆ'?'checked="checked"':'';?> /> อื่นๆ 
-      <input type="text" class="form-control " id="exampleInputName25" placeholder="ระบุ" style="width:200px;" name="marital_status_other" value="<?=$rs->marital_status_other?>" /></span>
-    </form></td>
+  <td>
+  	<span class="form-inline">
+  		<span><input type="radio" name="marital_status" value="โสด" <?=$rs->marital_status == 'โสด'?'checked="checked"':'';?>/> โสด</span>
+	    <span><input type="radio" name="marital_status" value="สมรสอยู่ด้วยกัน" <?=$rs->marital_status == 'สมรสอยู่ด้วยกัน'?'checked="checked"':'';?> /> สมรสอยู่ด้วยกัน</span>
+	    <span><input type="radio" name="marital_status" value="สมรสแยกกันอยู่" <?=$rs->marital_status == 'สมรสแยกกันอยู่'?'checked="checked"':'';?> /> สมรสแยกกันอยู่</span>
+	    <span><input type="radio" name="marital_status" value="หม้าย / แยกกันอยู่" <?=$rs->marital_status == 'หม้าย / แยกกันอยู่'?'checked="checked"':'';?> /> หม้าย / แยกกันอยู่</span>
+	    <span><input type="radio" name="marital_status" value="หม้ายคู่สมรสเสียชีวิต" <?=$rs->marital_status == 'หม้ายคู่สมรสเสียชีวิต'?'checked="checked"':'';?> /> หม้ายคู่สมรสเสียชีวิต</span>
+	    <span><input type="radio" name="marital_status" value="อยู่ด้วยกันโดยไม่สมรส" <?=$rs->marital_status == 'อยู่ด้วยกันโดยไม่สมรส'?'checked="checked"':'';?> /> อยู่ด้วยกันโดยไม่สมรส</span>
+	    <span><input type="radio" name="marital_status" value="อื่นๆ" <?=$rs->marital_status == 'อื่นๆ'?'checked="checked"':'';?> /> อื่นๆ</span><br>
+	    <input type="text" class="form-control " id="exampleInputName25" placeholder="ระบุ" style="width:200px;" name="marital_status_other" value="<?=$rs->marital_status_other?>" />
+  	</span>
+  </td>
 </tr>
 <tr>
   <th>การศึกษา</th>
-  <td><form class="form-inline">
+  <td>
     <span>
-	<input type="radio" name="education" value="ไม่ได้เรียนหนังสือ" /> ไม่ได้เรียนหนังสือ</span> <span>
-	<input type="radio" name="education" value="ประถมศึกษา" /> ประถมศึกษา</span> <span>
-	<input type="radio" name="education" value="มัธยมศึกษาตอนต้น" /> มัธยมศึกษาตอนต้น</span> <span>
-	<input type="radio" name="education" value="มัธยมศึกษาตอนปลาย" /> มัธยมศึกษาตอนปลาย</span><span>
-	<input type="radio" name="education" value="อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)" /> อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)</span> <span>
-	<input type="radio" name="education" value="ปริญญาตรี" /> ปริญญาตรี</span> <span>
-	<input type="radio" name="education" value="อื่นๆ" /> อื่นๆ
-	<input type="text" class="form-control " id="exampleInputName26" placeholder="ระบุ" style="width:200px;" name="education_other" value="<?=$rs->education_other?>" />
+	<input type="radio" name="education" value="ไม่ได้เรียนหนังสือ" <?=$rs->education == 'ไม่ได้เรียนหนังสือ'?'checked="checked"':'';?> /> ไม่ได้เรียนหนังสือ</span> <span>
+	<input type="radio" name="education" value="ประถมศึกษา" <?=$rs->education == 'ประถมศึกษา'?'checked="checked"':'';?> /> ประถมศึกษา</span> <span>
+	<input type="radio" name="education" value="มัธยมศึกษาตอนต้น" <?=$rs->education == 'มัธยมศึกษาตอนต้น'?'checked="checked"':'';?> /> มัธยมศึกษาตอนต้น</span> <span>
+	<input type="radio" name="education" value="มัธยมศึกษาตอนปลาย" <?=$rs->education == 'มัธยมศึกษาตอนปลาย'?'checked="checked"':'';?> /> มัธยมศึกษาตอนปลาย</span><span>
+	<input type="radio" name="education" value="อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)" <?=$rs->education == 'อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)'?'checked="checked"':'';?> /> อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)</span> <span>
+	<input type="radio" name="education" value="ปริญญาตรี" <?=$rs->education == 'ปริญญาตรี'?'checked="checked"':'';?>/> ปริญญาตรี</span> <span>
+	<input type="radio" name="education" value="อื่นๆ" <?=$rs->education == 'อื่นๆ'?'checked="checked"':'';?> /> อื่นๆ
+	<input type="text" class="form-control" id="exampleInputName26" placeholder="ระบุ" style="width:200px;" name="education_other" value="<?=$rs->education_other?>" />
 	</span>
-  </form></td>
+  </td>
 </tr>
 <tr>
   <th>อาชีพปัจจุบัน</th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName3" placeholder="อาชีพปัจจุบัน" style="width:300px;" name="current_occupation" value="<?=$rs->current_occupation?>" /><br />
-    <textarea rows="3" class="form-control " id="exampleInputName3" style="width:600px; margin-top:10px;" placeholder="รายละเอียด" name="current_occupation_detail"><?=$rs->current_occupation_detail?></textarea>
+    <input type="text" class="form-control " placeholder="อาชีพปัจจุบัน" style="width:300px;" name="current_occupation" value="<?=$rs->current_occupation?>" /><br />
+    <textarea rows="3" class="form-control" style="width:600px; margin-top:10px;" placeholder="รายละเอียด" name="current_occupation_detail"><?=$rs->current_occupation_detail?></textarea>
   </span></td>
 </tr>
 <tr>
@@ -350,7 +356,7 @@
 
 
 <div id="btnBoxAdd">
-  <input name="input" type="button" title="บันทึก" value="บันทึก" class="btn btn-primary" style="width:100px;"/>
+  <input name="input" type="submit" title="บันทึก" value="บันทึก" class="btn btn-primary" style="width:100px;"/>
   <input name="input2" type="button" title="ย้อนกลับ" value="ย้อนกลับ"  onclick="history.back(-1)"  class="btn btn-default" style="width:100px;"/>
 </div>
 
@@ -361,14 +367,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	// ที่อยู่ตามทะเบียนบ้าน * --------------------------------------------------------
 	// select จังหวัด หา อำเภอ
-	$('table').on('change', "select[name='reg_province_id']", function() {
+	$('table').on('change', "select[name=reg_province_id]", function() {
 		var province_id = $(this).val();
-		var ele = $(this).next(".spanAmphur");
+		var ele = $(this).closest('.spanProvince').next(".spanAmphur");
 		if(province_id == ""){
 				$(".spanAmphur").find('select').val('').attr("disabled", true);
 		}else{
-			$.get('home/ajax/get_select_amphur',{
+			$.get('home/ajax/get_select_reg_amphur',{
 				'province_id' : province_id
 			},function(data){
 				ele.html(data);
@@ -377,20 +384,92 @@ $(document).ready(function(){
 	});
 
 	// select อำเภอ หาตำบล
-	$('table').on('change', "select[name='reg_amphur_id']", function() {
+	$('table').on('change', "select[name=reg_amphur_id]", function() {
 		var amphur_id = $(this).val();
-		var ele = $(this).prev(".spanAmphur").next(".spanDistrict");
+		var ele = $(this).closest(".spanAmphur").next(".spanDistrict");
 		if(amphur_id == ""){
 				$(".spanDistrict").find('select').val('').attr("disabled", true);
 		}else{
-			$.get('home/ajax/get_select_district',{
+			$.get('home/ajax/get_select_reg_district',{
 				'amphur_id' : amphur_id
 			},function(data){
-				$('.loading').hide();
-				$("#lawsubmaintype").html(data);
+				ele.html(data);
 			});
 		}
 	});
+	
+	<?php if(@$rs->id != ""):?>
+	var reg_province_id = '<?=$rs->reg_province_id?>';
+	var reg_amphur_id = '<?=$rs->reg_amphur_id?>';
+	var reg_district_id = '<?=$rs->reg_district_id?>';
+	
+	$.get('home/ajax/get_select_reg_amphur',{
+		'province_id' : reg_province_id,
+		'amphur_id' : reg_amphur_id
+	},function(data){
+		$('select[name=reg_amphur_id]').closest('.spanAmphur').html(data);
+	});
+	
+	$.get('home/ajax/get_select_reg_district',{
+		'amphur_id' : reg_amphur_id,
+		'district_id' : reg_district_id
+	},function(data){
+		$('select[name=reg_district_id]').closest('.spanDistrict').html(data);
+	});
+	<?php endif;?>
+	// ที่อยู่ตามทะเบียนบ้าน * --------------------------------------------------------
+	
+	// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
+	// select จังหวัด หา อำเภอ
+	$('table').on('change', "select[name=now_province_id]", function() {
+		var province_id = $(this).val();
+		var ele = $(this).closest('.spanProvince').next(".spanAmphur");
+		if(province_id == ""){
+				$(".spanAmphur").find('select').val('').attr("disabled", true);
+		}else{
+			$.get('home/ajax/get_select_now_amphur',{
+				'province_id' : province_id
+			},function(data){
+				ele.html(data);
+			});
+		}
+	});
+
+	// select อำเภอ หาตำบล
+	$('table').on('change', "select[name=now_amphur_id]", function() {
+		var amphur_id = $(this).val();
+		var ele = $(this).closest(".spanAmphur").next(".spanDistrict");
+		if(amphur_id == ""){
+				$(".spanDistrict").find('select').val('').attr("disabled", true);
+		}else{
+			$.get('home/ajax/get_select_now_district',{
+				'amphur_id' : amphur_id
+			},function(data){
+				ele.html(data);
+			});
+		}
+	});
+	
+	<?php if(@$rs->id != ""):?>
+	var now_province_id = '<?=$rs->now_province_id?>';
+	var now_amphur_id = '<?=$rs->now_amphur_id?>';
+	var now_district_id = '<?=$rs->now_district_id?>';
+	
+	$.get('home/ajax/get_select_now_amphur',{
+		'province_id' : now_province_id,
+		'amphur_id' : now_amphur_id
+	},function(data){
+		$('select[name=now_amphur_id]').closest('.spanAmphur').html(data);
+	});
+	
+	$.get('home/ajax/get_select_now_district',{
+		'amphur_id' : now_amphur_id,
+		'district_id' : now_district_id
+	},function(data){
+		$('select[name=now_district_id]').closest('.spanDistrict').html(data);
+	});
+	<?php endif;?>
+	// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
 	
 });
 </script>

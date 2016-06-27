@@ -30,12 +30,45 @@ if(!function_exists('fix_file'))
     }
 }
 
+if(!function_exists('get_district_name'))
+{
+	function get_district_name($district_id){
+		$CI =& get_instance();
+		$rs = $CI->db->query("select name from district where id = ".$district_id)->row();
+		return $rs->name;
+	}
+}
+
+if(!function_exists('get_amphur_name'))
+{
+	function get_amphur_name($amphur_id){
+		$CI =& get_instance();
+		$rs = $CI->db->query("select name from amphur where id = ".$amphur_id)->row();
+		return $rs->name;
+	}
+}
+
 if(!function_exists('get_province_name'))
 {
 	function get_province_name($province_id){
 		$CI =& get_instance();
 		$rs = $CI->db->query("select name from province where id = ".$province_id)->row();
 		return $rs->name;
+	}
+}
+
+if(!function_exists('calculate_age'))
+{
+	function calculate_age($day,$month,$year){
+	# object oriented
+	$birth_day = ($year-543).'-'.$month.'-'.$day;
+	
+	$from = new DateTime($birth_day);
+	$to   = new DateTime('today');
+	return $from->diff($to)->y;
+	
+	# procedural
+	// echo date_diff(date_create('1970-02-01'), date_create('today'))->y, "\n";
 	}
 }
 ?>
