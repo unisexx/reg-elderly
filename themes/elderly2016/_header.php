@@ -16,7 +16,7 @@
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">บันทึกข้อมูล <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                <li><a href="kpy.php?act=list2">รายงานผลการดำเนินงานโครงการ (คปญ. ๒)</a></li>
+                <li><a href="home/projects">รายงานผลการดำเนินงานโครงการ (คปญ. ๒)</a></li>
                 <li><a href="kpy.php?act=list3">ตารางวิเคราะห์ SWOT (คปญ. ๓)</a></li>
                 <li><a href="kpy.php?act=list4">แผนการดำเนินงาน (คปญ. ๔)</a></li>
                 </ul>

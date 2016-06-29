@@ -367,6 +367,79 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	// validate
+	// $("form").validate({
+		// rules: {
+			// regis_date:"required",
+			// regis_province_id:"required",
+			// title:"required",
+			// birth_day:"required",
+			// birth_month:"required",
+			// birth_year:"required",
+			// status:"required",
+			// id_card:"required",
+			// issue_date:"required",
+			// expire_date:"required",
+			// issue_place:"required",
+			// reg_home_no:"required",
+			// reg_moo:"required",
+			// reg_soi:"required",
+			// reg_road:"required",
+			// reg_province_id:"required",
+			// reg_amphur_id:"required",
+			// reg_district_id:"required",
+			// reg_post_code:"required",
+			// now_home_no:"required",
+			// now_moo:"required",
+			// now_soi:"required",
+			// now_road:"required",
+			// now_province_id:"required",
+			// now_amphur_id:"required",
+			// now_district_id:"required",
+			// now_post_code:"required"
+		// },
+		// messages:{
+			// regis_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// regis_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// title:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// birth_day:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// birth_month:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// birth_year:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// status:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// id_card:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// issue_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// expire_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// issue_place:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_home_no:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_moo:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_soi:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_road:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_amphur_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_district_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// reg_post_code:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_home_no:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_moo:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_soi:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_road:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_amphur_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_district_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// now_post_code:"ฟิลด์นี้ห้ามเป็นค่าว่าง"
+		// },
+        // errorPlacement: function(error, element)
+        // {
+	            // if ( element.is(":radio,:checkbox")) 
+	            // {
+	                // error.appendTo( element.parents('td') );
+	            // }
+	            // else 
+	            // { // This is the default behavior 
+	                // error.insertAfter( element );
+	            // }
+		// }
+	// });
+	
 	// ที่อยู่ตามทะเบียนบ้าน * --------------------------------------------------------
 	// select จังหวัด หา อำเภอ
 	$('table').on('change', "select[name=reg_province_id]", function() {
