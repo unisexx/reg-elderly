@@ -20,18 +20,7 @@
   <input type="button" title="เพิ่มรายงาน คปญ.2 รายงานผลการดำเนินงานโครงการ" value="เพิ่มรายงาน คปญ.2" onclick="document.location='home/projects/form'" class="btn btn-warning vtip" />
 </div>
 
-<div class="paginationTG">
-	<ul>
-    <li style="margin-right:10px;">หน้าที่</li>
-	<li class="currentpage">1</li><li ><a href=''>2</a></li>
-	<li><a href="">3</a></li>
-	<li><a href="">4</a></li>
-	<li><a href="">5</a></li>
-	<li><a href="">6</a></li>
-	<li><a href="">7</a></li> . . . <li ><a href="">19</a></li>
-	<li><a href="">20</a></li><li ><a href="">21</a></li>
-	</ul>
-</div>
+<?=$rs->pagination();?>
 
 <table class="tblist">
 <tr>
@@ -44,68 +33,28 @@
   <th>SWOT คปญ.3</th>
   <th>จัดการ</th>
   </tr>
-<tr>
-  <td>1</td>
-  <td>2559</td>
-  <td>โครงการถ่ายทอดคลังปัญญาผู้สูงอายุ</td>
-  <td>กิจกรรมโครงการใส่ใจ<br /></td>
-  <td>1. นางสาวสุภาวดี  เมธาวรากร<br />
-    2. นางสาวชลลดา  วินิจฉัยกุล</td>
-  <td>กระบี่</td>
-  <td><a href="kpy.php?act=list3"><img src="themes/elderly2016/images/swot.png" width="48" height="48" /></a></td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
+  <?foreach($rs as $key=>$row):?>
+  <tr class="<?=alternator('','odd');?>">
+	  <td><?=($key+1)+$rs->paged->current_row?></td>
+	  <td><?=$row->budget_year?></td>
+	  <td><?=$row->name?></td>
+	  <td>
+	  	<?$activities = $this->db->query('select * from activities where project_id = '.$row->id)->result();?>
+	  	<?foreach($activities as $activity):?>
+  		<div><?=$activity->activity_name?></div>
+  		<?endforeach;?>
+	  </td>
+	  <td>
+	  	<?$experts = $this->db->query('select * from experts where project_id = '.$row->id)->result();?>
+	  	<?foreach($experts as $expert):?>
+  		<div><?=$expert->expert_name?></div>
+  		<?endforeach;?>
+	  </td>
+	  <td><?=get_province_name($row->province_id)?></td>
+	  <td><a href="kpy.php?act=list3"><img src="themes/elderly2016/images/swot.png" width="48" height="48" /></a></td>
+	  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="home/projects/form/<?=$rs->id?>"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <a href="home/projects/delete/<?=$rs->id?>"><img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></a></td>
   </tr>
-<tr class="odd">
-  <td>2</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td class="odd cursor"><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr class="odd">
-  <td>4</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
+  <?endforeach;?>
 </table>
 
-<div class="paginationTG">
-	<ul>
-    <li style="margin-right:10px;">หน้าที่</li>
-	<li class="currentpage">1</li><li ><a href=''>2</a></li>
-	<li><a href="">3</a></li>
-	<li><a href="">4</a></li>
-	<li><a href="">5</a></li>
-	<li><a href="">6</a></li>
-	<li><a href="">7</a></li> . . . <li ><a href="">19</a></li>
-	<li><a href="">20</a></li><li ><a href="">21</a></li>
-  </ul>
-</div>
+<?=$rs->pagination();?>

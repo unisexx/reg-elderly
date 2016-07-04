@@ -80,7 +80,12 @@
   <tr>
   	<td><?=$key+1?></td>
   	<td><?=$act->activity_name?></td>
-  	<td></td>
+  	<td>
+  		<?$experts = $this->db->query('select * from experts where activity_id = '.$act->id)->result();?>
+  		<?foreach($experts as $expert):?>
+  		<div><?=$expert->expert_name?></div>
+  		<?endforeach;?>
+  	</td>
   	<td><?=$act->b1m?></td>
   	<td><?=$act->b1f?></td>
   	<td><?=$act->b2m?></td>
@@ -108,7 +113,7 @@
 
 
 <!-- This contains the hidden content for inline calls -->
-<div style='display:block'>
+<div style='display:none;'>
       <div id='inline_activity' style='padding:10px; background:#fff;'>
       <h3>บันทึกรายละเอียดกิจกรรม</h3>
       
@@ -122,7 +127,7 @@
 <tr>
   <th><span style="width:20%">ชื่อวิทยากรภูมิปัญญา<span class="Txt_red_12"> *</span></span></th>
   <td><span class="form-inline">
-    <input class="inputExpert form-control" type="text" class="form-control " id="exampleInputName" placeholder="ชื่อวิทยากรภูมิปัญญา (auto complete)" style="width:500px;" />
+    <input class="inputExpert form-control" type="text" class="form-control " id="exampleInputName" placeholder="ชื่อวิทยากรภูมิปัญญา (auto complete)" style="width:500px;" name="expert_name" />
     <img id="addExpert" src="themes/elderly2016/images/add.png" width="16" height="16" class="vtip" title="เพิ่มชื่อวิทยากร" style="cursor: pointer;" /><span class="note">* ดึงข้อมูลจาก คปญ.01 ถ้ากรณีที่ไม่มีข้อมูลใน คปญ.01 ให้สามารถใส่ข้อมูลเองได้</span></span></td>
 </tr>
 <tr>
@@ -179,7 +184,7 @@ $(document).ready(function(){
 	// ดึงข้อมูลที่เลือกลงฟอร์มหลัก
 	$('#activityBtn').click(function(){
 		// ปิด colorbox
-		// $.colorbox.close();
+		$.colorbox.close();
 
 		var activity_name = $(this).closest('#inline_activity').find('input[name=activity_name]').val();
 		var b1m = $(this).closest('#inline_activity').find('input[name=b1m]').val();
@@ -203,7 +208,7 @@ $(document).ready(function(){
 		   var dataTxt = '<div>'+expertName+'</div>';
 		   multiInput += dataTxt;
 		   
-		   var dataForm = '<input type="hidden" name="expert_name[]" value="'+expertName+'">';
+		   var dataForm = '<input type="hidden" name="expert_name" value="'+expertName+'">';
 		   multiHiddenForm += dataForm;
 		});
 		
@@ -222,7 +227,7 @@ $(document).ready(function(){
 		hiddenForm += "<input type='hidden' name='budget[]' value='"+budget+"'>";
 		
 		var txtInsert = "";
-		txtInsert += '<tr>';
+		txtInsert += '<tr class="box">';
 		txtInsert += '<td></td>';
 		txtInsert += '<td>'+activity_name+'</td>';
 		txtInsert += '<td>'+multiInput+'</td>';
@@ -246,7 +251,7 @@ $(document).ready(function(){
 		$('.tbActivities tr:last').after(txtInsert);
 
 		// เคลียร์ค่า input ของฟอร์มใน colorbox
-		// $(this).closest('#inline_option_th').find("input[type=text], textarea").val("");
+		$(this).closest('#inline_activity').find("input[type=text], input[type=number], textarea").val("");
 
 		// คำนวนใส่ตัวเลขแถว
 		autoCountTableRow('tbActivities');
@@ -254,7 +259,14 @@ $(document).ready(function(){
 	
 	// เพิ่มวิทยากร
 	$('#addExpert').click(function(){
-		$('.inputExpert:last').after('<br><input class="inputExpert form-control" type="text" class="form-control " id="exampleInputName" placeholder="ชื่อวิทยากรภูมิปัญญา (auto complete)" style="width:500px;" />');
+		$('.inputExpert:last').after('<br><input class="inputExpert form-control" type="text" placeholder="ชื่อวิทยากรภูมิปัญญา (auto complete)" style="width:500px;" name="expert_name"/>');
+	});
+	
+	// submit button
+	$('input[type=submit]').click(function(){
+		$("form input[name=expert_name]").each(function(){
+			$(this).attr('name','expert_name['+ $('form .box').index($(this).closest('.box')) +'][]');
+		})
 	});
 });
 

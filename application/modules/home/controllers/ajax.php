@@ -29,5 +29,11 @@ Class ajax extends Public_Controller
 			echo form_dropdown('now_district_id', get_option('id','name','district where amphur_id = '.$_GET['amphur_id'].' order by name asc'), @$_GET['district_id'],'class="form-control" style="width:auto;"','+ เลือกตำบล +');
 		}
 	}
+
+	function get_select_project(){
+		if($_GET){
+			echo form_dropdown('project_id', get_option('id','name','projects where budget_year = '.$_GET['budget_year'].' and province_id = '.$_GET['province_id'].' order by name asc'), @$_GET['district_id'],'class="form-control" style="width:auto;"','-- เลือกโครงการ --');
+		}
+	}
 }
 ?>

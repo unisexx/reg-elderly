@@ -8,11 +8,11 @@ class projects extends Public_Controller {
 
 	function index()
 	{
-		$data['rs'] = new user();
-		if(@$_GET['search']){
-			$data['rs']->where('name LIKE "%'.$_GET['search'].'%"');
-			$data['rs']->or_where('username LIKE "%'.$_GET['search'].'%"');
-		}
+		$data['rs'] = new project();
+		// if(@$_GET['search']){
+			// $data['rs']->where('name LIKE "%'.$_GET['search'].'%"');
+			// $data['rs']->or_where('username LIKE "%'.$_GET['search'].'%"');
+		// }
 		$data['rs']->order_by('id','desc')->get_page();
 		$this->template->build('projects/index',$data);
 	}
@@ -35,14 +35,11 @@ class projects extends Public_Controller {
 			$rs->from_array($_POST);
 			$rs->save();
 			
-			// หา max id
+			// หา max id โปรเจก
 			if(@$id){
 				$project_id = $id;
 			}else{
-				$row = $this->db->query('SELECT MAX(id) AS maxid FROM projects')->row();
-				if ($row) {
-				    $project_id = $row->maxid;
-				}
+				$project_id = $rs->db->insert_id();
 			}
 			
 			//รายละเอียดข้อมูลกิจกรรม
@@ -63,23 +60,40 @@ class projects extends Public_Controller {
 					$act->budget = $_POST['budget'][$key];
 					$act->project_id = $project_id;
 					$act->save();
+					
+					
+						// หา max id กิจกรรม
+						$activity_id = $act->db->insert_id();
+			
+						foreach($_POST['expert_name'][$key] as $index => $data)
+						{
+							if($data)
+							{
+								$expert = new expert(@$_POST['expert_id'][$key][$index]);
+								$expert->project_id = $project_id;
+								$expert->activity_id = $activity_id;
+								$expert->expert_name = $data;
+								$expert->save();
+							}
+						}
+
 				}
 			}
 			
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
 		}
-		// redirect('home/projects/index');
-		redirect($_SERVER['HTTP_REFERER']);
+		redirect('home/projects/index');
+		// redirect($_SERVER['HTTP_REFERER']);
 	}
 	
-	// function delete($id){
-		// if($id){
-			// $rs = new user($id);
-			// $rs->delete();
-			// set_notify('success', 'ลบข้อมูลเรียบร้อย');
-		// }
-		// redirect('home/users/index');
-	// }
+	function delete($id){
+		if($id){
+			$rs = new project($id);
+			$rs->delete();
+			set_notify('success', 'ลบข้อมูลเรียบร้อย');
+		}
+		redirect('home/projects/index');
+	}
 	
 }
 ?>
