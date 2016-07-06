@@ -18,7 +18,7 @@
                 <ul class="dropdown-menu">
                 <li><a href="home/projects">รายงานผลการดำเนินงานโครงการ (คปญ. ๒)</a></li>
                 <li><a href="home/swots">ตารางวิเคราะห์ SWOT (คปญ. ๓)</a></li>
-                <li><a href="kpy.php?act=list4">แผนการดำเนินงาน (คปญ. ๔)</a></li>
+                <li><a href="home/plans">แผนการดำเนินงาน (คปญ. ๔)</a></li>
                 </ul>
             </li>
           </ul>

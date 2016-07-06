@@ -13,7 +13,7 @@
     </select>
     <?=form_dropdown('province_id',get_option('id','name','province order by name asc'),@$_GET['province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
     <span id="project" style="width: auto !important;">
-	    <select name="select2" class="form-control" style="width:500px;">
+	    <select name="select2" class="form-control" style="width:500px;" disabled="disabled">
 	      <option>-- เลือกโครงการ --</option>
 	    </select>
     </span>
@@ -23,27 +23,17 @@
 </div>
 
 
+<?if(@$_GET['project_id']):?>
 
 <div id="btnBox">
-  <input type="button" title="เพิ่มรายงาน คปญ.03 ตารางวิเคราะห์ SWOT" value="เพิ่มรายงาน คปญ.03" onclick="document.location='<?=basename($_SERVER['PHP_SELF'])?>?act=form3'" class="btn btn-warning vtip" />
+  <input type="button" title="เพิ่มรายงาน คปญ.03 ตารางวิเคราะห์ SWOT" value="เพิ่มรายงาน คปญ.03" onclick="document.location='home/swots/form/<?=$project->id?>'" class="btn btn-warning vtip" />
 </div>
 
 
-<h4 style="margin-bottom:20px; color:#630"><span style="color:#666">SWOT :</span> โครงการถ่ายทอดคลังปัญญาผู้สูงอายุ 
-<span style="color:#666">ปีงบประมาณ :</span> 2559 <span style="color:#666">จังหวัด :</span> กระบี่</h4>
-<div class="paginationTG">
-	<ul>
-    <li style="margin-right:10px;">หน้าที่</li>
-	<li class="currentpage">1</li><li ><a href=''>2</a></li>
-	<li><a href="">3</a></li>
-	<li><a href="">4</a></li>
-	<li><a href="">5</a></li>
-	<li><a href="">6</a></li>
-	<li><a href="">7</a></li> . . . <li ><a href="">19</a></li>
-	<li><a href="">20</a></li><li ><a href="">21</a></li>
-	</ul>
-</div>
+<h4 style="margin-bottom:20px; color:#630"><span style="color:#666">SWOT :</span> <?=$project->name?> 
+<span style="color:#666">ปีงบประมาณ :</span> <?=$project->budget_year?> <span style="color:#666">จังหวัด :</span> <?=get_province_name($project->province_id)?></h4>
 
+<?=$rs->pagination();?>
 
 <table class="tblist">
 <tr>
@@ -55,65 +45,22 @@
   <th>สรุปบทเรียน/แนวทางการแก้ไขดำเนินให้เกิดความยั่งยืน</th>
   <th>จัดการ</th>
   </tr>
-<tr>
-  <td>1</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr class="odd">
-  <td>2</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td class="odd cursor">&nbsp;</td>
-  <td class="odd cursor"><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr class="odd">
-  <td>4</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td class="odd">&nbsp;</td>
-  <td class="odd">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=form"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></td>
-  </tr>
+  <?foreach($rs as $key=>$row):?>
+  <tr class="<?=alternator('','odd');?>">
+	  <td><?=($key+1)+$rs->paged->current_row?></td>
+	  <td><?=$row->strengths?></td>
+	  <td><?=$row->weaknesses?></td>
+	  <td><?=$row->opportunities?></td>
+	  <td><?=$row->threats?></td>
+	  <td><?=$row->summary?></td>
+	  <td><a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="home/swots/form/<?=$row->project_id?>/<?=$row->id?>"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <a href="home/swots/delete/<?=$row->id?>"><img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้" onclick="return confirm('<?php echo "ยืนยันการลบ?";?>')"  /></a></td>
+	  </tr>
+  <?endforeach;?>
 </table>
 
-<div class="paginationTG">
-	<ul>
-    <li style="margin-right:10px;">หน้าที่</li>
-	<li class="currentpage">1</li><li ><a href=''>2</a></li>
-	<li><a href="">3</a></li>
-	<li><a href="">4</a></li>
-	<li><a href="">5</a></li>
-	<li><a href="">6</a></li>
-	<li><a href="">7</a></li> . . . <li ><a href="">19</a></li>
-	<li><a href="">20</a></li><li ><a href="">21</a></li>
-  </ul>
-</div>
+<?=$rs->pagination();?>
+
+<?endif;?>
 
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
@@ -134,10 +81,18 @@ $(document).ready(function(){
 	});
 });
 
-function get_select_project(budget_year,province_id){
+<?if(@$_GET['budget_year'] != "" && @$_GET['province_id'] != ""):?>
+var budget_year = '<?=$_GET['budget_year']?>';
+var province_id = '<?=$_GET['province_id']?>';
+var project_id = '<?=$_GET['project_id']?>';
+get_select_project(budget_year,province_id,project_id);
+<?endif;?>
+
+function get_select_project(budget_year,province_id,project_id=false){
 	$.get('home/ajax/get_select_project',{
 		'budget_year' : budget_year,
-		'province_id' : province_id
+		'province_id' : province_id,
+		'project_id' : project_id
 	},function(data){
 		$("#project").html(data);
 	});

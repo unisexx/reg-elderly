@@ -32,7 +32,7 @@ Class ajax extends Public_Controller
 
 	function get_select_project(){
 		if($_GET){
-			echo form_dropdown('project_id', get_option('id','name','projects where budget_year = '.$_GET['budget_year'].' and province_id = '.$_GET['province_id'].' order by name asc'), @$_GET['district_id'],'class="form-control" style="width:auto;"','-- เลือกโครงการ --');
+			echo form_dropdown('project_id', get_option('id','name','projects where budget_year = '.$_GET['budget_year'].' and province_id = '.$_GET['province_id'].' order by name asc'), @$_GET['project_id'],'class="form-control" style="width:auto;"','-- เลือกโครงการ --');
 		}
 	}
 }

@@ -57,6 +57,15 @@ if(!function_exists('get_province_name'))
 	}
 }
 
+if(!function_exists('get_project_name'))
+{
+	function get_project_name($project_id){
+		$CI =& get_instance();
+		$rs = $CI->db->query("select name from projects where id = ".$project_id)->row();
+		return $rs->name;
+	}
+}
+
 if(!function_exists('calculate_age'))
 {
 	function calculate_age($day,$month,$year){
