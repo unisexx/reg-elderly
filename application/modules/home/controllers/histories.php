@@ -9,10 +9,7 @@ class histories extends Public_Controller {
 	function index()
 	{
 		$data['rs'] = new history();
-		// if(@$_GET['search']){
-			// $data['rs']->where('name LIKE "%'.$_GET['search'].'%"');
-			// $data['rs']->or_where('username LIKE "%'.$_GET['search'].'%"');
-		// }
+		if(@$_GET['search']){ $data['rs']->where('name LIKE "%'.$_GET['search'].'%"'); }
 		$data['rs']->order_by('id','desc')->get_page();
 		$this->template->build('histories/index',$data);
 	}
