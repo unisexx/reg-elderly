@@ -1,23 +1,25 @@
 <h3>ประวัติคลังปัญญาผู้สูงอายุ (คปญ.1)</h3>
 <div id="search">
 <div id="searchBox">
-<form class="form-inline">
+<form method="get" class="form-inline">
   <div class="col-xs-4">
-    <input type="text" class="form-control " id="exampleInputName2" placeholder="ชื่อ - สกุล">
+    <input type="text" class="form-control" placeholder="ชื่อ - สกุล" name="search" value="<?=@$_GET['search']?>">
   </div>
-  <select name="" class="form-control" style="width:200px;">
-    <option>-- ทุกจังหวัดที่ขึ้นทะเบียน --</option>
-  </select>
+  <?=form_dropdown('regis_province_id',get_option('id','name','province order by name asc'),@$_GET['regis_province_id'],'class="form-control" style="width:200px;"','-- จังหวัดที่ขึ้นทะเบียน --');?>
   <div style="margin:5px 0;">
-  <select name="" class="form-control" style="width:200px;">
-    <option>-- ทุกจังหวัด --</option>
-  </select>
-  <select name="" class="form-control" style="width:200px;">
-    <option>-- ทุกอำเภอ --</option>
-  </select>
-  <select name="" class="form-control" style="width:200px;">
-    <option>-- ทุกตำบล --</option>
-  </select>
+  <span class="spanProvince">
+      	<?=form_dropdown('now_province_id',get_option('id','name','province order by name asc'),@$_GET['now_province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
+      </span>
+      <span class="spanAmphur">
+			<select name="now_amphur_id" class="form-control" style="width:180px;" disabled="disabled">
+				<option>-- เลือกอำเภอ --</option>
+			</select>
+      </span>
+      <span class="spanDistrict">
+      		<select name="now_district_id" class="form-control" style="width:180px;" disabled="disabled">
+	        	<option>-- เลือกตำบล --</option>
+	        </select>
+      </span>
   <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
   </div>
   <div>
@@ -44,12 +46,10 @@
   <span><input type="checkbox" name="checkbox7" id="checkbox12" checked="checked" /> ภาษา วรรณคดีฯ</span> 
   <span><input type="checkbox" name="checkbox7" id="checkbox12" checked="checked" /> วาทศิลป์</span>
   <input type="checkbox" name="checkbox8" id="checkbox13" checked="checked" /> อื่น  ๆ </div>
-  
 </form>
+</div>
+</div>
 
-  
-</div>
-</div>
 <div id="btnBox">
   <input type="button" title="เพิ่มโครงการ" value="เพิ่มรายการ" onclick="document.location='home/histories/form'" class="btn btn-warning vtip" />
 </div>
@@ -124,3 +124,58 @@ function wisdom_list($row){
 	return $txt;
 }
 ?>
+
+
+<script>
+// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
+// select จังหวัด หา อำเภอ
+$('table').on('change', "select[name=now_province_id]", function() {
+	var province_id = $(this).val();
+	var ele = $(this).closest('.spanProvince').next(".spanAmphur");
+	if(province_id == ""){
+			$(".spanAmphur").find('select').val('').attr("disabled", true);
+	}else{
+		$.get('home/ajax/get_select_now_amphur',{
+			'province_id' : province_id
+		},function(data){
+			ele.html(data);
+		});
+	}
+});
+
+// select อำเภอ หาตำบล
+$('table').on('change', "select[name=now_amphur_id]", function() {
+	var amphur_id = $(this).val();
+	var ele = $(this).closest(".spanAmphur").next(".spanDistrict");
+	if(amphur_id == ""){
+			$(".spanDistrict").find('select').val('').attr("disabled", true);
+	}else{
+		$.get('home/ajax/get_select_now_district',{
+			'amphur_id' : amphur_id
+		},function(data){
+			ele.html(data);
+		});
+	}
+});
+
+<?php if(@$rs->id != ""):?>
+var now_province_id = '<?=$_GET['now_province_id']?>';
+var now_amphur_id = '<?=$_GET['now_amphur_id']?>';
+var now_district_id = '<?=$_GET['now_district_id']?>';
+
+$.get('home/ajax/get_select_now_amphur',{
+	'province_id' : now_province_id,
+	'amphur_id' : now_amphur_id
+},function(data){
+	$('select[name=now_amphur_id]').closest('.spanAmphur').html(data);
+});
+
+$.get('home/ajax/get_select_now_district',{
+	'amphur_id' : now_amphur_id,
+	'district_id' : now_district_id
+},function(data){
+	$('select[name=now_district_id]').closest('.spanDistrict').html(data);
+});
+<?php endif;?>
+// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
+</script>
