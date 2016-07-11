@@ -7,13 +7,17 @@ class projects extends Public_Controller {
 	}
 
 	function index()
-	{
+	{	
 		$data['rs'] = new project();
-		// if(@$_GET['search']){
-			// $data['rs']->where('name LIKE "%'.$_GET['search'].'%"');
-			// $data['rs']->or_where('username LIKE "%'.$_GET['search'].'%"');
-		// }
-		$data['rs']->order_by('id','desc')->get_page();
+		if(@$_GET['search']){
+			$data['rs']->where('name LIKE "%'.$_GET['search'].'%"');
+			$data['rs']->or_where_related_activity('activity_name LIKE "%'.$_GET['search'].'%"');
+			$data['rs']->or_where_related_expert('expert_name LIKE "%'.$_GET['search'].'%"');
+		}
+		if(@$_GET['budget_year']){ $data['rs']->where('budget_year = '.$_GET['budget_year']); }
+		if(@$_GET['province_id']){ $data['rs']->where('province_id = '.$_GET['province_id']); }
+		$data['rs']->group_by('id')->order_by('id','desc')->get_page();
+		// $data['rs']->check_last_query();
 		$this->template->build('projects/index',$data);
 	}
 	
@@ -23,7 +27,7 @@ class projects extends Public_Controller {
 		if($id!=""){
 			// รายละเอียดข้อมูลกิจกรรม
 			$data['activities'] = new activity();
-			$data['activities']->where('project_id = '.$id)->get();
+			$data['activities']->where('project_id = '.$id)->order_by('id','asc')->get();
 		}
 		
 		$this->template->build('projects/form',$data);

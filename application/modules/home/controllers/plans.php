@@ -1,5 +1,5 @@
 <?php
-class histories extends Public_Controller {
+class plans extends Public_Controller {
 
 	function __construct()
 	{
@@ -8,51 +8,71 @@ class histories extends Public_Controller {
 
 	function index()
 	{
-		$data['rs'] = new history();
-		// if(@$_GET['search']){
-			// $data['rs']->where('name LIKE "%'.$_GET['search'].'%"');
-			// $data['rs']->or_where('username LIKE "%'.$_GET['search'].'%"');
-		// }
-		$data['rs']->order_by('id','desc')->get_page();
-		$this->template->build('histories/index',$data);
+		$data['rs'] = new plan();
+		if(@$_GET['search']){
+			$data['rs']->where('name LIKE "%'.$_GET['search'].'%"');
+			$data['rs']->or_where_related_plan_activity('activity_name LIKE "%'.$_GET['search'].'%"');
+		}
+		if(@$_GET['budget_year']){ $data['rs']->where('budget_year = '.$_GET['budget_year']); }
+		
+		$data['rs']->group_by('id')->order_by('id','desc')->get_page();
+		// $data['rs']->check_last_query();
+		$this->template->build('plans/index',$data);
 	}
 	
 	function form($id=false){
-		$data['rs'] = new history($id);
-		$this->template->build('histories/form',$data);
+		$data['rs'] = new plan($id);
+		
+		if($id!=""){
+			// รายละเอียดข้อมูลกิจกรรม
+			$data['activities'] = new plan_activity();
+			$data['activities']->where('plan_id = '.$id)->order_by('id','asc')->get();
+		}
+		
+		$this->template->build('plans/form',$data);
 	}
 	
 	function save($id=false){
 		if($_POST){
-			$rs = new history($id);
-			
-			if($_FILES['picture']['name'])
-			{
-				if($rs->id){
-					$rs->delete_file($rs->id,'uploads/histories','picture');
-				}
-				$_POST['picture'] = $rs->upload($_FILES['picture'],'uploads/histories/');
-			}
-			
-			$_POST['regis_date'] = Date2DB($_POST['regis_date']);
-			$_POST['issue_date'] = Date2DB($_POST['issue_date']);
-			$_POST['expire_date'] = Date2DB($_POST['expire_date']);
-			
+			$rs = new plan($id);
 			$rs->from_array($_POST);
 			$rs->save();
+			
+			// หา max id แผนการดำเนินงาน
+			if(@$id){
+				$plan_id = $id;
+			}else{
+				$plan_id = $rs->db->insert_id();
+			}
+			
+			//รายละเอียดข้อมูลกิจกรรม
+			if(@$_POST['activity_name']){
+				foreach($_POST['activity_name'] as $key=>$value){
+					$act = new plan_activity($_POST['activity_id'][$key]);
+					$act->activity_name = $value;
+					$act->area = $_POST['area'][$key];
+					$act->activity_date = Date2DB($_POST['activity_date'][$key]);
+					$act->budget = $_POST['budget'][$key];
+					$act->product = $_POST['product'][$key];
+					$act->result = $_POST['result'][$key];
+					$act->plan_id = $plan_id;
+					$act->save();
+				}
+			}
+			
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
 		}
-		redirect('home/histories/index');
+		redirect('home/plans/index');
 		// redirect($_SERVER['HTTP_REFERER']);
 	}
 	
 	function delete($id){
 		if($id){
-			$rs = new history($id);
+			$rs = new plan($id);
 			$rs->delete();
 			set_notify('success', 'ลบข้อมูลเรียบร้อย');
 		}
-		redirect('home/histories/index');
+		redirect('home/plans/index');
 	}
 	
 }

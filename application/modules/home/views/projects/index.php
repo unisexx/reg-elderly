@@ -1,16 +1,20 @@
 <h3>รายงานผลการดำเนินงานโครงการ (คปญ. 2) </h3>
 <div id="search">
 <div id="searchBox">
-<form class="form-inline">
+<form method="get" class="form-inline">
   <div class="col-xs-4">
-    <input type="text" class="form-control " id="exampleInputName2" placeholder="ชื่อโครงการ / ชื่อกิจกรรม / ชื่อวิทยากร">
+    <input type="text" class="form-control" placeholder="ชื่อโครงการ / ชื่อกิจกรรม / ชื่อวิทยากร" name="search" value="<?=@$_GET['search']?>">
   </div>
-  <select name="select" class="form-control" style="width:200px;">
-    <option>-- ทุกปีงบประมาณ --</option>
+  <select name="budget_year" class="form-control" style="width:200px;">
+    <option value="">-- ทุกปีงบประมาณ --</option>
+    <?php 
+		for ($x = 2450; $x <= (date("Y")+543); $x++) {
+			$selected_year = ($x == $_GET['budget_year'])?"selected=selected":"";
+		    echo "<option value='$x' $selected_year>$x</option>";
+		} 
+	  ?>
   </select>
-  <select name="" class="form-control" style="width:200px;">
-    <option>-- ทุกจังหวัด --</option>
-  </select>
+  <?=form_dropdown('province_id',get_option('id','name','province order by name asc'),@$_GET['province_id'],'class="form-control" style="width:200px;"','-- เลือกจังหวัด --');?>
   <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
 </form>
 </div>
@@ -39,13 +43,13 @@
 	  <td><?=$row->budget_year?></td>
 	  <td><?=$row->name?></td>
 	  <td>
-	  	<?$activities = $this->db->query('select * from activities where project_id = '.$row->id)->result();?>
+	  	<?$activities = $this->db->query('select * from activities where project_id = '.$row->id.' order by id asc')->result();?>
 	  	<?foreach($activities as $activity):?>
   		<div><?=$activity->activity_name?></div>
   		<?endforeach;?>
 	  </td>
 	  <td>
-	  	<?$experts = $this->db->query('select * from experts where project_id = '.$row->id)->result();?>
+	  	<?$experts = $this->db->query('select * from experts where project_id = '.$row->id.' order by id asc')->result();?>
 	  	<?foreach($experts as $expert):?>
   		<div><?=$expert->expert_name?></div>
   		<?endforeach;?>
