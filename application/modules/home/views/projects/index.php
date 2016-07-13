@@ -14,7 +14,7 @@
 		} 
 	  ?>
   </select>
-  <?=form_dropdown('province_id',get_option('id','name','province order by name asc'),@$_GET['province_id'],'class="form-control" style="width:200px;"','-- เลือกจังหวัด --');?>
+  <?=form_dropdown('province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$_GET['province_id'],'class="form-control" style="width:200px;"','-- เลือกจังหวัด --');?>
   <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
 </form>
 </div>

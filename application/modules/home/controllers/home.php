@@ -29,7 +29,7 @@ class Home extends Public_Controller {
 	public function logout()
 	{
 		logout();
-		redirect('users/admin/auth/login');
+		redirect('home');
 	}
 	
 }

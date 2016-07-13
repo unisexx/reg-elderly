@@ -11,7 +11,7 @@
 		} 
 	  ?>
     </select>
-    <?=form_dropdown('province_id',get_option('id','name','province order by name asc'),@$_GET['province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
+    <?=form_dropdown('province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$_GET['province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
     <span id="project" style="width: auto !important;">
 	    <select name="select2" class="form-control" style="width:500px;" disabled="disabled">
 	      <option>-- เลือกโครงการ --</option>

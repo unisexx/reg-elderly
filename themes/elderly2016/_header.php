@@ -53,8 +53,8 @@
                 <li><a href="dep_province.php">หน่วยงาน [จังหวัด]</a></li>
               </ul>
             </li>-->
-          <li><a href="user.php?act=form" class="vtip" title="นายชูศักดิ์  เกียรติเฉลิมคุณ (สำนักงานส่วนกลาง กทม.) "><img src="themes/elderly2016/images/user.png" width="24" height="24" /></a></li>
-            <li><a href="product.php" style="color:#C30">Log out</a></li>
+          <li><a href="home/users/form/<?=user_login()->id?>" class="vtip" title="<?=user_login()->name?> (จังหวัด<?=get_province_name(user_login()->province_id)?>)"><img src="themes/elderly2016/images/user.png" width="24" height="24" /></a></li>
+            <li><a href="home/logout" style="color:#C30">Log out</a></li>
           </ul>
           
           <!--<ul class="nav navbar-nav navbar-right">

@@ -45,7 +45,7 @@ function user_login($id=FALSE)
 {
 	$CI =& get_instance();
 	$id = ($id)?$id:$CI->session->userdata('id');
-	$user = new Sys_user($id);
+	$user = new user($id);
 	return $user;
 }
 
@@ -62,6 +62,19 @@ function is_owner($id)
     $CI =& get_instance();
     if($id == $CI->session->userdata('id') && $CI->session->userdata('id') != 0)
     {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+function is_admin($id=FALSE){
+	$CI =& get_instance();
+	$id = ($id)?$id:$CI->session->userdata('id');
+	$user = new user($id);
+	if($user->is_admin == 1){
         return TRUE;
     }
     else

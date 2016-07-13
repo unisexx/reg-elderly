@@ -5,7 +5,7 @@
   <div class="col-xs-4">
     <input type="text" class="form-control" placeholder="ชื่อ - สกุล" name="search" value="<?=@$_GET['search']?>">
   </div>
-  <?=form_dropdown('regis_province_id',get_option('id','name','province order by name asc'),@$_GET['regis_province_id'],'class="form-control" style="width:200px;"','-- จังหวัดที่ขึ้นทะเบียน --');?>
+  <?=form_dropdown('regis_province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$_GET['regis_province_id'],'class="form-control" style="width:200px;"','-- จังหวัดที่ขึ้นทะเบียน --');?>
   <div style="margin:5px 0;">
   <span class="spanProvince">
       	<?=form_dropdown('now_province_id',get_option('id','name','province order by name asc'),@$_GET['now_province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
@@ -23,29 +23,29 @@
   <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
   </div>
   <div>
-  <span><input name="checkbox" type="checkbox" id="checkbox" checked="checked" /> การศึกษา</span> 
-  <span><input type="checkbox" name="checkbox2" id="checkbox2" checked="checked" /> การแพทย์และสาธารณสุข</span> 
-  <span><input type="checkbox" name="checkbox3" id="checkbox3" checked="checked" /> การเกษตร</span> 
-  <span><input type="checkbox" name="checkbox4" id="checkbox4" checked="checked" /> ทรัพยากรธรรมชาติฯ</span> 
-  <span><input type="checkbox" name="checkbox" id="checkbox" checked="checked" /> วิทยาศาสตร์และเทคฯ</span> 
-  <span><input type="checkbox" name="checkbox" id="checkbox" checked="checked" /> วิศวกรรม</span> 
-  <span><input type="checkbox" name="checkbox" id="checkbox" checked="checked" /> สถาปัตยกรรม</span>
-  <span><input type="checkbox" name="checkbox5" id="checkbox5" checked="checked" /> พัฒนาสังคมฯ</span> 
-  <span><input type="checkbox" name="checkbox5" id="checkbox6" checked="checked" /> กฎหมาย</span> 
-  <span><input type="checkbox" name="checkbox5" id="checkbox7" checked="checked" /> การเมืองการปกครอง</span> 
-  <span><input type="checkbox" name="checkbox5" id="checkbox7" checked="checked" /> ศิลปะ วัฒนธรรมฯ</span> 
-  <span><input type="checkbox" name="checkbox5" id="checkbox7" checked="checked" /> ศาสนา จริยธรรม </span>
-  <span><input type="checkbox" name="checkbox6" id="checkbox8" checked="checked" /> พาณิชย์และบริการ</span> 
-  <span><input type="checkbox" name="checkbox6" id="checkbox9" checked="checked" /> ความมั่นคง</span> 
-  <span><input type="checkbox" name="checkbox6" id="checkbox9" checked="checked" /> บริหารจัดการฯ</span> 
-  <span><input type="checkbox" name="checkbox6" id="checkbox9" checked="checked" /> การประชาสัมพันธ์</span>
-  <span><input type="checkbox" name="checkbox7" id="checkbox10" checked="checked" /> คมนาคมและการสื่อสาร</span> 
-  <span><input type="checkbox" name="checkbox7" id="checkbox10" checked="checked" /> พลังงาน</span>
-  <span><input type="checkbox" name="checkbox7" id="checkbox11" checked="checked" /> ต่างประเทศ</span> 
-  <span><input type="checkbox" name="checkbox7" id="checkbox12" checked="checked" /> อุตสาหกรรม หัตถกรรมฯ</span> 
-  <span><input type="checkbox" name="checkbox7" id="checkbox12" checked="checked" /> ภาษา วรรณคดีฯ</span> 
-  <span><input type="checkbox" name="checkbox7" id="checkbox12" checked="checked" /> วาทศิลป์</span>
-  <input type="checkbox" name="checkbox8" id="checkbox13" checked="checked" /> อื่น  ๆ </div>
+  <span><input type="checkbox" name="wis_study" id="checkbox" value="1" <?=@$_GET['wis_study'] == 1 ? 'checked="checked"' : '' ;?>/> การศึกษา</span> 
+  <span><input type="checkbox" name="wis_medical" id="checkbox2"  value="1" <?=@$_GET['wis_medical'] == 1 ? 'checked="checked"' : '' ;?>/> การแพทย์และสาธารณสุข</span> 
+  <span><input type="checkbox" name="wis_agriculture" id="checkbox3"  value="1" <?=@$_GET['wis_agriculture'] == 1 ? 'checked="checked"' : '' ;?>/> การเกษตร</span> 
+  <span><input type="checkbox" name="wis_natural" id="checkbox4"  value="1" <?=@$_GET['wis_natural'] == 1 ? 'checked="checked"' : '' ;?> /> ทรัพยากรธรรมชาติฯ</span> 
+  <span><input type="checkbox" name="wis_science" id="checkbox"  value="1" <?=@$_GET['wis_science'] == 1 ? 'checked="checked"' : '' ;?>/> วิทยาศาสตร์และเทคฯ</span> 
+  <span><input type="checkbox" name="wis_engineer" id="checkbox"  value="1" <?=@$_GET['wis_engineer'] == 1 ? 'checked="checked"' : '' ;?> /> วิศวกรรม</span> 
+  <span><input type="checkbox" name="wis_architecture" id="checkbox"  value="1" <?=@$_GET['wis_architecture'] == 1 ? 'checked="checked"' : '' ;?>/> สถาปัตยกรรม</span>
+  <span><input type="checkbox" name="wis_social" id="checkbox5"  value="1" <?=@$_GET['wis_social'] == 1 ? 'checked="checked"' : '' ;?>/> พัฒนาสังคมฯ</span> 
+  <span><input type="checkbox" name="wis_law" id="checkbox6"  value="1" <?=@$_GET['wis_law'] == 1 ? 'checked="checked"' : '' ;?>/> กฎหมาย</span> 
+  <span><input type="checkbox" name="wis_politics" id="checkbox7"  value="1" <?=@$_GET['wis_politics'] == 1 ? 'checked="checked"' : '' ;?>/> การเมืองการปกครอง</span> 
+  <span><input type="checkbox" name="wis_art" id="checkbox7"  value="1" <?=@$_GET['wis_art'] == 1 ? 'checked="checked"' : '' ;?>/> ศิลปะ วัฒนธรรมฯ</span> 
+  <span><input type="checkbox" name="wis_religion" id="checkbox7"  value="1" <?=@$_GET['wis_religion'] == 1 ? 'checked="checked"' : '' ;?>/> ศาสนา จริยธรรม </span>
+  <span><input type="checkbox" name="wis_commercial" id="checkbox8"  value="1" <?=@$_GET['wis_commercial'] == 1 ? 'checked="checked"' : '' ;?>/> พาณิชย์และบริการ</span> 
+  <span><input type="checkbox" name="wis_security" id="checkbox9"  value="1" <?=@$_GET['wis_security'] == 1 ? 'checked="checked"' : '' ;?>/> ความมั่นคง</span> 
+  <span><input type="checkbox" name="wis_management" id="checkbox9"  value="1" <?=@$_GET['wis_management'] == 1 ? 'checked="checked"' : '' ;?>/> บริหารจัดการฯ</span> 
+  <span><input type="checkbox" name="wis_publicity" id="checkbox9"  value="1" <?=@$_GET['wis_publicity'] == 1 ? 'checked="checked"' : '' ;?>/> การประชาสัมพันธ์</span>
+  <span><input type="checkbox" name="wis_transport" id="checkbox10"  value="1" <?=@$_GET['wis_transport'] == 1 ? 'checked="checked"' : '' ;?>/> คมนาคมและการสื่อสาร</span> 
+  <span><input type="checkbox" name="wis_energy" id="checkbox10"  value="1" <?=@$_GET['wis_energy'] == 1 ? 'checked="checked"' : '' ;?>/> พลังงาน</span>
+  <span><input type="checkbox" name="wis_foreign" id="checkbox11"  value="1" <?=@$_GET['wis_foreign'] == 1 ? 'checked="checked"' : '' ;?>/> ต่างประเทศ</span> 
+  <span><input type="checkbox" name="wis_materials" id="checkbox12"  value="1" <?=@$_GET['wis_materials'] == 1 ? 'checked="checked"' : '' ;?>/> อุตสาหกรรม หัตถกรรมฯ</span> 
+  <span><input type="checkbox" name="wis_language" id="checkbox12"  value="1" <?=@$_GET['wis_language'] == 1 ? 'checked="checked"' : '' ;?>/> ภาษา วรรณคดีฯ</span> 
+  <span><input type="checkbox" name="wis_rhetoric" id="checkbox12"  value="1" <?=@$_GET['wis_rhetoric'] == 1 ? 'checked="checked"' : '' ;?>/> วาทศิลป์</span>
+  <input type="checkbox" name="wis_other" id="checkbox13"  value="1" <?=@$_GET['wis_other'] == 1 ? 'checked="checked"' : '' ;?>/> อื่น  ๆ </div>
 </form>
 </div>
 </div>
@@ -129,7 +129,7 @@ function wisdom_list($row){
 <script>
 // ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
 // select จังหวัด หา อำเภอ
-$('table').on('change', "select[name=now_province_id]", function() {
+$(document).on('change', "select[name=now_province_id]", function() {
 	var province_id = $(this).val();
 	var ele = $(this).closest('.spanProvince').next(".spanAmphur");
 	if(province_id == ""){
@@ -144,7 +144,7 @@ $('table').on('change', "select[name=now_province_id]", function() {
 });
 
 // select อำเภอ หาตำบล
-$('table').on('change', "select[name=now_amphur_id]", function() {
+$(document).on('change', "select[name=now_amphur_id]", function() {
 	var amphur_id = $(this).val();
 	var ele = $(this).closest(".spanAmphur").next(".spanDistrict");
 	if(amphur_id == ""){
@@ -159,9 +159,9 @@ $('table').on('change', "select[name=now_amphur_id]", function() {
 });
 
 <?php if(@$rs->id != ""):?>
-var now_province_id = '<?=$_GET['now_province_id']?>';
-var now_amphur_id = '<?=$_GET['now_amphur_id']?>';
-var now_district_id = '<?=$_GET['now_district_id']?>';
+var now_province_id = '<?=@$_GET['now_province_id']?>';
+var now_amphur_id = '<?=@$_GET['now_amphur_id']?>';
+var now_district_id = '<?=@$_GET['now_district_id']?>';
 
 $.get('home/ajax/get_select_now_amphur',{
 	'province_id' : now_province_id,

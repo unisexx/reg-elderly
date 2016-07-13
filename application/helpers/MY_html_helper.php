@@ -80,4 +80,12 @@ if(!function_exists('calculate_age'))
 	// echo date_diff(date_create('1970-02-01'), date_create('today'))->y, "\n";
 	}
 }
+
+if(!function_exists('select_province_condition'))
+{
+	function select_province_condition(){
+		$condition = !is_admin()? " where id = ".user_login()->province_id : "" ;
+		return $condition;
+	}
+}
 ?>

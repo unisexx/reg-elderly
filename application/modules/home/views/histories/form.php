@@ -18,7 +18,7 @@
     <div class="input-group date">
 	  <input type="text" class="form-control datepickerTH" name="regis_date" data-date-language="th-th" value="<?=DB2Date($rs->regis_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> // 
-	  <?=form_dropdown('regis_province_id',get_option('id','name','province order by name asc'),@$rs->regis_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+	  <?=form_dropdown('regis_province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$rs->regis_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
     </span>
   </td>
 </tr>
