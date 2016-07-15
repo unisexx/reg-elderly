@@ -60,8 +60,8 @@
   		<div><?=$activity->budget?></div>
   		<?endforeach;?>
 	</td>
-	<td><?=$row->department_id?></td>
-	<td></td>
+	<td><?=$row->user->name?></td>
+	<td><?=get_province_name($row->user->province_id)?></td>
 	<td><?=$row->name?></td>
 	<td>
 		<a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a>

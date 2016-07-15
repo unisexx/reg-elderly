@@ -83,8 +83,10 @@ if(!function_exists('calculate_age'))
 
 if(!function_exists('select_province_condition'))
 {
-	function select_province_condition(){
-		$condition = !is_admin()? " where id = ".user_login()->province_id : "" ;
+	function select_province_condition($field=false){
+		if(!$field){ $field = "id";}
+		
+		$condition = !is_admin()? " where ".$field." = ".user_login()->province_id : "" ;
 		return $condition;
 	}
 }

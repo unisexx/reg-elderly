@@ -73,7 +73,7 @@
   <td><?=mysql_to_th($row->regis_date)?></td>
   <td><?=get_province_name($row->regis_province_id)?></td>
   <td><?=$row->title?><?=$row->name?></td>
-  <td><?=calculate_age($row->birth_day,$row->birth_month,$row->birth_year)?></td>
+  <td><?=@calculate_age($row->birth_day,$row->birth_month,$row->birth_year)?></td>
   <td><img src="themes/elderly2016/images/star.png" width="32" height="32" class="vtip" title="<?=wisdom_list($row)?>" /></td>
   <td>
   	<?=$row->now_home_no?>

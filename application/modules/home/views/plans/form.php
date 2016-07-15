@@ -19,10 +19,8 @@
   </tr>
   <tr>
     <th> หน่วยงาน <span class="Txt_red_12">*</span></th>
-    <td><select name="department_id" class="form-control" style="width:auto;">
-        <option>+ เลือกหน่วยงาน +</option>
-        <option value="1">สํานักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัดปทุมธานี</option>
-      </select>
+    <td>
+    	<?=form_dropdown('user_id',get_option('id','name','users '.select_province_condition("province_id").' order by name asc'),@$rs->user_id,'class="form-control" style="width:auto;"','+ เลือกหน่วยงาน +');?>
     </td>
   </tr>
 <tr>

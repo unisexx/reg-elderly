@@ -42,7 +42,7 @@
   <th>วัน/เดือน/ปีเกิด <span class="Txt_red_12">*</span> (อายุ) </th>
   <td><span class="form-inline">
     <select name="birth_day" class="form-control" style="width:auto;">
-      <option>+ วัน +</option>
+      <option value="">+ วัน +</option>
       <?php 
 		for ($x = 1; $x <= 31; $x++) {
 			$selected_day = ($x == $rs->birth_day)?"selected=selected":"";
@@ -55,7 +55,7 @@
     <?=form_dropdown('birth_month',$month_th,@$rs->birth_month,'class="form-control" style="width:auto;"','+ เดือน +');?>
     /
     <select name="birth_year" class="form-control" style="width:auto;">
-      <option>+ ปี +</option>
+      <option value="">+ ปี +</option>
       <?php 
 		for ($x = 2450; $x <= (date("Y")+543); $x++) {
 			$selected_year = ($x == $rs->birth_year)?"selected=selected":"";
@@ -63,7 +63,7 @@
 		} 
 	  ?>
     </select>
-  </span>(xx ปี) </td>
+  </span><span class="calAge">(xx ปี)</span> </td>
 </tr>
 <tr>
   <th>สถานภาพ <span class="Txt_red_12">*</span></th>
@@ -169,7 +169,7 @@
 	    <span><input type="radio" name="marital_status" value="หม้ายคู่สมรสเสียชีวิต" <?=$rs->marital_status == 'หม้ายคู่สมรสเสียชีวิต'?'checked="checked"':'';?> /> หม้ายคู่สมรสเสียชีวิต</span>
 	    <span><input type="radio" name="marital_status" value="อยู่ด้วยกันโดยไม่สมรส" <?=$rs->marital_status == 'อยู่ด้วยกันโดยไม่สมรส'?'checked="checked"':'';?> /> อยู่ด้วยกันโดยไม่สมรส</span>
 	    <span><input type="radio" name="marital_status" value="อื่นๆ" <?=$rs->marital_status == 'อื่นๆ'?'checked="checked"':'';?> /> อื่นๆ</span><br>
-	    <input type="text" class="form-control " id="exampleInputName25" placeholder="ระบุ" style="width:200px;" name="marital_status_other" value="<?=$rs->marital_status_other?>" />
+	    <input type="text" class="form-control " id="exampleInputName25" placeholder="ระบุ" style="width:200px;" name="marital_status_other" value="<?=$rs->marital_status_other?>" <?=$rs->marital_status != 'อื่นๆ'?'disabled="disabled"':'';?>/>
   	</span>
   </td>
 </tr>
@@ -184,7 +184,7 @@
 	<input type="radio" name="education" value="อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)" <?=$rs->education == 'อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)'?'checked="checked"':'';?> /> อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)</span> <span>
 	<input type="radio" name="education" value="ปริญญาตรี" <?=$rs->education == 'ปริญญาตรี'?'checked="checked"':'';?>/> ปริญญาตรี</span> <span>
 	<input type="radio" name="education" value="อื่นๆ" <?=$rs->education == 'อื่นๆ'?'checked="checked"':'';?> /> อื่นๆ
-	<input type="text" class="form-control" id="exampleInputName26" placeholder="ระบุ" style="width:200px;" name="education_other" value="<?=$rs->education_other?>" />
+	<input type="text" class="form-control" id="exampleInputName26" placeholder="ระบุ" style="width:200px;" name="education_other" value="<?=$rs->education_other?>" <?=$rs->education != 'อื่นๆ'?'disabled="disabled"':'';?> />
 	</span>
   </td>
 </tr>
@@ -368,77 +368,111 @@
 $(document).ready(function(){
 	
 	// validate
-	// $("form").validate({
-		// rules: {
-			// regis_date:"required",
-			// regis_province_id:"required",
-			// title:"required",
+	$("form").validate({
+		rules: {
+			regis_date:"required",
+			regis_province_id:"required",
+			title:"required",
+			name:"required",
 			// birth_day:"required",
 			// birth_month:"required",
-			// birth_year:"required",
-			// status:"required",
-			// id_card:"required",
-			// issue_date:"required",
-			// expire_date:"required",
-			// issue_place:"required",
-			// reg_home_no:"required",
-			// reg_moo:"required",
-			// reg_soi:"required",
+			birth_year:"required",
+			status:"required",
+			id_card:"required",
+			issue_date:"required",
+			expire_date:"required",
+			issue_place:"required",
+			reg_home_no:"required",
+			reg_moo:"required",
+			reg_soi:"required",
 			// reg_road:"required",
-			// reg_province_id:"required",
-			// reg_amphur_id:"required",
-			// reg_district_id:"required",
-			// reg_post_code:"required",
-			// now_home_no:"required",
-			// now_moo:"required",
-			// now_soi:"required",
-			// now_road:"required",
-			// now_province_id:"required",
-			// now_amphur_id:"required",
-			// now_district_id:"required",
-			// now_post_code:"required"
-		// },
-		// messages:{
-			// regis_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// regis_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// title:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			reg_province_id:"required",
+			reg_amphur_id:"required",
+			reg_district_id:"required",
+			reg_post_code:"required",
+			now_home_no:"required",
+			now_moo:"required",
+			now_soi:"required",
+			now_road:"required",
+			now_province_id:"required",
+			now_amphur_id:"required",
+			now_district_id:"required",
+			now_post_code:"required"
+		},
+		messages:{
+			regis_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			regis_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			title:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			name:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			// birth_day:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			// birth_month:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// birth_year:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// status:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// id_card:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// issue_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// expire_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// issue_place:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// reg_home_no:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// reg_moo:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// reg_soi:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			birth_year:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			status:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			id_card:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			issue_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			expire_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			issue_place:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			reg_home_no:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			reg_moo:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			reg_soi:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			// reg_road:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// reg_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// reg_amphur_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// reg_district_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// reg_post_code:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_home_no:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_moo:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_soi:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_road:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_amphur_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_district_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			// now_post_code:"ฟิลด์นี้ห้ามเป็นค่าว่าง"
-		// },
-        // errorPlacement: function(error, element)
-        // {
-	            // if ( element.is(":radio,:checkbox")) 
-	            // {
-	                // error.appendTo( element.parents('td') );
-	            // }
-	            // else 
-	            // { // This is the default behavior 
-	                // error.insertAfter( element );
-	            // }
-		// }
-	// });
+			reg_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			reg_amphur_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			reg_district_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			reg_post_code:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_home_no:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_moo:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_soi:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_road:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_province_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_amphur_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_district_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			now_post_code:"ฟิลด์นี้ห้ามเป็นค่าว่าง"
+		},
+        errorPlacement: function(error, element)
+        {
+	            if ( element.is(":radio,:checkbox")) 
+	            {
+	                error.appendTo( element.parents('td') );
+	            }
+	            else 
+	            { // This is the default behavior 
+	                error.insertAfter( element );
+	            }
+		}
+	});
+	
+	//คำนวนอายุ
+	$("select[name=birth_year]").change(function(){
+		var birth_year = $(this).val();
+		if(birth_year != ""){
+			$.get('home/ajax/calAge',{
+				'birth_year' : birth_year
+			},function(data){
+				$('.calAge').html(data);
+			});
+		}else{
+			$('.calAge').html("(xx ปี)");
+		}
+	});
+	
+	<?php if(@$rs->id != ""):?>
+	var birth_year = '<?=$rs->birth_year?>';
+	$.get('home/ajax/calAge',{
+		'birth_year' : birth_year
+	},function(data){
+		$('.calAge').html(data);
+	});
+	<?php endif;?>
+	
+	// อื่นๆ ระบุ
+	$('input:radio[name=marital_status],input:radio[name=education]').change(function() {
+        if (this.value == 'อื่นๆ') {
+            $(this).closest('td').find('input[type=text]').removeAttr('disabled','disabled');
+        }else{
+        	$(this).closest('td').find('input[type=text]').attr('disabled','disabled');
+        }
+    });
 	
 	// ที่อยู่ตามทะเบียนบ้าน * --------------------------------------------------------
 	// select จังหวัด หา อำเภอ

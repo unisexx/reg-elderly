@@ -3,7 +3,7 @@ class user extends ORM
 {
 	public $table = "users";
 	
-	// public $has_one = array('user_group','user_premission');
+	public $has_many = array('plan');
 
 	public function __construct($id = NULL)
 	{

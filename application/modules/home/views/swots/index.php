@@ -3,7 +3,7 @@
 <div id="searchBox">
 <form class="form-inline">
     <select name="budget_year" class="form-control" style="width:170px">
-      <option>-- เลือกปีงบประมาณ --</option>
+      <option value="">-- เลือกปีงบประมาณ --</option>
       <?php 
 		for ($x = 2450; $x <= (date("Y")+543); $x++) {
 			$selected_year = ($x == @$_GET['budget_year'])?"selected=selected":"";
@@ -13,9 +13,7 @@
     </select>
     <?=form_dropdown('province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$_GET['province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
     <span id="project" style="width: auto !important;">
-	    <select name="select2" class="form-control" style="width:500px;" disabled="disabled">
-	      <option>-- เลือกโครงการ --</option>
-	    </select>
+    	<?=form_dropdown('project_id',get_option('id','name','projects '.select_province_condition("province_id").' order by name asc'),@$_GET['project_id'],'class="form-control" style="width:180px;"','-- เลือกโครงการ --');?>
     </span>
   <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
 </form>
@@ -67,17 +65,13 @@ $(document).ready(function(){
 	$("select[name=budget_year]").change(function() {
 	  	var budget_year = $(this).val();
 	  	var province_id = $('select[name=province_id]').val();
-	  	if (budget_year != "" && province_id != ""){
-		    get_select_project(budget_year,province_id);
-		}
+	  	get_select_project(budget_year,province_id);
 	});
 	
 	$("select[name=province_id]").change(function() {
 	  	var budget_year = $('select[name=budget_year]').val();
 	  	var province_id = $(this).val();
-	  	if (budget_year != "" && province_id != ""){
-		    get_select_project(budget_year,province_id);
-		}
+	  	get_select_project(budget_year,province_id);
 	});
 });
 
@@ -88,7 +82,7 @@ var project_id = '<?=$_GET['project_id']?>';
 get_select_project(budget_year,province_id,project_id);
 <?endif;?>
 
-function get_select_project(budget_year,province_id,project_id=false){
+function get_select_project(budget_year=false,province_id=false,project_id=false){
 	$.get('home/ajax/get_select_project',{
 		'budget_year' : budget_year,
 		'province_id' : province_id,

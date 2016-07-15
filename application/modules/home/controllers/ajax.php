@@ -32,7 +32,21 @@ Class ajax extends Public_Controller
 
 	function get_select_project(){
 		if($_GET){
-			echo form_dropdown('project_id', get_option('id','name','projects where budget_year = '.$_GET['budget_year'].' and province_id = '.$_GET['province_id'].' order by name asc'), @$_GET['project_id'],'class="form-control" style="width:auto;"','-- เลือกโครงการ --');
+			$condition = " 1=1 ";
+			if((@$_GET['budget_year'] != "false") && (@$_GET['budget_year'] != "")){ $condition .= ' and budget_year = '.$_GET['budget_year']; }
+			if((@$_GET['province_id'] != "false") && (@$_GET['province_id'] != "")){
+				 $condition .= ' and province_id = '.$_GET['province_id']; 
+			}else{
+				$condition .= !is_admin()? " and province_id = ".user_login()->province_id : "" ;
+			}
+
+			echo @form_dropdown('project_id', get_option('id','name','projects where '.$condition.' order by name asc'), @$_GET['project_id'],'class="form-control" style="width:auto;"','-- เลือกโครงการ --');
+		}
+	}
+
+	function calAge(){
+		if($_GET){
+			echo '('.calculate_age('00','00',$_GET['birth_year']).' ปี)';
 		}
 	}
 }

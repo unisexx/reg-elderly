@@ -15,6 +15,7 @@ class plans extends Public_Controller {
 		}
 		if(@$_GET['budget_year']){ $data['rs']->where('budget_year = '.$_GET['budget_year']); }
 		
+		if(!is_admin()){ $data['rs']->where_related_user('province_id = '.user_login()->province_id); }
 		$data['rs']->group_by('id')->order_by('id','desc')->get_page();
 		// $data['rs']->check_last_query();
 		$this->template->build('plans/index',$data);
