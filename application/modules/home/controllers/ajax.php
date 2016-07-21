@@ -49,5 +49,17 @@ Class ajax extends Public_Controller
 			echo '('.calculate_age('00','00',$_GET['birth_year']).' ปี)';
 		}
 	}
+	
+	function get_expert_name_autocomplete(){
+		// if($_GET){
+			$sql = 'select name from histories';
+			$rs = $this->db->query($sql)->result();
+			$rows = array();
+			foreach($rs as $item){
+				$rows[] = $item;
+			}
+			print json_encode($rows);
+		// }
+	}
 }
 ?>

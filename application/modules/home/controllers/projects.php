@@ -68,8 +68,13 @@ class projects extends Public_Controller {
 					
 					
 						// หา max id กิจกรรม
-						$activity_id = $act->db->insert_id();
+						if($_POST['activity_id'][$key] == ""){
+							$activity_id = $act->db->insert_id();
+						}else{
+							$activity_id = $_POST['activity_id'][$key];
+						}
 			
+						$this->db->query('DELETE FROM experts WHERE activity_id = '.$activity_id); //ลบเก่าแล้วสร้างใหม่
 						foreach($_POST['expert_name'][$key] as $index => $data)
 						{
 							if($data)

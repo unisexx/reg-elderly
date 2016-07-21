@@ -8,8 +8,8 @@
     <td>
     	<select name="budget_year" class="form-control" style="width:auto;">
 	      <option>+ เลือกปีงบประมาณ +</option>
-	      <?php 
-			for ($x = 2450; $x <= (date("Y")+543); $x++) {
+		  <?php 
+			for ($x = (date("Y")+543); $x >= 2550; $x--) {
 				$selected_year = ($x == $rs->budget_year)?"selected=selected":"";
 			    echo "<option value='$x' $selected_year>$x</option>";
 			} 
