@@ -1,6 +1,14 @@
 @charset "utf-8";
 /* CSS Document */
 
+@font-face {
+	font-family: 'Conv_THSarabun';
+	src: url('fonts/THSarabun.eot');
+	src: local(''), url('fonts/THSarabun.woff') format('woff'), url('fonts/THSarabun.ttf') format('truetype'), url('fonts/THSarabun.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 img { border:0;}
 .cursor { cursor:pointer;}
 .clear { clear:both;}
@@ -328,3 +336,9 @@ padding-left: 9px;
 
 .error{color:#C00;}
 .input-group.date{width:150px;}
+
+
+.printpage { width:800px; margin:0 auto; position:relative; font-family:'Conv_THSarabun',Sans-Serif; font-size:19px; color:#000;}
+.printpage p { margin:0; padding:0;}
+.printpage ol li span, .printpage div span { margin:0 10px;}
+.printpage ol li {list-style-type: thai}

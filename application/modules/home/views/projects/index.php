@@ -63,7 +63,7 @@
 	  <td><?=get_province_name($row->province_id)?></td>
 	  <td><a href="home/swots?budget_year=<?=$row->budget_year?>&province_id=<?=$row->province_id?>&project_id=<?=$row->id?>"><img src="themes/elderly2016/images/swot.png" width="48" height="48" /></a></td>
 	  <td>
-	  	<a href="<?=basename($_SERVER['PHP_SELF'])?>?act=print"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a>
+	  	<a href="home/projects/view/<?=$rs->id?>"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a>
 	  	<a href="home/projects/form/<?=$rs->id?>"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> 
 	  	<a href="home/projects/delete/<?=$rs->id?>"><img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้"  /></a></td>
   </tr>

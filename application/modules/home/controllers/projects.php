@@ -105,5 +105,15 @@ class projects extends Public_Controller {
 		redirect('home/projects/index');
 	}
 	
+	function view($id){
+		$data['rs'] = new project($id);
+		if($id!=""){
+			// รายละเอียดข้อมูลกิจกรรม
+			$data['activities'] = new activity();
+			$data['activities']->where('project_id = '.$id)->order_by('id','asc')->get();
+		}
+		$this->template->build('projects/view',$data);
+	}
+	
 }
 ?>

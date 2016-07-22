@@ -63,7 +63,7 @@
 		} 
 	  ?>
     </select>
-  </span><span class="calAge">(xx ปี)</span> </td>
+  </span>(<span class="calAge"></span> ปี)</td>
 </tr>
 <tr>
   <th>สถานภาพ <span class="Txt_red_12">*</span></th>

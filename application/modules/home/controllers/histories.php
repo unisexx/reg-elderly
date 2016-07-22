@@ -82,5 +82,10 @@ class histories extends Public_Controller {
 		redirect('home/histories/index');
 	}
 	
+	function view($id){
+		$data['rs'] = new history($id);
+		$this->template->build('histories/view',$data);
+	}
+	
 }
 ?>

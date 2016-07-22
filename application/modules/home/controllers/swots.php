@@ -46,5 +46,11 @@ class swots extends Public_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
+	function view($project_id,$id=false){
+		$data['project'] = new project($project_id);
+		$data['rs'] = new swot($id);
+		$this->template->build('swots/view',$data);
+	}
+	
 }
 ?>

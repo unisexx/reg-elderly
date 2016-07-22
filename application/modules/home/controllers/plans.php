@@ -76,5 +76,17 @@ class plans extends Public_Controller {
 		redirect('home/plans/index');
 	}
 	
+	function view($id=false){
+		$data['rs'] = new plan($id);
+		
+		if($id!=""){
+			// รายละเอียดข้อมูลกิจกรรม
+			$data['activities'] = new plan_activity();
+			$data['activities']->where('plan_id = '.$id)->order_by('id','asc')->get();
+		}
+		
+		$this->template->build('plans/view',$data);
+	}
+	
 }
 ?>

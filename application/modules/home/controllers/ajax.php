@@ -46,7 +46,7 @@ Class ajax extends Public_Controller
 
 	function calAge(){
 		if($_GET){
-			echo '('.calculate_age('00','00',$_GET['birth_year']).' ปี)';
+			echo calculate_age('00','00',$_GET['birth_year']);
 		}
 	}
 	
