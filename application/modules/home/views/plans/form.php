@@ -7,7 +7,7 @@
     <th>ปีงบประมาณ <span class="Txt_red_12">*</span></th>
     <td>
     	<select name="budget_year" class="form-control" style="width:auto;">
-	      <option>+ เลือกปีงบประมาณ +</option>
+	      <option value="">+ เลือกปีงบประมาณ +</option>
 		  <?php 
 			for ($x = (date("Y")+543); $x >= 2550; $x--) {
 				$selected_year = ($x == $rs->budget_year)?"selected=selected":"";
@@ -129,6 +129,33 @@
 
 <script>
 $(document).ready(function(){
+	// validate
+	$("form").validate({
+		rules: {
+			budget_year:"required",
+			user_id:"required",
+			name:"required",
+			tel:"required"
+		},
+		messages:{
+			budget_year:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			user_id:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			name:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			tel:"ฟิลด์นี้ห้ามเป็นค่าว่าง"
+		},
+        errorPlacement: function(error, element)
+        {
+	            if ( element.is(":radio,:checkbox")) 
+	            {
+	                error.appendTo( element.parents('td') );
+	            }
+	            else 
+	            { // This is the default behavior 
+	                error.insertAfter( element );
+	            }
+		}
+	});
+	
 	// ดึงข้อมูลที่เลือกลงฟอร์มหลัก
 	$('#activityBtn').click(function(){
 		// ปิด colorbox
