@@ -90,4 +90,18 @@ if(!function_exists('select_province_condition'))
 		return $condition;
 	}
 }
+
+if(!function_exists('addLog')){
+	function addLog($module=false,$detail=false,$url=false){
+		$rs = new log();
+		$data['module'] =  $module;
+		$data['detail'] = $detail;
+		$data['url'] = $url;
+		$data['user_id'] = user_login()->id;
+		$data['username'] = user_login()->username;
+		$data['ip'] = $_SERVER['REMOTE_ADDR'];
+		$rs->from_array($data);
+		$rs->save();
+	}
+}
 ?>

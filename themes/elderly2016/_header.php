@@ -38,7 +38,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav">
-          	<li><a href="logfile.php">Log file</a></li>
+          	<li><a href="home/logs">Log file</a></li>
           </ul>	
          <ul class="nav navbar-nav navbar-right">
           	<!-- <li class="dropdown">

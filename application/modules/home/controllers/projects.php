@@ -91,6 +91,14 @@ class projects extends Public_Controller {
 			}
 			
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
+			
+			// logs
+			if($id != ""){
+				addLog('projects','แก้ไขรายงานผลการดำเนินงานโครงการ (คปญ. ๒) '.$_POST['name'],$_POST['current']);
+			}else{
+				addLog('projects','เพิ่มรายงานผลการดำเนินงานโครงการ (คปญ. ๒) '.$_POST['name'],$_POST['current'].'/'.$rs->db->insert_id());
+			}
+			
 		}
 		redirect('home/projects/index');
 		// redirect($_SERVER['HTTP_REFERER']);
@@ -99,6 +107,10 @@ class projects extends Public_Controller {
 	function delete($id){
 		if($id){
 			$rs = new project($id);
+			
+			// logs
+			addLog('users','ลบรายงานผลการดำเนินงานโครงการ (คปญ. ๒) '.$rs->name,current_url());
+			
 			$rs->delete();
 			set_notify('success', 'ลบข้อมูลเรียบร้อย');
 		}

@@ -32,6 +32,7 @@
 
 
 <div id="btnBoxAdd">
+  <?php echo form_current() ?>
   <input type="hidden" name="project_id" value="<?=$project->id?>">
   <input type="hidden" name="budget_year" value="<?=$project->budget_year?>">
   <input type="hidden" name="province_id" value="<?=$project->province_id?>">

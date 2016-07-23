@@ -28,6 +28,14 @@ class users extends Public_Controller {
 			$rs->from_array($_POST);
 			$rs->save();
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
+			
+			// logs
+			if($id != ""){
+				addLog('users','แก้ไขผู้ใช้งาน '.$_POST['name'],$_POST['current']);
+			}else{
+				addLog('users','เพิ่มผู้ใช้งาน '.$_POST['name'],$_POST['current'].'/'.$rs->db->insert_id());
+			}
+			
 		}
 		redirect('home/users/index');
 	}
@@ -35,6 +43,10 @@ class users extends Public_Controller {
 	function delete($id){
 		if($id){
 			$rs = new user($id);
+			
+			// logs
+			addLog('users','ลบผู้ใช้งาน '.$rs->name,current_url());
+			
 			$rs->delete();
 			set_notify('success', 'ลบข้อมูลเรียบร้อย');
 		}

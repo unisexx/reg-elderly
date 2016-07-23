@@ -32,6 +32,14 @@ class swots extends Public_Controller {
 			$rs->save();
 			
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
+			
+			// logs
+			if($id != ""){
+				addLog('swots','แก้ไขตารางวิเคราะห์ SWOT (คปญ. ๓) '.get_project_name($_POST['project_id']),$_POST['current']);
+			}else{
+				addLog('swots','เพิ่มตารางวิเคราะห์ SWOT (คปญ. ๓) '.get_project_name($_POST['project_id']),$_POST['current'].'/'.$rs->db->insert_id());
+			}
+			
 		}
 		redirect('home/swots/index?budget_year='.$project->budget_year.'&province_id='.$project->province_id.'&project_id='.$project->id);
 		// redirect($_SERVER['HTTP_REFERER']);
@@ -40,6 +48,10 @@ class swots extends Public_Controller {
 	function delete($id){
 		if($id){
 			$rs = new swot($id);
+			
+			// logs
+			addLog('users','ลบตารางวิเคราะห์ SWOT (คปญ. ๓) '.get_project_name($rs->project_id),current_url());
+			
 			$rs->delete();
 			set_notify('success', 'ลบข้อมูลเรียบร้อย');
 		}

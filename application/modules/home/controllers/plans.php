@@ -62,6 +62,14 @@ class plans extends Public_Controller {
 			}
 			
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
+			
+			// logs
+			if($id != ""){
+				addLog('plans','แก้ไขแผนการดำเนินงาน (คปญ. ๔) '.$_POST['name'],$_POST['current']);
+			}else{
+				addLog('plans','เพิ่มแผนการดำเนินงาน (คปญ. ๔) '.$_POST['name'],$_POST['current'].'/'.$rs->db->insert_id());
+			}
+			
 		}
 		redirect('home/plans/index');
 		// redirect($_SERVER['HTTP_REFERER']);
@@ -70,6 +78,10 @@ class plans extends Public_Controller {
 	function delete($id){
 		if($id){
 			$rs = new plan($id);
+			
+			// logs
+			addLog('users','ลบแผนการดำเนินงาน (คปญ. ๔) '.$rs->name,current_url());
+			
 			$rs->delete();
 			set_notify('success', 'ลบข้อมูลเรียบร้อย');
 		}

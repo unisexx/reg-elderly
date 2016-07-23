@@ -68,6 +68,13 @@ class histories extends Public_Controller {
 			$rs->from_array($_POST);
 			$rs->save();
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
+			
+			// logs
+			if($id != ""){
+				addLog('histories','แก้ไขประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑) '.$_POST['name'],$_POST['current']);
+			}else{
+				addLog('histories','เพิ่มประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑) '.$_POST['name'],$_POST['current'].'/'.$rs->db->insert_id());
+			}
 		}
 		redirect('home/histories/index');
 		// redirect($_SERVER['HTTP_REFERER']);
@@ -76,6 +83,10 @@ class histories extends Public_Controller {
 	function delete($id){
 		if($id){
 			$rs = new history($id);
+			
+			// logs
+			addLog('users','ลบประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑) '.$rs->name,current_url());
+			
 			$rs->delete();
 			set_notify('success', 'ลบข้อมูลเรียบร้อย');
 		}
