@@ -25,9 +25,11 @@
            <ul class="nav navbar-nav">
           	<li><a href="home/histories">ประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑)</a></li>
           </ul>	
+          <?if(user_login()->is_admin == 1):?>
           <ul class="nav navbar-nav">
           	<li><a href="home/users">ผู้ใช้งาน</a></li>
           </ul>	
+          <?endif;?>
           <ul class="nav navbar-nav">
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">รายงาน <span class="caret"></span></a>
@@ -37,9 +39,12 @@
                 </ul>
             </li>
           </ul>
+          <?if(user_login()->is_admin == 1):?>
           <ul class="nav navbar-nav">
           	<li><a href="home/logs">Log file</a></li>
           </ul>	
+          <?endif;?>
+          
          <ul class="nav navbar-nav navbar-right">
           	<!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ตั้งค่า <span class="caret"></span></a>
