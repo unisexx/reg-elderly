@@ -8,7 +8,7 @@ class Public_Controller extends Master_Controller
 		// ini_set("memory_limit","512M");	
 		
 		// check login
-		// if(!is_login('Administrator')) redirect('users/admin/auth/login');
+		if(user_login()->id == "") redirect('home');
 		
 		$this->template->set_theme('elderly2016');
 		

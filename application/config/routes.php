@@ -32,7 +32,7 @@
 | would be loaded.
 */
 
-$route['default_controller'] = "home";
+$route['default_controller'] = "home/histories";
 
 $route['admin'] = 'users/admin/auth/login';
 // 

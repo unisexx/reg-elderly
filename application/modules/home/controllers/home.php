@@ -1,5 +1,5 @@
 <?php
-class Home extends Public_Controller {
+class Home extends Master_Controller {
 
 	function __construct()
 	{
@@ -8,6 +8,8 @@ class Home extends Public_Controller {
 
 	function index()
 	{
+		$this->template->set_theme('elderly2016');
+		// Set layout
 		$this->template->set_layout('login');
 		$this->template->build('index');
 	}
@@ -17,7 +19,7 @@ class Home extends Public_Controller {
 		if(login($this->input->post('username'), $this->input->post('password')))
 		{
 			set_notify('success', 'Welcome to Admin control');
-			redirect('home/users');
+			redirect('home/histories');
 		} 
 		else
 		{

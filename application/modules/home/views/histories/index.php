@@ -61,6 +61,7 @@
   <th>ลำดับ</th>
   <th>ว/ด/ป ที่ขึ้นทะเบียน</th>
   <th>จังหวัด</th>
+  <th>เลขประจำตัวประชาชน</th>
   <th style="width:20%">ชื่อ-สกุล</th>
   <th>อายุ</th>
   <th>ความเชี่ยวชาญ</th>
@@ -72,6 +73,7 @@
   <td><?=($key+1)+$rs->paged->current_row?></td>
   <td><?=mysql_to_th($row->regis_date)?></td>
   <td><?=get_province_name($row->regis_province_id)?></td>
+  <td><?=$row->id_card?></td>
   <td><?=$row->title?><?=$row->name?></td>
   <td><?=@calculate_age($row->birth_day,$row->birth_month,$row->birth_year)?></td>
   <td><img src="themes/elderly2016/images/star.png" width="32" height="32" class="vtip" title="<?=wisdom_list($row)?>" /></td>
@@ -82,7 +84,9 @@
   	<?=$row->now_district_id != "" ? " ตำบล".get_district_name($row->now_district_id) : "" ;?>
   	<?=$row->now_amphur_id != "" ? " อำเภอ".get_amphur_name($row->now_amphur_id) : "" ;?>
   	<?=$row->now_province_id != "" ? get_province_name($row->now_province_id) : "" ;?>
-  	<?=$row->now_post_code != "" ? $row->now_post_code : "" ;?>
+  	<?=$row->now_post_code != "" ? $row->now_post_code : "" ;?><br>
+  	<?=$row->tel != "" ? " โทรศัพท์ ".$row->tel : "" ;?> 
+  	<?=$row->mobile != "" ? " โทรศัพท์มือถือ ".$row->mobile : "" ;?> 
   </td>
   <td>
   	<a href="home/histories/view/<?=$row->id?>"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a>
