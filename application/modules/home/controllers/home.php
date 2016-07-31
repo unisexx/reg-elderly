@@ -34,5 +34,9 @@ class Home extends Master_Controller {
 		redirect('home');
 	}
 	
+	function info(){
+		// echo phpinfo();
+	}
+	
 }
 ?>
