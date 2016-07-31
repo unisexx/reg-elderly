@@ -38,14 +38,14 @@
 | the active record class
 */
 
-$active_group = 'fd';
+$active_group = 'local';
 $active_record = TRUE;
 
 
 $db['local']['hostname'] = 'localhost';
 $db['local']['username'] = 'root';
-$db['local']['password'] = '1234';
-$db['local']['database'] = 'law2016';
+$db['local']['password'] = '';
+$db['local']['database'] = 'reg_elderly';
 $db['local']['dbdriver'] = 'mysql';
 $db['local']['dbprefix'] = '';
 $db['local']['pconnect'] = TRUE;

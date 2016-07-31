@@ -98,5 +98,23 @@ class histories extends Public_Controller {
 		$this->template->build('histories/view',$data);
 	}
 	
+	function test(){
+		//convert date function
+		$sql = "select id, regis_date, REGISTER_DATE from histories where regis_date = null order by id asc";
+		$rs = $this->db->query($sql)->result_array();
+		foreach($rs as $row){
+				if($row['REGISTER_DATE'] != ""){
+					$exp = explode("-", $row['REGISTER_DATE']);
+					$day = $exp[0];
+					$month = $exp[1];
+					$year = ($exp[2]-543);
+					
+					$newDate = $year.'-'.$month.'-'.$day;
+					
+					$this->db->query("UPDATE histories SET regis_date = '".$newDate."' where id = ".$row['id']);
+				}
+		}
+	}
+	
 }
 ?>
