@@ -20,7 +20,7 @@
   <th>โครงการ <span class="Txt_red_12">*</span> / จังหวัด <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
     <input type="text" class="form-control " id="exampleInputName" placeholder="โครงการ" style="width:500px;" name="name" value="<?=$rs->name?>" /> 
-    / <?=form_dropdown('province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+    / <?=form_dropdown('province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
   </span></td>
 </tr>
 <tr>

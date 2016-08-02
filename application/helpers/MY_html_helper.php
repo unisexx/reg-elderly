@@ -34,7 +34,7 @@ if(!function_exists('get_district_name'))
 {
 	function get_district_name($district_id){
 		$CI =& get_instance();
-		$rs = $CI->db->query("select name from district where id = ".$district_id)->row();
+		$rs = $CI->db->query("select name from district where code = ".$district_id)->row();
 		return $rs->name;
 	}
 }
@@ -43,7 +43,7 @@ if(!function_exists('get_amphur_name'))
 {
 	function get_amphur_name($amphur_id){
 		$CI =& get_instance();
-		$rs = $CI->db->query("select name from amphur where id = ".$amphur_id)->row();
+		$rs = $CI->db->query("select name from amphur where code = ".$amphur_id)->row();
 		return $rs->name;
 	}
 }
@@ -52,7 +52,7 @@ if(!function_exists('get_province_name'))
 {
 	function get_province_name($province_id){
 		$CI =& get_instance();
-		$rs = $CI->db->query("select name from province where id = ".$province_id)->row();
+		$rs = $CI->db->query("select name from province where code = ".$province_id)->row();
 		return $rs->name;
 	}
 }
@@ -84,7 +84,7 @@ if(!function_exists('calculate_age'))
 if(!function_exists('select_province_condition'))
 {
 	function select_province_condition($field=false){
-		if(!$field){ $field = "id";}
+		if(!$field){ $field = "code";}
 		
 		$condition = !is_admin()? " where ".$field." = ".user_login()->province_id : "" ;
 		return $condition;

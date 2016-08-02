@@ -9,7 +9,7 @@
 <tr>
   <th>จังหวัด<span class="Txt_red_12"> *</span></th>
   <td>
-	<?=form_dropdown('province_id',get_option('id','name','province order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+	<?=form_dropdown('province_id',get_option('code','name','province order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
 </td>
 </tr>
 <tr>

@@ -5,10 +5,10 @@
   <div class="col-xs-4">
     <input type="text" class="form-control" placeholder="ชื่อ - สกุล" name="search" value="<?=@$_GET['search']?>">
   </div>
-  <?=form_dropdown('regis_province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$_GET['regis_province_id'],'class="form-control" style="width:200px;"','-- จังหวัดที่ขึ้นทะเบียน --');?>
+  <?=form_dropdown('regis_province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$_GET['regis_province_id'],'class="form-control" style="width:200px;"','-- จังหวัดที่ขึ้นทะเบียน --');?>
   <div style="margin:5px 0;">
   <span class="spanProvince">
-      	<?=form_dropdown('now_province_id',get_option('id','name','province order by name asc'),@$_GET['now_province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
+      	<?=form_dropdown('now_province_id',get_option('code','name','province order by name asc'),@$_GET['now_province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
       </span>
       <span class="spanAmphur">
 			<select name="now_amphur_id" class="form-control" style="width:180px;" disabled="disabled">
@@ -149,12 +149,14 @@ $(document).on('change', "select[name=now_province_id]", function() {
 
 // select อำเภอ หาตำบล
 $(document).on('change', "select[name=now_amphur_id]", function() {
+	var province_id = $('[name=now_province_id]').val();
 	var amphur_id = $(this).val();
 	var ele = $(this).closest(".spanAmphur").next(".spanDistrict");
 	if(amphur_id == ""){
 			$(".spanDistrict").find('select').val('').attr("disabled", true);
 	}else{
 		$.get('home/ajax/get_select_now_district',{
+			'province_id' : province_id,
 			'amphur_id' : amphur_id
 		},function(data){
 			ele.html(data);
@@ -175,6 +177,7 @@ $.get('home/ajax/get_select_now_amphur',{
 });
 
 $.get('home/ajax/get_select_now_district',{
+	'province_id' : now_province_id,
 	'amphur_id' : now_amphur_id,
 	'district_id' : now_district_id
 },function(data){

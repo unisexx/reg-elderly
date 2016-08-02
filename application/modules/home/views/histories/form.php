@@ -18,14 +18,15 @@
     <div class="input-group date">
 	  <input type="text" class="form-control datepickerTH" name="regis_date" data-date-language="th-th" value="<?=DB2Date($rs->regis_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> // 
-	  <?=form_dropdown('regis_province_id',get_option('id','name','province '.select_province_condition().' order by name asc'),@$rs->regis_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+	  <?=form_dropdown('regis_province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$rs->regis_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
     </span>
   </td>
 </tr>
 <tr>
   <th>ชื่อ - สกุล <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
-      <?=form_dropdown('title',array('นาย'=>'นาย','นาง'=>'นาง','นางสาว'=>'นางสาว'),@$rs->title,'class="form-control" style="width:auto;"','+ เลือกคำนำหน้า +');?>
+      <?//=form_dropdown('title',array('นาย'=>'นาย','นาง'=>'นาง','นางสาว'=>'นางสาว'),@$rs->title,'class="form-control" style="width:auto;"','+ เลือกคำนำหน้า +');?>
+      <?=form_dropdown('title',get_option('prefix_code','prefix_name_full','prefix order by seq_no asc'),@$rs->title,'class="form-control" style="width:auto;"','+ เลือกคำนำหน้า +');?>
     <input type="text" name="name" class="form-control " id="exampleInputName11" placeholder="ชื่อ - สกุล" style="width:500px;" value="<?=$rs->name?>"/>
     </span></td>
 </tr>
@@ -119,7 +120,7 @@
     <input type="text" class="form-control " id="exampleInputName21" placeholder="ซอย" style="width:200px;" name="reg_soi" value="<?=$rs->reg_soi?>" />
     <div style="margin-top:10px;">
 	  <span class="spanProvince">
-      	<?=form_dropdown('reg_province_id',get_option('id','name','province order by name asc'),@$rs->reg_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+      	<?=form_dropdown('reg_province_id',get_option('code','name','province order by name asc'),@$rs->reg_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
       </span>
       <span class="spanAmphur">
 			<select name="reg_amphur_id" class="form-control" style="width:auto;" disabled="disabled">
@@ -142,7 +143,7 @@
     <input type="text" class="form-control " id="exampleInputName23" placeholder="ซอย" style="width:200px;" name="now_soi" value="<?=$rs->now_soi?>" />
     <div style="margin-top:10px;">
       <span class="spanProvince">
-      	<?=form_dropdown('now_province_id',get_option('id','name','province order by name asc'),@$rs->now_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
+      	<?=form_dropdown('now_province_id',get_option('code','name','province order by name asc'),@$rs->now_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
       </span>
       <span class="spanAmphur">
 			<select name="now_amphur_id" class="form-control" style="width:auto;" disabled="disabled">
@@ -493,12 +494,14 @@ $(document).ready(function(){
 
 	// select อำเภอ หาตำบล
 	$('table').on('change', "select[name=reg_amphur_id]", function() {
+		var province_id = $('[name=reg_province_id]').val();
 		var amphur_id = $(this).val();
 		var ele = $(this).closest(".spanAmphur").next(".spanDistrict");
 		if(amphur_id == ""){
 				$(".spanDistrict").find('select').val('').attr("disabled", true);
 		}else{
 			$.get('home/ajax/get_select_reg_district',{
+				'province_id' : province_id,
 				'amphur_id' : amphur_id
 			},function(data){
 				ele.html(data);
@@ -519,6 +522,7 @@ $(document).ready(function(){
 	});
 	
 	$.get('home/ajax/get_select_reg_district',{
+		'province_id' : reg_province_id,
 		'amphur_id' : reg_amphur_id,
 		'district_id' : reg_district_id
 	},function(data){
@@ -545,12 +549,14 @@ $(document).ready(function(){
 
 	// select อำเภอ หาตำบล
 	$('table').on('change', "select[name=now_amphur_id]", function() {
+		var province_id = $('[name=now_province_id]').val();
 		var amphur_id = $(this).val();
 		var ele = $(this).closest(".spanAmphur").next(".spanDistrict");
 		if(amphur_id == ""){
 				$(".spanDistrict").find('select').val('').attr("disabled", true);
 		}else{
 			$.get('home/ajax/get_select_now_district',{
+				'province_id' : province_id,
 				'amphur_id' : amphur_id
 			},function(data){
 				ele.html(data);
@@ -571,6 +577,7 @@ $(document).ready(function(){
 	});
 	
 	$.get('home/ajax/get_select_now_district',{
+		'province_id' : now_province_id,
 		'amphur_id' : now_amphur_id,
 		'district_id' : now_district_id
 	},function(data){

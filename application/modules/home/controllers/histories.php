@@ -100,19 +100,55 @@ class histories extends Public_Controller {
 	
 	function test(){
 		//convert date function
-		$sql = "select id, regis_date, REGISTER_DATE from histories where regis_date = null order by id asc";
+		$sql = "select id, person_id from histories where now_province_id is null order by id asc";
 		$rs = $this->db->query($sql)->result_array();
 		foreach($rs as $row){
-				if($row['REGISTER_DATE'] != ""){
-					$exp = explode("-", $row['REGISTER_DATE']);
-					$day = $exp[0];
-					$month = $exp[1];
-					$year = ($exp[2]-543);
 					
-					$newDate = $year.'-'.$month.'-'.$day;
+					$sql = "select ADDRESS_NO, MOO, SOI, PROVINCE_CODE, DISTRICT_CODE, SUBDISTRICT_CODE, TELEPHONE, FAX,  POSTCODE from _mn_address_01 where person_id = ".$row['person_id'];
+					$q = $this->db->query($sql)->row_array();
+		
+					$sql = "UPDATE histories SET 
+						now_home_no = '".@$q['ADDRESS_NO']."',
+						now_moo = '".@$q['MOO']."',
+						now_soi = '".@$q['SOI']."',
+						now_province_id = '".@$q['PROVINCE_CODE']."',
+						now_amphur_id = '".@$q['DISTRICT_CODE']."',
+						now_district_id = '".@$q['SUBDISTRICT_CODE']."',
+						now_post_code = '".@$q['POSTCODE']."',
+						tel = '".@$q['TELEPHONE']."',
+						fax = '".@$q['FAX']."'
+					where id = ".$row['id'];
+ 
+					$this->db->query($sql);
 					
-					$this->db->query("UPDATE histories SET regis_date = '".$newDate."' where id = ".$row['id']);
-				}
+					echo 'update '.$row['id'].' success<br>';
+		}
+	}
+	
+	function test2(){
+		//convert date function
+		$sql = "select id, person_id from histories where reg_province_id is null order by id asc";
+		$rs = $this->db->query($sql)->result_array();
+		foreach($rs as $row){
+					
+					$sql = "select ADDRESS_NO, MOO, SOI, PROVINCE_CODE, DISTRICT_CODE, SUBDISTRICT_CODE, TELEPHONE, FAX,  POSTCODE  from _mn_address_02 where person_id = ".$row['person_id'];
+					$q = $this->db->query($sql)->row_array();
+		
+					$sql = "UPDATE histories SET 
+						reg_home_no = '".@$q['ADDRESS_NO']."',
+						reg_moo = '".@$q['MOO']."',
+						reg_soi = '".@$q['SOI']."',
+						reg_province_id = '".@$q['PROVINCE_CODE']."',
+						reg_amphur_id = '".@$q['DISTRICT_CODE']."',
+						reg_district_id = '".@$q['SUBDISTRICT_CODE']."',
+						reg_post_code = '".@$q['POSTCODE']."',
+						tel = '".@$q['TELEPHONE']."',
+						fax = '".@$q['FAX']."'
+					where id = ".$row['id'];
+ 
+					$this->db->query($sql);
+					
+					echo 'update '.$row['id'].' success<br>';
 		}
 	}
 	
