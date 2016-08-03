@@ -11,9 +11,9 @@
 		} 
 	  ?>
     </select>
-    <?=form_dropdown('province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$_GET['province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
+    <?=@form_dropdown('province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$_GET['province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
     <span id="project" style="width: auto !important;">
-    	<?=form_dropdown('project_id',get_option('code','name','projects '.select_province_condition("province_id").' order by name asc'),@$_GET['project_id'],'class="form-control" style="width:180px;"','-- เลือกโครงการ --');?>
+    	<?=@form_dropdown('project_id',get_option('code','name','projects '.select_province_condition("province_id").' order by name asc'),@$_GET['project_id'],'class="form-control" style="width:180px;"','-- เลือกโครงการ --');?>
     </span>
   <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
 </form>
