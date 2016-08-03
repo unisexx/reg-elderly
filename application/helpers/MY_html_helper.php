@@ -69,15 +69,13 @@ if(!function_exists('get_project_name'))
 if(!function_exists('calculate_age'))
 {
 	function calculate_age($day,$month,$year){
-	# object oriented
-	$birth_day = ($year-543).'-'.$month.'-'.$day;
-	
-	$from = new DateTime($birth_day);
-	$to   = new DateTime('today');
-	return $from->diff($to)->y;
-	
-	# procedural
-	// echo date_diff(date_create('1970-02-01'), date_create('today'))->y, "\n";
+		if($day != 0 or $month !=0 or $year !=0){
+			$birth_day = ($year-543).'-'.$month.'-'.$day;
+			
+			$from = new DateTime($birth_day);
+			$to   = new DateTime('today');
+			return $from->diff($to)->y;	
+		}
 	}
 }
 

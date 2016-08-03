@@ -54,7 +54,8 @@
   <input type="button" title="เพิ่มโครงการ" value="เพิ่มรายการ" onclick="document.location='home/histories/form'" class="btn btn-warning vtip" />
 </div>
 
-<?=$rs->pagination();?>
+<?// =$rs->pagination();?>
+<?=$pagination?>
 
 <table class="tblist">
 <tr>
@@ -68,9 +69,10 @@
   <th style="width:35%">ข้อมูลติดต่อ</th>
   <th>จัดการ</th>
   </tr>
+  <?php $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1; ?>
   <?foreach($rs as $key=>$row):?>
 	<tr class="<?=alternator('','odd');?>">
-  <td><?=($key+1)+$rs->paged->current_row?></td>
+  <td><?=$i?></td>
   <td><?=mysql_to_th($row->regis_date)?></td>
   <td><?=get_province_name($row->regis_province_id)?></td>
   <td><?=$row->id_card?></td>
@@ -94,10 +96,12 @@
   	<a href="home/histories/delete/<?=$row->id?>"><img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้" onclick="return confirm('<?php echo "ยืนยันการลบ?";?>')"  /></a>
   </td>
   </tr>
+  	<?$i++?>
 	<?endforeach;?>
 </table>
 
-<?=$rs->pagination();?>
+<?//=$rs->pagination();?>
+<?=$pagination?>
 
 <?
 function wisdom_list($row){
