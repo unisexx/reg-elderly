@@ -32,18 +32,18 @@ if(!function_exists('fix_file'))
 
 if(!function_exists('get_district_name'))
 {
-	function get_district_name($district_id){
+	function get_district_name($province_id,$amphur_id,$district_id){
 		$CI =& get_instance();
-		$rs = $CI->db->query("select name from district where code = ".$district_id)->row();
+		$rs = $CI->db->query("select name from district where province_id = ".$province_id." and amphur_id = ".$amphur_id." and code = ".$district_id)->row();
 		return $rs->name;
 	}
 }
 
 if(!function_exists('get_amphur_name'))
 {
-	function get_amphur_name($amphur_id){
+	function get_amphur_name($province_id,$amphur_id){
 		$CI =& get_instance();
-		$rs = $CI->db->query("select name from amphur where code = ".$amphur_id)->row();
+		$rs = $CI->db->query("select name from amphur where province_id = ".$province_id." and code = ".$amphur_id)->row();
 		return $rs->name;
 	}
 }
@@ -63,6 +63,17 @@ if(!function_exists('get_project_name'))
 		$CI =& get_instance();
 		$rs = $CI->db->query("select name from projects where id = ".$project_id)->row();
 		return $rs->name;
+	}
+}
+
+if(!function_exists('get_prefix'))
+{
+	function get_prefix($id=false){
+		if($id){
+			$CI =& get_instance();
+			$rs = $CI->db->query("select prefix_name_full from prefix where prefix_code = ".$id)->row();
+			return $rs->prefix_name_full;
+		}
 	}
 }
 
