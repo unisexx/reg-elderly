@@ -76,15 +76,15 @@
   <td><?=mysql_to_th($row->regis_date)?></td>
   <td><?=get_province_name($row->regis_province_id)?></td>
   <td><?=$row->id_card?></td>
-  <td><?=$row->title?><?=$row->name?></td>
+  <td><?=get_prefix($row->title)?><?=$row->name?></td>
   <td><?=@calculate_age($row->birth_day,$row->birth_month,$row->birth_year)?></td>
   <td><img src="themes/elderly2016/images/star.png" width="32" height="32" class="vtip" title="<?=wisdom_list($row)?>" /></td>
   <td>
   	<?=$row->now_home_no?>
   	<?=$row->now_moo != "" ? " หมู่ที่ ".$row->now_moo : "" ;?>
   	<?=$row->now_soi != "" ? " ซอย".$row->now_soi : "" ;?>
-  	<?=$row->now_district_id != "" ? " ตำบล".get_district_name($row->now_district_id) : "" ;?>
-  	<?=$row->now_amphur_id != "" ? " อำเภอ".get_amphur_name($row->now_amphur_id) : "" ;?>
+  	<?=$row->now_district_id != "" ? " ตำบล".get_district_name($row->now_province_id,$row->now_amphur_id,$row->now_district_id) : "" ;?>
+  	<?=$row->now_amphur_id != "" ? " อำเภอ".get_amphur_name($row->now_province_id,$row->now_amphur_id) : "" ;?>
   	<?=$row->now_province_id != "" ? get_province_name($row->now_province_id) : "" ;?>
   	<?=$row->now_post_code != "" ? $row->now_post_code : "" ;?><br>
   	<?=$row->tel != "" ? " โทรศัพท์ ".$row->tel : "" ;?> 

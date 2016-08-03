@@ -69,9 +69,9 @@
 <tr>
   <th>สถานภาพ <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline"><span>
-    <input name="status" type="radio" id="radio" value="มีชีวิต" <?=$rs->status == 'มีชีวิต'?'checked=checked':'';?> />
+    <input name="status" type="radio" id="radio" value="1" <?=$rs->status == '1'?'checked=checked':'';?> />
 มีชีวิต </span> <span>
-<input name="status" type="radio" id="radio2" value="เสียชีวิต" <?=$rs->status == 'เสียชีวิต'?'checked=checked':'';?> />
+<input name="status" type="radio" id="radio2" value="2" <?=$rs->status == '2'?'checked=checked':'';?> />
 เสียชีวิต </span></span></td>
 </tr>
 <tr>
@@ -163,14 +163,14 @@
   <th>สถานภาพ</th>
   <td>
   	<span class="form-inline">
-  		<span><input type="radio" name="marital_status" value="โสด" <?=$rs->marital_status == 'โสด'?'checked="checked"':'';?>/> โสด</span>
-	    <span><input type="radio" name="marital_status" value="สมรสอยู่ด้วยกัน" <?=$rs->marital_status == 'สมรสอยู่ด้วยกัน'?'checked="checked"':'';?> /> สมรสอยู่ด้วยกัน</span>
-	    <span><input type="radio" name="marital_status" value="สมรสแยกกันอยู่" <?=$rs->marital_status == 'สมรสแยกกันอยู่'?'checked="checked"':'';?> /> สมรสแยกกันอยู่</span>
-	    <span><input type="radio" name="marital_status" value="หม้าย / แยกกันอยู่" <?=$rs->marital_status == 'หม้าย / แยกกันอยู่'?'checked="checked"':'';?> /> หม้าย / แยกกันอยู่</span>
-	    <span><input type="radio" name="marital_status" value="หม้ายคู่สมรสเสียชีวิต" <?=$rs->marital_status == 'หม้ายคู่สมรสเสียชีวิต'?'checked="checked"':'';?> /> หม้ายคู่สมรสเสียชีวิต</span>
-	    <span><input type="radio" name="marital_status" value="อยู่ด้วยกันโดยไม่สมรส" <?=$rs->marital_status == 'อยู่ด้วยกันโดยไม่สมรส'?'checked="checked"':'';?> /> อยู่ด้วยกันโดยไม่สมรส</span>
-	    <span><input type="radio" name="marital_status" value="อื่นๆ" <?=$rs->marital_status == 'อื่นๆ'?'checked="checked"':'';?> /> อื่นๆ</span><br>
-	    <input type="text" class="form-control " id="exampleInputName25" placeholder="ระบุ" style="width:200px;" name="marital_status_other" value="<?=$rs->marital_status_other?>" <?=$rs->marital_status != 'อื่นๆ'?'disabled="disabled"':'';?>/>
+  		<span><input type="radio" name="marital_status" value="1" <?=$rs->marital_status == '1'?'checked="checked"':'';?>/> โสด</span>
+	    <span><input type="radio" name="marital_status" value="2" <?=$rs->marital_status == '2'?'checked="checked"':'';?> /> สมรสอยู่ด้วยกัน</span>
+	    <span><input type="radio" name="marital_status" value="4" <?=$rs->marital_status == '4'?'checked="checked"':'';?> /> สมรสแยกกันอยู่</span>
+	    <span><input type="radio" name="marital_status" value="3" <?=$rs->marital_status == '3'?'checked="checked"':'';?> /> หม้าย / แยกกันอยู่</span>
+	    <span><input type="radio" name="marital_status" value="5" <?=$rs->marital_status == '5'?'checked="checked"':'';?> /> หม้ายคู่สมรสเสียชีวิต</span>
+	    <span><input type="radio" name="marital_status" value="6" <?=$rs->marital_status == '6'?'checked="checked"':'';?> /> อยู่ด้วยกันโดยไม่สมรส</span>
+	    <span><input type="radio" name="marital_status" value="99999" <?=$rs->marital_status == '99999'?'checked="checked"':'';?> /> อื่นๆ</span><br>
+	    <input type="text" class="form-control " id="exampleInputName25" placeholder="ระบุ" style="width:300px;" name="marital_status_other" value="<?=$rs->marital_status_other?>" <?=$rs->marital_status != 'อื่นๆ'?'disabled="disabled"':'';?>/>
   	</span>
   </td>
 </tr>
@@ -178,14 +178,15 @@
   <th>การศึกษา</th>
   <td>
     <span>
-	<input type="radio" name="education" value="ไม่ได้เรียนหนังสือ" <?=$rs->education == 'ไม่ได้เรียนหนังสือ'?'checked="checked"':'';?> /> ไม่ได้เรียนหนังสือ</span> <span>
-	<input type="radio" name="education" value="ประถมศึกษา" <?=$rs->education == 'ประถมศึกษา'?'checked="checked"':'';?> /> ประถมศึกษา</span> <span>
-	<input type="radio" name="education" value="มัธยมศึกษาตอนต้น" <?=$rs->education == 'มัธยมศึกษาตอนต้น'?'checked="checked"':'';?> /> มัธยมศึกษาตอนต้น</span> <span>
-	<input type="radio" name="education" value="มัธยมศึกษาตอนปลาย" <?=$rs->education == 'มัธยมศึกษาตอนปลาย'?'checked="checked"':'';?> /> มัธยมศึกษาตอนปลาย</span><span>
-	<input type="radio" name="education" value="อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)" <?=$rs->education == 'อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)'?'checked="checked"':'';?> /> อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)</span> <span>
-	<input type="radio" name="education" value="ปริญญาตรี" <?=$rs->education == 'ปริญญาตรี'?'checked="checked"':'';?>/> ปริญญาตรี</span> <span>
-	<input type="radio" name="education" value="อื่นๆ" <?=$rs->education == 'อื่นๆ'?'checked="checked"':'';?> /> อื่นๆ
-	<input type="text" class="form-control" id="exampleInputName26" placeholder="ระบุ" style="width:200px;" name="education_other" value="<?=$rs->education_other?>" <?=$rs->education != 'อื่นๆ'?'disabled="disabled"':'';?> />
+	<input type="radio" name="education" value="91" <?=$rs->education == '91'?'checked="checked"':'';?> /> ไม่ได้เรียนหนังสือ</span> <span>
+	<input type="radio" name="education" value="93" <?=$rs->education == '93'?'checked="checked"':'';?> /> ประถมศึกษาตอนต้น</span> <span>
+		<input type="radio" name="education" value="94" <?=$rs->education == '94'?'checked="checked"':'';?> /> ประถมศึกษาตอนปลาย</span> <span>
+	<input type="radio" name="education" value="95" <?=$rs->education == '95'?'checked="checked"':'';?> /> มัธยมศึกษาตอนต้น</span> <span>
+	<input type="radio" name="education" value="96" <?=$rs->education == '96'?'checked="checked"':'';?> /> มัธยมศึกษาตอนปลาย</span><span>
+	<input type="radio" name="education" value="10" <?=$rs->education == '10'?'checked="checked"':'';?> /> อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)</span> <span>
+	<input type="radio" name="education" value="40" <?=$rs->education == '40'?'checked="checked"':'';?>/> ปริญญาตรี</span> <span>
+	<input type="radio" name="education" value="99999" <?=$rs->education == '99999'?'checked="checked"':'';?> /> อื่นๆ
+	<input type="text" class="form-control" id="exampleInputName26" placeholder="ระบุ" style="width:300px;" name="education_other" value="<?=$rs->education_other?>" <?=$rs->education != 'อื่นๆ'?'disabled="disabled"':'';?> />
 	</span>
   </td>
 </tr>
@@ -469,7 +470,7 @@ $(document).ready(function(){
 	
 	// อื่นๆ ระบุ
 	$('input:radio[name=marital_status],input:radio[name=education]').change(function() {
-        if (this.value == 'อื่นๆ') {
+        if (this.value == '99999') {
             $(this).closest('td').find('input[type=text]').removeAttr('disabled','disabled');
         }else{
         	$(this).closest('td').find('input[type=text]').attr('disabled','disabled');
