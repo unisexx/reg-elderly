@@ -46,34 +46,135 @@ class histories extends Public_Controller {
 		if(!is_admin()){ $condition .= ' and regis_province_id = '.user_login()->province_id; }
 		if(@$_GET['search']){ $condition .= ' and name LIKE "%'.$_GET['search'].'%" ';}
 		if(@$_GET['regis_province_id']){ $condition .= ' and regis_province_id = '.$_GET['regis_province_id']; }
+		if(@$_GET['regis_year']){ $condition .= ' and regis_date LIKE "%'.($_GET['regis_year']-543).'%" ';}
 		if(@$_GET['now_province_id']){ $condition .= ' and now_province_id = '.$_GET['now_province_id']; }
 		if(@$_GET['now_amphur_id']){ $condition .= ' and now_amphur_id = '.$_GET['now_amphur_id']; }
 		if(@$_GET['now_district_id']){ $condition .= ' and now_district_id = '.$_GET['now_district_id']; }
-		if(@$_GET['wis_study']){ $condition .= ' or wis_study <> ""'; }
-		if(@$_GET['wis_medical']){ $condition .= ' or wis_medical <> ""'; }
-		if(@$_GET['wis_agriculture']){ $condition .= ' or wis_agriculture <> ""'; }
-		if(@$_GET['wis_natural']){ $condition .= ' or wis_natural <> ""'; }
-		if(@$_GET['wis_science']){ $condition .= ' or wis_science <> ""'; }
-		if(@$_GET['wis_engineer']){ $condition .= ' or wis_engineer <> ""'; }
-		if(@$_GET['wis_architecture']){ $condition .= ' or wis_architecture <> ""'; }
-		if(@$_GET['wis_social']){ $condition .= ' or wis_social <> ""'; }
-		if(@$_GET['wis_law']){ $condition .= ' or wis_law <> ""'; }
-		if(@$_GET['wis_politics']){ $condition .= ' or wis_politics <> ""'; }
-		if(@$_GET['wis_art']){ $condition .= ' or wis_art <> ""'; }
-		if(@$_GET['wis_religion']){ $condition .= ' or wis_religion <> ""'; }
-		if(@$_GET['wis_commercial']){ $condition .= ' or wis_commercial <> ""'; }
-		if(@$_GET['wis_security']){ $condition .= ' or wis_security <> ""'; }
-		if(@$_GET['wis_management']){ $condition .= ' or wis_management <> ""'; }
-		if(@$_GET['wis_publicity']){ $condition .= ' or wis_publicity <> ""'; }
-		if(@$_GET['wis_transport']){ $condition .= ' or wis_transport <> ""'; }
-		if(@$_GET['wis_energy']){ $condition .= ' or wis_energy <> ""'; }
-		if(@$_GET['wis_foreign']){ $condition .= ' or wis_foreign <> ""'; }
-		if(@$_GET['wis_materials']){ $condition .= ' or wis_materials <> ""'; }
-		if(@$_GET['wis_language']){ $condition .= ' or wis_language <> ""'; }
-		if(@$_GET['wis_rhetoric']){ $condition .= ' or wis_rhetoric <> ""'; }
-		if(@$_GET['wis_other']){ $condition .= ' or wis_other <> ""'; }
+		
+		// condition for wisdom (ความเชี่ยวชาญ)
+		$condition .= " and ( 1=1 ";
+		
+		$operator = "and";
+		
+		if(@$_GET['wis_study']){
+			 $condition .= ' '.$operator.' wis_study <> ""'; 
+			 $operator = "or";
+		}
+
+		if(@$_GET['wis_medical']){
+			 $condition .=  ' '.$operator.' wis_medical <> ""';
+			 $operator = "or";
+		}
+		
+		if(@$_GET['wis_agriculture']){
+			$condition .= ' '.$operator.' wis_agriculture <> ""'; 
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_natural']){
+			$condition .= ' '.$operator.' wis_natural <> ""'; 
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_science']){
+			$condition .= ' '.$operator.' wis_science <> ""'; 
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_engineer']){
+			$condition .= ' '.$operator.' wis_engineer <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_architecture']){
+			$condition .= ' '.$operator.' wis_architecture <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_social']){
+			$condition .= ' '.$operator.' wis_social <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_law']){
+			$condition .= ' '.$operator.' wis_law <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_politics']){
+			$condition .= ' '.$operator.' wis_politics <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_art']){
+			$condition .= ' '.$operator.' wis_art <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_religion']){
+			$condition .= ' '.$operator.' wis_religion <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_commercial']){
+			$condition .= ' '.$operator.' wis_commercial <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_security']){
+			$condition .= ' '.$operator.' wis_security <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_management']){
+			$condition .= ' '.$operator.' wis_management <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_publicity']){
+			$condition .= ' '.$operator.' wis_publicity <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_transport']){
+			$condition .= ' '.$operator.' wis_transport <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_energy']){
+			$condition .= ' '.$operator.' wis_energy <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_foreign']){
+			$condition .= ' '.$operator.' wis_foreign <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_materials']){
+			$condition .= ' '.$operator.' wis_materials <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_language']){
+			$condition .= ' '.$operator.' wis_language <> ""';
+			$operator = "or";
+		}
+
+		if(@$_GET['wis_rhetoric']){
+			$condition .= ' '.$operator.' wis_rhetoric <> ""';
+			$operator = "or";
+		}
+		
+		if(@$_GET['wis_other']){
+			$condition .= ' '.$operator.' wis_other <> ""';
+			$operator = "or";
+		}
+		
+		$condition .= " )";
 		
 		$sql = "select * from histories where ".$condition." order by id desc";
+		// echo $sql;
 		$histories = new history();
         $data['rs'] = $histories->sql_page($sql, 20);
 		$data['pagination'] = $histories->sql_pagination;

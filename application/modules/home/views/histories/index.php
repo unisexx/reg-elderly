@@ -6,6 +6,17 @@
     <input type="text" class="form-control" placeholder="ชื่อ - สกุล" name="search" value="<?=@$_GET['search']?>">
   </div>
   <?=form_dropdown('regis_province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$_GET['regis_province_id'],'class="form-control" style="width:200px;"','-- จังหวัดที่ขึ้นทะเบียน --');?>
+  
+  <select name="regis_year" class="form-control" style="width:auto;">
+      <option value="">-- ปีงบประมาณที่ขึ้นทะเบียน --</option>
+      <?php 
+		for ($x = (date("Y")+543); $x >= 2533; $x--) {
+			$selected_year = ($x == @$_GET['regis_year'])?"selected=selected":"";
+		    echo "<option value='$x' $selected_year>$x</option>";
+		} 
+	  ?>
+    </select>
+    
   <div style="margin:5px 0;">
   <span class="spanProvince">
       	<?=form_dropdown('now_province_id',get_option('code','name','province order by name asc'),@$_GET['now_province_id'],'class="form-control" style="width:180px;"','-- เลือกจังหวัด --');?>
@@ -67,7 +78,7 @@
   <th>อายุ</th>
   <th>ความเชี่ยวชาญ</th>
   <th style="width:35%">ข้อมูลติดต่อ</th>
-  <th>จัดการ</th>
+  <th style="width:136px;">จัดการ</th>
   </tr>
   <?php $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1; ?>
   <?foreach($rs as $key=>$row):?>
