@@ -62,7 +62,8 @@
     <th rowspan="3" style="width:20%">พื้นที่ดำเนินการ</th>
     <th rowspan="3" style="width:10%">วันที่ดำเนินการ</th>
     <th rowspan="3" style="width:10%">งบประมาณโครงการ/จำนวน</th>
-    </tr>
+    <th rowspan="3" style="width:10%">ลบ</th>
+  </tr>
   <tr>
     <th colspan="2">0-18  ปี</th>
     <th colspan="2">18-25  ปี</th>
@@ -81,7 +82,7 @@
   </tr>
   <?if(isset($activities)):?>
   <?foreach($activities as $key=>$act):?>
-  <tr>
+  <tr class="box">
   	<td><?=$key+1?></td>
   	<td><a class='inline' href="#inline_activity" data-id=<?=$act->id?>><?=$act->activity_name?></a></td>
   	<td>
@@ -102,6 +103,25 @@
   	<td><?=$act->area?></td>
   	<td><?=DB2Date($act->activity_date)?></td>
   	<td><?=$act->budget?></td>
+  	<td>
+  		<input type="hidden" name="activity_name[]" value="<?=$act->activity_name?>">
+  		<input type="hidden" name="b1m[]" value="<?=$act->b1m?>">
+  		<input type="hidden" name="b1f[]" value="<?=$act->b1f?>">
+  		<input type="hidden" name="b2m[]" value="<?=$act->b2m?>">
+  		<input type="hidden" name="b2f[]" value="<?=$act->b2f?>">
+  		<input type="hidden" name="b3m[]" value="<?=$act->b3m?>">
+  		<input type="hidden" name="b3f[]" value="<?=$act->b3f?>">
+  		<input type="hidden" name="b4m[]" value="<?=$act->b4m?>">
+  		<input type="hidden" name="b4f[]" value="<?=$act->b4f?>">
+  		<input type="hidden" name="area[]" value="<?=$act->area?>">
+  		<input type="hidden" name="activity_date[]" value="<?=DB2Date($act->activity_date)?>">
+  		<input type="hidden" name="budget[]" value="<?=$act->budget?>">
+  		<input type="hidden" name="activity_id[]" value="<?=$act->id?>">
+  		<?foreach($experts as $expert):?>
+  		<input type="hidden" name="expert_name" value="<?=$expert->expert_name?>">
+  		<?endforeach;?>
+  		<button class="act_delete" data-row-id="<?=$act->id?>">ลบ</button>
+  	</td>
   </tr>
   <?endforeach;?>
   <?endif;?>
@@ -319,7 +339,8 @@ $(document).ready(function(){
 			txtInsert += '<td>'+total+'</td>';
 			txtInsert += '<td>'+area+'</td>';
 			txtInsert += '<td>'+activity_date+'</td>';
-			txtInsert += '<td>'+budget+hiddenForm+multiHiddenForm+'</td>';
+			txtInsert += '<td>'+budget+'</td>';
+			txtInsert += '<td>'+hiddenForm+multiHiddenForm+'<button class="act_delete">ลบ</button></td>';
 			txtInsert += '</tr>';
 			
 			
@@ -356,7 +377,7 @@ $(document).ready(function(){
 	});
 	
 	// submit button
-	$('input[type=submit]').click(function(){
+	$('#projectForm input[type=submit]').click(function(){
 		$("#projectForm input[name=expert_name]").each(function(){
 			$(this).attr('name','expert_name['+ $('form .box').index($(this).closest('.box')) +'][]');
 		})
@@ -406,6 +427,18 @@ $(document).ready(function(){
 		autoComplete();
 	});
 	
+	// ลบกิจกรรม
+	$(document).on('click', ".act_delete", function() {
+		if (!confirm('ยืนยันการลบกิจกรรม')) return false;
+		
+		var actId = $(this).attr('data-row-id');
+		if(actId != ''){
+			$.get('home/ajax/delete_activity/'+actId);
+		}
+		
+		$(this).closest('tr').fadeOut(300, function() { $(this).remove(); });
+		return false;
+	});
 });
 
 // นับจำนวนใส่ตัวเลขหน้าแถว

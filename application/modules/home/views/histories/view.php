@@ -5,11 +5,17 @@
 </div>
 
 <div style="display:inline-block; margin-left:80px; margin-top:50px; text-align:center; font-size:24px; width:590px;">แบบประวัติคลังปัญญาผู้สูงอายุ  จังหวัด <span><?=get_province_name($rs->regis_province_id)?></span></div>
+
+<?if($rs->picture != ""):?>
 <div style="float:right; border:1px solid #ccc; padding:5px;">
-	<?if($rs->picture != ""):?>
-  		<img src="uploads/histories/<?=$rs->picture?>" width="110" height="110" />
-  	<?endif;?>
+	<?if(@$_GET['type'] == ""):?>
+		<img src="uploads/histories/<?=$rs->picture?>" width="110" height="110" />
+	<?else:?>
+		<!-- <img src="../../../uploads/histories/<?=$rs->picture?>" width="110" height="110" /> -->
+	<?endif;?>
 </div>
+<?endif;?>
+
 <div class="clear"></div>
 
 <ol>
@@ -57,11 +63,9 @@
 </li>
 </ol>
 
-
-
-
-
-
+<?if(@$_GET['type'] == ""):?>
+<div align="right"><a href="home/histories/view/<?=$rs->id?>?type=word">word</a> | <a href="home/histories/view/<?=$rs->id?>?type=excel">excel</a></div>
+<?endif;?>
 
 </div><!--printpage-->
 

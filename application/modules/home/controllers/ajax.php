@@ -61,5 +61,16 @@ Class ajax extends Public_Controller
 			print json_encode($rows);
 		// }
 	}
+	
+	function delete_activity($id){
+		if($id){
+			$expert = new expert();
+			$expert->where('activity_id', $id)->get();
+			$expert->delete_all();
+
+			$rs = new activity($id);
+			$rs->delete();
+		}
+	}
 }
 ?>
