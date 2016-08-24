@@ -124,7 +124,20 @@ class projects extends Public_Controller {
 			$data['activities'] = new activity();
 			$data['activities']->where('project_id = '.$id)->order_by('id','asc')->get();
 		}
-		$this->template->build('projects/view',$data);
+		
+		$filename = "(คปญ.๒)_รายงานผลการดำเนินงานโครงการ".$data['rs']->name."_จังหวัด".get_province_name($data['rs']->province_id)."_ปีงบประมาณ_".$data['rs']->budget_year;
+		
+		if(@$_GET['type'] == "word"){
+			header("Content-type: application/vnd.ms-word");
+			header("Content-Disposition: attachment;Filename=".$filename.".doc");
+			$this->load->view('projects/view',$data);
+		}elseif(@$_GET['type'] == 'excel'){
+			header("Content-type: application/vnd.ms-excel");
+			header("Content-Disposition: attachment;Filename=".$filename.".xls");
+			$this->load->view('projects/view',$data);
+		}else{
+			$this->template->build('projects/view',$data);
+		}
 	}
 	
 }

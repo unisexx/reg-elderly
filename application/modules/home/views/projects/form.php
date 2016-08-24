@@ -102,7 +102,7 @@
   	<td><?=($act->b1m + $act->b1f + $act->b2m + $act->b2f + $act->b3m + $act->b3f + $act->b4m + $act->b4f)?></td>
   	<td><?=$act->area?></td>
   	<td><?=DB2Date($act->activity_date)?></td>
-  	<td><?=$act->budget?></td>
+  	<td><?=number_format($act->budget)?></td>
   	<td>
   		<input type="hidden" name="activity_name[]" value="<?=$act->activity_name?>">
   		<input type="hidden" name="b1m[]" value="<?=$act->b1m?>">
@@ -339,7 +339,7 @@ $(document).ready(function(){
 			txtInsert += '<td>'+total+'</td>';
 			txtInsert += '<td>'+area+'</td>';
 			txtInsert += '<td>'+activity_date+'</td>';
-			txtInsert += '<td>'+budget+'</td>';
+			txtInsert += '<td>'+numberWithCommas(budget)+'</td>';
 			txtInsert += '<td>'+hiddenForm+multiHiddenForm+'<button class="act_delete">ลบ</button></td>';
 			txtInsert += '</tr>';
 			
@@ -399,7 +399,7 @@ $(document).ready(function(){
 		var b4f = $(this).closest('tr').find('td:eq(10)').text();
 		var area = $(this).closest('tr').find('td:eq(12)').text();
 		var activity_date = $(this).closest('tr').find('td:eq(13)').text();
-		var budget = $(this).closest('tr').find('td:eq(14)').text();
+		var budget = $(this).closest('tr').find('td:eq(14)').text().replace(/,/g, "");
 		
 		var expertInput = '';
 		$(this).closest('tr').find('.expertName').each(function() {
@@ -449,6 +449,11 @@ function autoCountTableRow(tbClassName){
 		$(this).html('');
 		$(this).append((i+1));
 	});
+}
+
+// ใส่คอมม่าที่ตัวเลข
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 </script>
 

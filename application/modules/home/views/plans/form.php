@@ -9,7 +9,7 @@
     	<select name="budget_year" class="form-control" style="width:auto;">
 	      <option value="">+ เลือกปีงบประมาณ +</option>
 		  <?php 
-			for ($x = (date("Y")+543); $x >= 2550; $x--) {
+			for ($x = (date("Y")+545); $x >= 2550; $x--) {
 				$selected_year = ($x == $rs->budget_year)?"selected=selected":"";
 			    echo "<option value='$x' $selected_year>$x</option>";
 			} 
@@ -44,6 +44,7 @@
     <th rowspan="2" style="width:10%">วัน/เดือน/ปี</th>
     <th rowspan="2" style="width:10%">งบประมาณ</th>
     <th colspan="2">ผลสัมฤทธิ์</th>
+    <th rowspan="2">ลบ</th>
   </tr>
   <tr>
   <th>ผลผลิต</th>
@@ -53,12 +54,22 @@
   <?foreach($activities as $key=>$act):?>
   <tr>
   	<td><?=$key+1?></td>
-  	<td><?=$act->activity_name?></td>
+  	<td><a class='inline' href="#inline_activity" data-id=<?=$act->id?>><?=$act->activity_name?></a></td>
   	<td><?=$act->area?></td>
   	<td><?=DB2Date($act->activity_date)?></td>
-  	<td><?=$act->budget?></td>
+  	<td><?=number_format($act->budget)?></td>
   	<td><?=$act->product?></td>
   	<td><?=$act->result?></td>
+  	<td>
+  		<input type='hidden' name='activity_name[]' value='<?=$act->activity_name?>'>
+  		<input type='hidden' name='area[]' value='<?=$act->area?>'>
+  		<input type='hidden' name='activity_date[]' value='<?=DB2Date($act->activity_date)?>'>
+  		<input type='hidden' name='budget[]' value='<?=$act->budget?>'>
+  		<input type='hidden' name='product[]' value='<?=$act->product?>'>
+  		<input type='hidden' name='result[]' value='<?=$act->result?>'>
+  		<input type='hidden' name='activity_id[]' value='<?=$act->id?>'>
+  		<button class="act_delete" data-row-id="<?=$act->id?>">ลบ</button>
+  	</td>
   </tr>
   <?endforeach;?>
   <?endif;?>
@@ -120,6 +131,8 @@
       </table>
 
 <div id="btnBoxAdd">
+	<input type="hidden" name="id" value="">
+	<input type="hidden" name="trRow" value="">
   <input id="activityBtn" name="input" type="button" title="บันทึกกิจกรรม" value="บันทึกกิจกรรม" class="btn btn-primary"/>
 </div>
       </div>
@@ -161,6 +174,8 @@ $(document).ready(function(){
 		// ปิด colorbox
 		$.colorbox.close();
 
+		var id = $(this).closest('#inline_activity').find('input[name=id]').val();
+		var trRow = $(this).closest('#inline_activity').find('input[name=trRow]').val();
 		var activity_name = $(this).closest('#inline_activity').find('input[name=activity_name]').val();
 		var area = $(this).closest('#inline_activity').find('textarea[name=area]').val();
 		var activity_date = $(this).closest('#inline_activity').find('input[name=activity_date]').val();
@@ -175,21 +190,30 @@ $(document).ready(function(){
 		hiddenForm += "<input type='hidden' name='budget[]' value='"+budget+"'>";
 		hiddenForm += "<input type='hidden' name='product[]' value='"+product+"'>";
 		hiddenForm += "<input type='hidden' name='result[]' value='"+result+"'>";
+		hiddenForm += "<input type='hidden' name='activity_id[]' value='"+id+"'>";
 		
 		var txtInsert = "";
 		txtInsert += '<tr class="box">';
 		txtInsert += '<td></td>';
-		txtInsert += '<td>'+activity_name+'</td>';
+		txtInsert += '<td><a class="inline" href="#inline_activity" data-id="'+id+'">'+activity_name+'</a></td>';
 		txtInsert += '<td>'+area+'</td>';
 		txtInsert += '<td>'+activity_date+'</td>';
-		txtInsert += '<td>'+budget+'</td>';
+		txtInsert += '<td>'+numberWithCommas(budget)+'</td>';
 		txtInsert += '<td>'+product+'</td>';
-		txtInsert += '<td>'+result+hiddenForm+'</td>';
+		txtInsert += '<td>'+result+'</td>';
+		txtInsert += '<td>'+hiddenForm+'<button class="act_delete">ลบ</button></td>';
 		txtInsert += '</tr>';
 		
 		// console.log(hiddenForm);
 		
-		$('.tbActivities tr:last').after(txtInsert);
+		// ถ้าเป็น edit ให้แทนแถวเดิม ถ้าเป็นเพิ่มใหม่ให้ใส่แถวสุดท้าย
+		if(trRow != ""){
+			$('.tbActivities').find("td:first-child:contains('"+trRow+"')").parent().replaceWith(txtInsert);
+			$(".inline").colorbox({inline:true, width:"90%"}); // reload colorbox
+		}else{
+			$('.tbActivities tr:last').after(txtInsert);
+			$(".inline").colorbox({inline:true, width:"90%"}); // reload colorbox
+		}
 
 		// เคลียร์ค่า input ของฟอร์มใน colorbox
 		$(this).closest('#inline_activity').find("input[type=text], input[type=number], textarea").val("");
@@ -197,6 +221,44 @@ $(document).ready(function(){
 		// คำนวนใส่ตัวเลขแถว
 		autoCountTableRow('tbActivities');
 	});
+	
+	
+	// แก้ไขกิจกรรม
+	$('table.tbActivities').on('click', '.inline', function() {
+		// alert($(this).attr('data-edit-id'));
+		var trRow =  $(this).parent().prev('td').html();
+		var id = $(this).attr('data-id');
+		var activity_name = $(this).closest('tr').find('td:eq(1)').text();
+		var area = $(this).closest('tr').find('td:eq(2)').text();
+		var activity_date = $(this).closest('tr').find('td:eq(3)').text();
+		var budget = $(this).closest('tr').find('td:eq(4)').text().replace(/,/g, "");
+		var product = $(this).closest('tr').find('td:eq(5)').text();
+		var result = $(this).closest('tr').find('td:eq(6)').text();
+		
+		
+		$('input[name=activity_name]').val(activity_name);
+		$('textarea[name=area]').val(area);
+		$('input[name=activity_date]').val(activity_date);
+		$('input[name=budget]').val(budget);
+		$('textarea[name=product]').val(product);
+		$('textarea[name=result]').val(result);
+		$('input[name=id]').val(id);
+		$('input[name=trRow]').val(trRow);
+	});
+	
+	// ลบกิจกรรม
+	$(document).on('click', ".act_delete", function() {
+		if (!confirm('ยืนยันการลบกิจกรรม')) return false;
+		
+		var actId = $(this).attr('data-row-id');
+		if(actId != ''){
+			$.get('home/ajax/delete_plan_activity/'+actId);
+		}
+		
+		$(this).closest('tr').fadeOut(300, function() { $(this).remove(); });
+		return false;
+	});
+	
 });
 
 // นับจำนวนใส่ตัวเลขหน้าแถว
@@ -208,4 +270,10 @@ function autoCountTableRow(tbClassName){
 		$(this).append((i+1));
 	});
 }
+
+// ใส่คอมม่าที่ตัวเลข
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+</script>
 </script>

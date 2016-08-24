@@ -198,13 +198,16 @@ class histories extends Public_Controller {
 	
 	function view($id){
 		$data['rs'] = new history($id);
+		
+		$filename = "(คปญ.๑)_ประวัติคลังปัญญาผู้สูงอายุ_จังหวัด".get_province_name($data['rs']->regis_province_id)."_".get_prefix($data['rs']->title).$data['rs']->name;
+		
 		if(@$_GET['type'] == "word"){
 			header("Content-type: application/vnd.ms-word");
-			header("Content-Disposition: attachment;Filename=history.doc");
+			header("Content-Disposition: attachment;Filename=".$filename.".doc");
 			$this->load->view('histories/view',$data);
 		}elseif(@$_GET['type'] == 'excel'){
 			header("Content-type: application/vnd.ms-excel");
-			header("Content-Disposition: attachment;Filename=history.xls");
+			header("Content-Disposition: attachment;Filename=".$filename.".xls");
 			$this->load->view('histories/view',$data);
 		}else{
 			$this->template->build('histories/view',$data);

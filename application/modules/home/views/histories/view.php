@@ -19,7 +19,7 @@
 <div class="clear"></div>
 
 <ol>
-<li>นาย (ชื่อ – สกุล) <span><?=$rs->title?> <?=$rs->name?></span></li>
+<li>นาย (ชื่อ – สกุล) <span><?=get_prefix($rs->title)?> <?=$rs->name?></span></li>
 <li>วัน/เดือน/ปีเกิด <span><?=$rs->birth_day?>/<?=$rs->birth_month?>/<?=$rs->birth_year?></span>  อายุ <span class="calAge"></span> ปี</li>
 <li>เลขประจำตัวประชาชน <span><?=$rs->id_card?></span> วันที่ออกบัตร <span><?=DB2Date($rs->issue_date)?></span> วันที่บัตรหมดอายุ <span><?=DB2Date($rs->expire_date)?></span>สถานที่ออกบัตร<span><?=$rs->issue_place?></span></li>
 <li>เชื้อชาติ <span><?=$rs->race?></span> สัญชาติ <span><?=$rs->nationality?></span> ศาสนา <span><?=$rs->religion?></span></li>

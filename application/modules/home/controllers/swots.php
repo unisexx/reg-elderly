@@ -58,10 +58,32 @@ class swots extends Public_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
-	function view($project_id,$id=false){
-		$data['project'] = new project($project_id);
-		$data['rs'] = new swot($id);
-		$this->template->build('swots/view',$data);
+	function view(){
+		// $data['project'] = new project($project_id);
+		// $data['rs'] = new swot($id);
+		
+		$data['rs'] = new swot();
+		if(@$_GET['project_id']){
+			$data['rs']->where('project_id = '.$_GET['project_id']); 
+			$data['project'] = new project($_GET['project_id']);
+		}
+		$data['rs']->order_by('id','desc')->get();
+		
+		
+		$filename = "(คปญ.๓)_ตารางวิเคราะห์ SWOT_".$data['project']->name."_จังหวัด".get_province_name(@$_GET['province_id'])."_ปีงบประมาณ_".$_GET['budget_year'];
+		
+		if(@$_GET['type'] == "word"){
+			header("Content-type: application/vnd.ms-word");
+			header("Content-Disposition: attachment;Filename=".$filename.".doc");
+			$this->load->view('swots/view',$data);
+		}elseif(@$_GET['type'] == 'excel'){
+			header("Content-type: application/vnd.ms-excel");
+			header("Content-Disposition: attachment;Filename=".$filename.".xls");
+			$this->load->view('swots/view',$data);
+		}else{
+			$this->template->build('swots/view',$data);
+		}
+		
 	}
 	
 }

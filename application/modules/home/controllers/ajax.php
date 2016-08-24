@@ -72,5 +72,12 @@ Class ajax extends Public_Controller
 			$rs->delete();
 		}
 	}
+	
+	function delete_plan_activity($id){
+		if($id){
+			$rs = new plan_activity($id);
+			$rs->delete();
+		}
+	}
 }
 ?>

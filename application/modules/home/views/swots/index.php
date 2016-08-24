@@ -29,7 +29,9 @@
 
 
 <h4 style="margin-bottom:20px; color:#630"><span style="color:#666">SWOT :</span> <?=$project->name?> 
-<span style="color:#666">ปีงบประมาณ :</span> <?=$project->budget_year?> <span style="color:#666">จังหวัด :</span> <?=get_province_name($project->province_id)?></h4>
+<span style="color:#666">ปีงบประมาณ :</span> <?=$project->budget_year?> <span style="color:#666">จังหวัด :</span> <?=get_province_name($project->province_id)?>
+<a href="home/swots/view?budget_year=<?=@$_GET['budget_year']?>&province_id=<?=@$_GET['province_id']?>&project_id=<?=@$_GET['project_id']?>"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-left:15px;"  /></a>
+</h4>
 
 <?=$rs->pagination();?>
 
@@ -51,7 +53,7 @@
 	  <td><?=$row->opportunities?></td>
 	  <td><?=$row->threats?></td>
 	  <td><?=$row->summary?></td>
-	  <td><a href="home/swots/view/<?=$row->project_id?>/<?=$row->id?>"><img src="themes/elderly2016/images/print.png" width="24" height="24" class="vtip" title="พิมพ์รายการนี้"  style="margin-right:10px;"  /></a><a href="home/swots/form/<?=$row->project_id?>/<?=$row->id?>"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <a href="home/swots/delete/<?=$row->id?>"><img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้" onclick="return confirm('<?php echo "ยืนยันการลบ?";?>')"  /></a></td>
+	  <td><a href="home/swots/form/<?=$row->project_id?>/<?=$row->id?>"><img src="themes/elderly2016/images/edit.png" width="24" height="24" class="vtip" title="แก้ไขรายการนี้" /></a> <a href="home/swots/delete/<?=$row->id?>"><img src="themes/elderly2016/images/remove.png" width="32" height="32" class="vtip" title="ลบรายการนี้" onclick="return confirm('<?php echo "ยืนยันการลบ?";?>')"  /></a></td>
 	  </tr>
   <?endforeach;?>
 </table>

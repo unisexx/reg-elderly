@@ -97,7 +97,19 @@ class plans extends Public_Controller {
 			$data['activities']->where('plan_id = '.$id)->order_by('id','asc')->get();
 		}
 		
-		$this->template->build('plans/view',$data);
+		$filename = "(คปญ.๔)_แผนการดำเนินงาน_หน่วยงาน".$data['rs']->user->name."_จังหวัด".get_province_name($data['rs']->user->province_id)."_ปีงบประมาณ_".$data['rs']->budget_year;
+		
+		if(@$_GET['type'] == "word"){
+			header("Content-type: application/vnd.ms-word");
+			header("Content-Disposition: attachment;Filename=".$filename.".doc");
+			$this->load->view('plans/view',$data);
+		}elseif(@$_GET['type'] == 'excel'){
+			header("Content-type: application/vnd.ms-excel");
+			header("Content-Disposition: attachment;Filename=".$filename.".xls");
+			$this->load->view('plans/view',$data);
+		}else{
+			$this->template->build('plans/view',$data);
+		}
 	}
 	
 }

@@ -57,7 +57,7 @@
 	<td>
 		<?$activities = $this->db->query('select budget from plans_activities where plan_id = '.$row->id.' order by id asc')->result();?>
 	  	<?foreach($activities as $activity):?>
-  		<div><?=$activity->budget?></div>
+  		<div><?=number_format($activity->budget)?></div>
   		<?endforeach;?>
 	</td>
 	<td><?=$row->user->name?></td>
