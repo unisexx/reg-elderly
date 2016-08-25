@@ -37,7 +37,8 @@ class users extends Public_Controller {
 			}
 			
 		}
-		redirect('home/users/index');
+		// redirect('home/users/index');
+		redirect($_POST['referer']);
 	}
 	
 	function delete($id){
