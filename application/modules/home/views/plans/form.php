@@ -216,7 +216,7 @@ $(document).ready(function(){
 		}
 
 		// เคลียร์ค่า input ของฟอร์มใน colorbox
-		$(this).closest('#inline_activity').find("input[type=text], input[type=number], textarea").val("");
+		$(this).closest('#inline_activity').find("input[type=text], input[type=number], input[type=hidden], textarea").val("");
 
 		// คำนวนใส่ตัวเลขแถว
 		autoCountTableRow('tbActivities');
