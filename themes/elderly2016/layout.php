@@ -3,6 +3,7 @@
 	<head>
 		<base href="<?php echo base_url(); ?>" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=EDGE" />
 		<title><?php echo $template['title']; ?></title> 
         <? include '_meta.php'?>
 		<? include '_script.php'?>
