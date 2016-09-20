@@ -33,27 +33,33 @@ if(!function_exists('fix_file'))
 if(!function_exists('get_district_name'))
 {
 	function get_district_name($province_id,$amphur_id,$district_id){
-		$CI =& get_instance();
-		$rs = $CI->db->query("select name from district where province_id = ".$province_id." and amphur_id = ".$amphur_id." and code = ".$district_id)->row();
-		return $rs->name;
+		if($province_id != "" and $amphur_id != "" and $district_id != ""){
+			$CI =& get_instance();
+			$rs = $CI->db->query("select name from district where province_id = ".$province_id." and amphur_id = ".$amphur_id." and code = ".$district_id)->row();
+			return $rs->name;
+		}
 	}
 }
 
 if(!function_exists('get_amphur_name'))
 {
 	function get_amphur_name($province_id,$amphur_id){
-		$CI =& get_instance();
-		$rs = $CI->db->query("select name from amphur where province_id = ".$province_id." and code = ".$amphur_id)->row();
-		return $rs->name;
+		if($province_id != "" and $amphur_id != ""){
+			$CI =& get_instance();
+			$rs = $CI->db->query("select name from amphur where province_id = ".$province_id." and code = ".$amphur_id)->row();
+			return $rs->name;
+		}
 	}
 }
 
 if(!function_exists('get_province_name'))
 {
 	function get_province_name($province_id){
-		$CI =& get_instance();
-		$rs = $CI->db->query("select name from province where code = ".$province_id)->row();
-		return $rs->name;
+		if($province_id != ""){
+			$CI =& get_instance();
+			$rs = $CI->db->query("select name from province where code = ".$province_id)->row();
+			return $rs->name;
+		}
 	}
 }
 
