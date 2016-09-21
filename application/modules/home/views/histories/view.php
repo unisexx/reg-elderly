@@ -25,10 +25,10 @@
 <li>เชื้อชาติ <span><?=$rs->race?></span> สัญชาติ <span><?=$rs->nationality?></span> ศาสนา <span><?=$rs->religion?></span></li>
 <li>โทรศัพท์<span><?=$rs->tel?></span> โทรสาร (ถ้ามี) <span><?=$rs->fax?></span> โทรศัพท์มือถือ <span><?=$rs->mobile?></span> e-mail <span><?=$rs->email?></span></li>
 <li>ที่อยู่ตามทะเบียนบ้าน
-<div>บ้านเลขที่ <span><?=$rs->reg_home_no?></span> หมู่ที่ <span><?=$rs->reg_moo?></span> ซอย <span><?=$rs->reg_soi?></span> ตำบล <span><?=get_district_name($rs->reg_province_id,$rs->reg_amphur_id,$rs->reg_district_id)?></span> อำเภอ <span><?=get_amphur_name($rs->reg_province_id,$rs->reg_amphur_id)?></span> จังหวัด <span><?=get_province_name($rs->reg_province_id)?></span> รหัสไปรษณีย์ <span><?=$rs->reg_post_code?></span> </div>
+<div>บ้านเลขที่ <span><?=$rs->reg_home_no?></span> หมู่ที่ <span><?=$rs->reg_moo?></span> ซอย <span><?=$rs->reg_soi?></span> ตำบล <span><?=@get_district_name($rs->reg_province_id,$rs->reg_amphur_id,$rs->reg_district_id)?></span> อำเภอ <span><?=@get_amphur_name($rs->reg_province_id,$rs->reg_amphur_id)?></span> จังหวัด <span><?=@get_province_name($rs->reg_province_id)?></span> รหัสไปรษณีย์ <span><?=$rs->reg_post_code?></span> </div>
 </li>
 <li>ที่อยู่ปัจจุบัน
-<div>บ้านเลขที่ <span><?=$rs->now_home_no?></span> หมู่ที่ <span><?=$rs->now_moo?></span> ซอย <span><?=$rs->now_soi?></span> ตำบล <span><?=get_district_name($rs->now_province_id,$rs->now_amphur_id,$rs->now_district_id)?></span> อำเภอ <span><?=get_amphur_name($rs->now_province_id,$rs->now_amphur_id)?></span> จังหวัด <span><?=get_province_name($rs->now_province_id)?></span> รหัสไปรษณีย์ <span></span> </div>
+<div>บ้านเลขที่ <span><?=$rs->now_home_no?></span> หมู่ที่ <span><?=$rs->now_moo?></span> ซอย <span><?=$rs->now_soi?></span> ตำบล <span><?=@get_district_name($rs->now_province_id,$rs->now_amphur_id,$rs->now_district_id)?></span> อำเภอ <span><?=@get_amphur_name($rs->now_province_id,$rs->now_amphur_id)?></span> จังหวัด <span><?=@get_province_name($rs->now_province_id)?></span> รหัสไปรษณีย์ <span></span> </div>
 </li>
 <li>สถานภาพ <span><?=$rs->marital_status?> <?=$rs->marital_status_other?></span></li>
 <li>การศึกษา <span><?=$rs->education?> <?=$rs->education_other?></span></li>
