@@ -106,6 +106,33 @@ if(!function_exists('select_province_condition'))
 	}
 }
 
+if(!function_exists('get_education_name'))
+{
+	function get_education_name($id=false){
+			if($id == 91){
+				$name = "ไม่ได้เรียนหนังสือ";
+			}elseif($id == 93){
+				$name = "ประถมศึกษาตอนต้น";
+			}elseif($id == 94){
+				$name = "ประถมศึกษาตอนปลาย";
+			}elseif($id == 95){
+				$name = "มัธยมศึกษาตอนต้น";
+			}elseif($id == 96){
+				$name = "มัธยมศึกษาตอนปลาย";
+			}elseif($id == 10){
+				$name = "อาชีวศึกษาและประกาศนียบัตรชั้นสูง (ปวช./ปวท./ปกศ.ต้น)";
+			}elseif($id == 40){
+				$name = "ปริญญาตรี";
+			}elseif($id == 99999){
+				$name = "อื่นๆ";
+			}else{
+				$name = "";
+			}
+		
+		return $name;
+	}
+}
+
 if(!function_exists('addLog')){
 	function addLog($module=false,$detail=false,$url=false){
 		$rs = new log();

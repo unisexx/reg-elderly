@@ -179,8 +179,9 @@ class histories extends Public_Controller {
 				addLog('histories','เพิ่มประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑) '.$_POST['name'],$_POST['current'].'/'.$rs->db->insert_id());
 			}
 		}
-		redirect('home/histories/index');
+		// redirect('home/histories/index');
 		// redirect($_SERVER['HTTP_REFERER']);
+		redirect($_POST['referer']);
 	}
 	
 	function delete($id){

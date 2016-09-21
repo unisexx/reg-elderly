@@ -34,8 +34,10 @@
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">รายงาน <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                <li><a href="report.php?act=r1">report 1</a></li>
-                <li><a href="report.php?act=r2">report 2</a></li>
+                <li><a href="home/report/report_1">รายชื่อผู้ขึ้นทะเบียน</a></li>
+                <li><a href="home/report/report_2">จำนวนผู้ขึ้นทะเบียน</a></li>
+                <!-- <li><a href="#">รายงานผล คปญ.</a></li>
+                <li><a href="#">ผู้ขึ้นทะเบียนเสียชีวิต</a></li> -->
                 </ul>
             </li>
           </ul>
