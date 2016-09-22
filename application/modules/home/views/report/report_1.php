@@ -1,4 +1,4 @@
-<h3>รายงาน รายชื่อผู้ขึ้นทะเบียน</h3>
+<h3>รายงานรายชื่อผู้ขึ้นทะเบียน</h3>
 <div id="search">
 <div id="searchBox">
 <form class="form-inline">

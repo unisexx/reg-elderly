@@ -4,7 +4,7 @@ th {
 }	
 </style>
 
-<h3>รายงานจำนวนผู้ขึ้นทะเบียน</h3>
+<h3>รายงานผู้ขึ้นทะเบียนเสียชีวิต</h3>
 <div id="search">
 <div id="searchBox">
 <form class="form-inline">
@@ -25,26 +25,15 @@ th {
 <table class="table">
 	<thead>
 		<tr>
-			<th rowspan="3">ลำดับ</th>
-			<th rowspan="3">จังหวัด</th>
-			<th colspan="9">จำนวนผู้สูงอายุที่ขึ้นทะเบียนคลังปัญญาจังหวัด</th>
-			<th rowspan="3">รวม</th>
+			<th rowspan="2">ลำดับ</th>
+			<th rowspan="2">จังหวัด</th>
+			<th colspan="4">ผู้ขึ้นทะเบียนภูมิปัญญา	</th>
 		</tr>
 		<tr>
-			<th colspan="3">ชาย</th>
-			<th colspan="3">หญิง	</th>
-			<th colspan="3">ไม่ระบุ</th>
-		</tr>
-		<tr>
-			<th>60-69 ปี</th>
-			<th>70-79 ปี</th>
-			<th>80 ปีขึ้นไป</th>
-			<th>60-69 ปี</th>
-			<th>70-79 ปี</th>
-			<th>80 ปีขึ้นไป</th>
-			<th>60-69 ปี</th>
-			<th>70-79 ปี</th>
-			<th>80 ปีขึ้นไป</th>
+			<th rowspan="2">ชาย(เสียชีวิต)</th>
+			<th rowspan="2">หญิง(เสียชีวิต)</th>
+			<th rowspan="2">ไม่ระบุ(เสียชีวิต)</th>
+			<th colspan="2">รวม</th>
 		</tr>
 	</thead>
 	<tbody>

@@ -23,5 +23,13 @@ class report extends Public_Controller {
 		$this->template->build('report/report_2');
 	}
 	
+	function report_3(){
+		$this->template->build('report/report_3');
+	}
+	
+	function report_4(){
+		$this->template->build('report/report_4');
+	}
+	
 }
 ?>
