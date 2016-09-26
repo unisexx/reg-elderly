@@ -31,7 +31,7 @@
 			<th>ที่อยู่</th>
 			<th>โทรศัพท์</th>
 			<th>ภาพผู้เป็นภูมิปัญญา</th>
-			<th>เสียชีวิต</th>
+			<th>สถานภาพ</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,7 +60,13 @@
 					<img src="uploads/histories/<?=$row->picture?>" width="110" height="110" />
 				<?endif;?>
 			</td>
-			<td></td>
+			<td>
+				<?if($row->status == 1):?>
+					มีชีวิต
+				<?elseif($row->status == 2):?>
+					เสียชีวิต
+				<?endif;?>
+			</td>
 		</tr>
 		<?endforeach;?>
 	</tbody>

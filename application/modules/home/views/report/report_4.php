@@ -33,10 +33,36 @@ th {
 			<th rowspan="2">ชาย(เสียชีวิต)</th>
 			<th rowspan="2">หญิง(เสียชีวิต)</th>
 			<th rowspan="2">ไม่ระบุ(เสียชีวิต)</th>
-			<th colspan="2">รวม</th>
+			<th>รวม</th>
 		</tr>
 	</thead>
 	<tbody>
-		
+		<?
+			$sum_male = 0;
+			$sum_female = 0;
+			$sum_unknow = 0;
+			$sum_total = 0;
+		?>
+		<?foreach($rs as $key=>$row):?>
+		<tr>
+			<td><?=$key+1?></td>
+			<td><?=$row->province_name?></td>
+			<td><?=$row->count_male?></td>
+			<td><?=$row->count_female?></td>
+			<td><?=$row->count_unknow?></td>
+			<td><?=$row->count_total?></td>
+		</tr>
+		<?
+			$sum_male += $row->count_male;
+			$sum_female += $row->count_female; 
+			$sum_unknow += $row->count_unknow; 
+			$sum_total += $row->count_total;
+		?>
+		<?endforeach;?>
+		<td colspan="2" align="center"><b>รวม</b></td>
+		<td><?=$sum_male?></td>
+		<td><?=$sum_female?></td>
+		<td><?=$sum_unknow?></td>
+		<td><?=$sum_total?></td>
 	</tbody>
 </table>
