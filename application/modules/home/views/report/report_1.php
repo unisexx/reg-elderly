@@ -17,7 +17,7 @@
 </div>
 </div>
 
-<table class="table">
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>อำเภอ</th>
@@ -71,3 +71,5 @@
 		<?endforeach;?>
 	</tbody>
 </table>
+
+<?=$pagination?>

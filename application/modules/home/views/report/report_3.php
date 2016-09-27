@@ -8,11 +8,11 @@ th {
 <div id="search">
 <div id="searchBox">
 <form class="form-inline">
-    <select name="regis_year" class="form-control" style="width:auto;">
-      <option value="">-- ปีงบประมาณที่ขึ้นทะเบียน --</option>
+    <select name="budget_year" class="form-control" style="width:auto;">
+      <option value="">-- ปีงบประมาณ --</option>
       <?php 
-		for ($x = (date("Y")+543); $x >= 2533; $x--) {
-			$selected_year = ($x == @$_GET['regis_year'])?"selected=selected":"";
+		for ($x = (date("Y")+543); $x >= 2550; $x--) {
+			$selected_year = ($x == @$_GET['budget_year'])?"selected=selected":"";
 		    echo "<option value='$x' $selected_year>$x</option>";
 		} 
 	  ?>
@@ -22,7 +22,7 @@ th {
 </div>
 </div>
 
-<table class="table">
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<th rowspan="3">ลำดับ</th>
@@ -52,6 +52,64 @@ th {
 		</tr>
 	</thead>
 	<tbody>
-		
+		<?
+			$sum_male = 0;
+			$sum_female = 0;
+			$sum_unknown = 0;
+			$sum_total = 0;
+			$sum_b1m = 0;
+			$sum_b1f = 0;
+			$sum_b2m = 0;
+			$sum_b2f = 0;
+			$sum_b3m = 0;
+			$sum_b3f = 0;
+			$sum_b4m = 0;
+			$sum_b4f = 0;
+		?>
+		<?foreach($rs as $key=>$row):?>
+			<tr>
+				<td><?=$key+1?></td>
+				<td><?=$row->province_name?></td>
+				<td><?=$row->male?></td>
+				<td><?=$row->female?></td>
+				<td><?=$row->unknown?></td>
+				<td><?=$row->b1m?></td>
+				<td><?=$row->b1f?></td>
+				<td><?=$row->b2m?></td>
+				<td><?=$row->b2f?></td>
+				<td><?=$row->b3m?></td>
+				<td><?=$row->b3f?></td>
+				<td><?=$row->b4m?></td>
+				<td><?=$row->b4f?></td>
+				<td><?=$count_total = $row->male+$row->female+$row->unknown+$row->b1m+$row->b1f+$row->b2m+$row->b2f+$row->b3m+$row->b3f+$row->b4m+$row->b4f?></td>
+			</tr>
+		<?
+			$sum_male += $row->male;
+			$sum_female += $row->female; 
+			$sum_unknown += $row->unknown; 
+			$sum_total += $count_total;
+			$sum_b1m += $row->b1m;
+			$sum_b1f += $row->b1f;
+			$sum_b2m += $row->b2m;
+			$sum_b2f += $row->b2f;
+			$sum_b3m += $row->b3m;
+			$sum_b3f += $row->b3f;
+			$sum_b4m += $row->b4m;
+			$sum_b4f += $row->b4f;
+		?>
+		<?endforeach;?>
+		<td colspan="2" align="center"><b>รวม</b></td>
+		<td><?=$sum_male?></td>
+		<td><?=$sum_female?></td>
+		<td><?=$sum_unknown?></td>
+		<td><?=$sum_b1m?></td>
+		<td><?=$sum_b1f?></td>
+		<td><?=$sum_b2m?></td>
+		<td><?=$sum_b2f?></td>
+		<td><?=$sum_b3m?></td>
+		<td><?=$sum_b3f?></td>
+		<td><?=$sum_b4m?></td>
+		<td><?=$sum_b4f?></td>
+		<td><?=$sum_total?></td>
 	</tbody>
 </table>

@@ -22,7 +22,7 @@ th {
 </div>
 </div>
 
-<table class="table">
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<th rowspan="3">ลำดับ</th>
@@ -48,6 +48,56 @@ th {
 		</tr>
 	</thead>
 	<tbody>
-		
+		<?
+			$sum_male_60 = 0;
+			$sum_male_70 = 0;
+			$sum_male_80 = 0;
+			$sum_female_60 = 0;
+			$sum_female_70 = 0;
+			$sum_female_80 = 0;
+			$sum_unknow_60 = 0;
+			$sum_unknow_70 = 0;
+			$sum_unknow_80 = 0;
+			$sum_total = 0;
+		?>
+		<?foreach($rs as $key=>$row):?>
+		<tr>
+			<td><?=$key+1?></td>
+			<td><?=$row->province_name?></td>
+			<td><?=$row->count_male_60?></td>
+			<td><?=$row->count_male_70?></td>
+			<td><?=$row->count_male_80?></td>
+			<td><?=$row->count_female_60?></td>
+			<td><?=$row->count_female_70?></td>
+			<td><?=$row->count_female_80?></td>
+			<td><?=$row->count_unknow_60?></td>
+			<td><?=$row->count_unknow_70?></td>
+			<td><?=$row->count_unknow_80?></td>
+			<td><?=$row->count_total?></td>
+		</tr>
+		<?
+			$sum_male_60 += $row->count_male_60;
+			$sum_male_70 += $row->count_male_70;
+			$sum_male_80 += $row->count_male_80;
+			$sum_female_60 += $row->count_female_60;
+			$sum_female_70 += $row->count_female_70;
+			$sum_female_80 += $row->count_female_80;
+			$sum_unknow_60 += $row->count_unknow_60;
+			$sum_unknow_70 += $row->count_unknow_70;
+			$sum_unknow_80 += $row->count_unknow_80;
+			$sum_total += $row->count_total;
+		?>
+		<?endforeach;?>
+		<td colspan="2" align="center"><b>รวม</b></td>
+		<td><?=$sum_male_60?></td>
+		<td><?=$sum_male_70?></td>
+		<td><?=$sum_male_80?></td>
+		<td><?=$sum_female_60?></td>
+		<td><?=$sum_female_70?></td>
+		<td><?=$sum_female_80?></td>
+		<td><?=$sum_unknow_60?></td>
+		<td><?=$sum_unknow_70?></td>
+		<td><?=$sum_unknow_80?></td>
+		<td><?=$sum_total?></td>
 	</tbody>
 </table>

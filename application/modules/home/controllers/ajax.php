@@ -52,11 +52,11 @@ Class ajax extends Public_Controller
 	
 	function get_expert_name_autocomplete(){
 		// if($_GET){
-			$sql = 'select name from histories';
+			$sql = 'select id,name from histories';
 			$rs = $this->db->query($sql)->result();
 			$rows = array();
 			foreach($rs as $item){
-				$rows[] = $item;
+				$rows[] = array('id' => $item->id,'name' => $item->name);
 			}
 			print json_encode($rows);
 		// }
