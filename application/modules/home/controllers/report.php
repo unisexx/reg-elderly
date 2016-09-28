@@ -8,10 +8,13 @@ class report extends Public_Controller {
 
 	function report_1(){
 		$condition = " 1=1 ";
-		if(@$_GET['regis_year']){ $condition .= ' and regis_province_id = '.$_GET['regis_province_id'];}
+		if(@$_GET['regis_province_id']){ $condition .= ' and regis_province_id = '.$_GET['regis_province_id'];}
 		if(@$_GET['regis_year']){ $condition .= ' and regis_date LIKE "%'.($_GET['regis_year']-543).'%" ';}
 		$sql = "select * from histories where ".$condition." order by id desc";
+		
+		// $data['rs'] = $this->db->query($sql)->result();
 		// echo $sql;
+		
 		$histories = new history();
         $data['rs'] = $histories->sql_page($sql, 20);
 		$data['pagination'] = $histories->sql_pagination;
