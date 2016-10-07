@@ -1,3 +1,14 @@
+<style>
+.num {
+  mso-number-format:General;
+}
+.text{
+  mso-number-format:"\@";/*force text*/
+}
+</style>
+
+<?php if(@$_GET['export_type']!='excel'):?>
+
 <h3>รายงานรายชื่อผู้ขึ้นทะเบียน</h3>
 <div id="search">
 <div id="searchBox">
@@ -17,7 +28,15 @@
 </div>
 </div>
 
-<table class="table table-bordered">
+<div align="right"><button class="btn-excel-report">Excel</button></div><br>
+
+<?php else:?>
+	
+	<h3>รายงานรายชื่อผู้ขึ้นทะเบียน<?if(@$_GET['regis_province_id']){ echo "จังหวัด".get_province_name($_GET['regis_province_id']); }?> <?if(@$_GET['regis_year']){ echo "ปี พ.ศ. ".$_GET['regis_year']; }?></h3>
+
+<?php endif;?>
+
+<table class="table table-bordered" border="1">
 	<thead>
 		<tr>
 			<th>ที่</th>
@@ -40,7 +59,7 @@
 		<tr>
 			<td><?=$i?></td>
 			<td><?=get_amphur_name($row->reg_province_id,$row->reg_amphur_id)?></td>
-			<td><?=$row->id_card?></td>
+			<td class="text"><?=$row->id_card?></td>
 			<td><?=$row->name?></td>
 			<td><?=@calculate_age($row->birth_day,$row->birth_month,$row->birth_year)?></td>
 			<td><?=wisdom_list($row)?></td>
@@ -74,7 +93,9 @@
 	</tbody>
 </table>
 
+<?php if(@$_GET['export_type']!='excel'):?>
 <?=$pagination?>
+<?php endif;?>
 
 
 <?
@@ -134,3 +155,21 @@ function wisdom_detail($row){
 	return $txt;
 }
 ?>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$('.btn-excel-report').click(function(){
+        var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=excel';
+        window.open(url);
+    });
+    
+	$('.btn-print-report').click(function(){
+	    var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=print';
+	    window.open(url);
+	});
+});
+
+<?php if(@$_GET['export_type']=='print'):?>
+setTimeout("window.print();",2000);
+<?php endif;?>
+</script>

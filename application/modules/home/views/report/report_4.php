@@ -4,6 +4,8 @@ th {
 }	
 </style>
 
+<?php if(@$_GET['export_type']!='excel'):?>
+	
 <h3>รายงานผู้ขึ้นทะเบียนเสียชีวิต</h3>
 <div id="search">
 <div id="searchBox">
@@ -22,7 +24,15 @@ th {
 </div>
 </div>
 
-<table class="table table-bordered">
+<div align="right"><button class="btn-excel-report">Excel</button></div><br>
+
+<?php else:?>
+	
+	<h3>รายงานผู้ขึ้นทะเบียนเสียชีวิต <?if(@$_GET['regis_year']){ echo "ปี พ.ศ. ".$_GET['regis_year']; }?></h3>
+
+<?php endif;?>
+
+<table class="table table-bordered" border="1">
 	<thead>
 		<tr>
 			<th rowspan="2">ลำดับ</th>
@@ -30,9 +40,9 @@ th {
 			<th colspan="4">ผู้ขึ้นทะเบียนภูมิปัญญา	</th>
 		</tr>
 		<tr>
-			<th rowspan="2">ชาย(เสียชีวิต)</th>
-			<th rowspan="2">หญิง(เสียชีวิต)</th>
-			<th rowspan="2">ไม่ระบุ(เสียชีวิต)</th>
+			<th>ชาย(เสียชีวิต)</th>
+			<th>หญิง(เสียชีวิต)</th>
+			<th>ไม่ระบุ(เสียชีวิต)</th>
 			<th>รวม</th>
 		</tr>
 	</thead>
@@ -66,3 +76,21 @@ th {
 		<td><?=$sum_total?></td>
 	</tbody>
 </table>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$('.btn-excel-report').click(function(){
+        var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=excel';
+        window.open(url);
+    });
+    
+	$('.btn-print-report').click(function(){
+	    var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=print';
+	    window.open(url);
+	});
+});
+
+<?php if(@$_GET['export_type']=='print'):?>
+setTimeout("window.print();",2000);
+<?php endif;?>
+</script>

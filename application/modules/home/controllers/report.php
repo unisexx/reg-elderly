@@ -15,11 +15,23 @@ class report extends Public_Controller {
 		// $data['rs'] = $this->db->query($sql)->result();
 		// echo $sql;
 		
-		$histories = new history();
-        $data['rs'] = $histories->sql_page($sql, 20);
-		$data['pagination'] = $histories->sql_pagination;
+		if(@$_GET['export_type']!=''){
+			$data['rs'] = $this->db->query($sql)->result();
+			
+			if(@$_GET['export_type']=='excel'){
+				if(@$_GET['regis_province_id']){$txt = "จังหวัด".get_province_name($_GET['regis_province_id']);}
+				if(@$_GET['regis_year']){ $txt .= "ปี พ.ศ. ".$_GET['regis_year']; }
+                $filename= "รายงานรายชื่อผู้ขึ้นทะเบียน".@$txt.".xls";
+                header("Content-Disposition: attachment; filename=".$filename);
+            }
+			$this->load->view('report/report_1',$data);
+		}else{
+			$histories = new history();
+	        $data['rs'] = $histories->sql_page($sql, 20);
+			$data['pagination'] = $histories->sql_pagination;
 		
-		$this->template->build('report/report_1',$data);
+			$this->template->build('report/report_1',$data);
+		}
 	}
 	
 	function report_2(){
@@ -44,7 +56,17 @@ class report extends Public_Controller {
 		// echo $sql;
 		$data['rs'] = $this->db->query($sql)->result();
 		// $histories = new history();
-		$this->template->build('report/report_2',$data);
+		
+		if(@$_GET['export_type']!=''){
+			if(@$_GET['export_type']=='excel'){
+				if(@$_GET['regis_year']){ $txt = "ปี พ.ศ. ".$_GET['regis_year']; }
+                $filename= "รายงานจำนวนผู้ขึ้นทะเบียน".@$txt.".xls";
+                header("Content-Disposition: attachment; filename=".$filename);
+            }
+			$this->load->view('report/report_2',$data);
+		}else{
+			$this->template->build('report/report_2',$data);
+		}
 	}
 	
 	function report_3(){
@@ -70,7 +92,17 @@ class report extends Public_Controller {
 		// echo $sql;
 		$data['rs'] = $this->db->query($sql)->result();
 		// $histories = new history();
-		$this->template->build('report/report_3',$data);
+		
+		if(@$_GET['export_type']!=''){
+			if(@$_GET['export_type']=='excel'){
+				if(@$_GET['budget_year']){ $txt = "ปี พ.ศ. ".$_GET['budget_year']; }
+                $filename= "รายงานผลคปญ".@$txt.".xls";
+                header("Content-Disposition: attachment; filename=".$filename);
+            }
+			$this->load->view('report/report_3',$data);
+		}else{
+			$this->template->build('report/report_3',$data);
+		}
 	}
 	
 	function report_4(){
@@ -89,7 +121,17 @@ class report extends Public_Controller {
 		// echo $sql;
 		$data['rs'] = $this->db->query($sql)->result();
 		// $histories = new history();
-		$this->template->build('report/report_4',$data);
+		
+		if(@$_GET['export_type']!=''){
+			if(@$_GET['export_type']=='excel'){
+				if(@$_GET['regis_year']){ $txt = "ปี พ.ศ. ".$_GET['regis_year']; }
+                $filename= "รายงานผู้ขึ้นทะเบียนเสียชีวิต".@$txt.".xls";
+                header("Content-Disposition: attachment; filename=".$filename);
+            }
+			$this->load->view('report/report_4',$data);
+		}else{
+			$this->template->build('report/report_4',$data);
+		}
 	}
 	
 }

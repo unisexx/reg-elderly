@@ -4,6 +4,8 @@ th {
 }	
 </style>
 
+<?php if(@$_GET['export_type']!='excel'):?>
+	
 <h3>รายงานผลคปญ.</h3>
 <div id="search">
 <div id="searchBox">
@@ -22,7 +24,15 @@ th {
 </div>
 </div>
 
-<table class="table table-bordered">
+<div align="right"><button class="btn-excel-report">Excel</button></div><br>
+
+<?php else:?>
+	
+	<h3>รายงานผลคปญ. <?if(@$_GET['budget_year']){ echo "ปี พ.ศ. ".$_GET['budget_year']; }?></h3>
+
+<?php endif;?>
+
+<table class="table table-bordered" border="1">
 	<thead>
 		<tr>
 			<th rowspan="3">ลำดับ</th>
@@ -113,3 +123,21 @@ th {
 		<td><?=$sum_total?></td>
 	</tbody>
 </table>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$('.btn-excel-report').click(function(){
+        var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=excel';
+        window.open(url);
+    });
+    
+	$('.btn-print-report').click(function(){
+	    var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=print';
+	    window.open(url);
+	});
+});
+
+<?php if(@$_GET['export_type']=='print'):?>
+setTimeout("window.print();",2000);
+<?php endif;?>
+</script>

@@ -4,25 +4,34 @@ th {
 }	
 </style>
 
-<h3>รายงานจำนวนผู้ขึ้นทะเบียน</h3>
-<div id="search">
-<div id="searchBox">
-<form class="form-inline">
-    <select name="regis_year" class="form-control" style="width:auto;">
-      <option value="">-- ปีงบประมาณที่ขึ้นทะเบียน --</option>
-      <?php 
-		for ($x = (date("Y")+543); $x >= 2533; $x--) {
-			$selected_year = ($x == @$_GET['regis_year'])?"selected=selected":"";
-		    echo "<option value='$x' $selected_year>$x</option>";
-		} 
-	  ?>
-    </select>
-  <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
-</form>
-</div>
-</div>
+<?php if(@$_GET['export_type']!='excel'):?>
+	<h3>รายงานจำนวนผู้ขึ้นทะเบียน</h3>
+	<div id="search">
+	<div id="searchBox">
+	<form class="form-inline">
+	    <select name="regis_year" class="form-control" style="width:auto;">
+	      <option value="">-- ปีงบประมาณที่ขึ้นทะเบียน --</option>
+	      <?php 
+			for ($x = (date("Y")+543); $x >= 2533; $x--) {
+				$selected_year = ($x == @$_GET['regis_year'])?"selected=selected":"";
+			    echo "<option value='$x' $selected_year>$x</option>";
+			} 
+		  ?>
+	    </select>
+	  <button type="submit" class="btn btn-info"><img src="themes/elderly2016/images/search.png" width="16" height="16" />ค้นหา</button>
+	</form>
+	</div>
+	</div>
+	
+	<div align="right"><button class="btn-excel-report">Excel</button></div><br>
 
-<table class="table table-bordered">
+<?php else:?>
+	
+	<h3>รายงานจำนวนผู้สูงอายุที่ขึ้นทะเบียนคลังปัญญาจังหวัด <?if(@$_GET['regis_year']){ echo "ปี พ.ศ. ".$_GET['regis_year']; }?></h3>
+
+<?php endif;?>
+
+<table class="table table-bordered" border="1">
 	<thead>
 		<tr>
 			<th rowspan="3">ลำดับ</th>
@@ -101,3 +110,21 @@ th {
 		<td><?=$sum_total?></td>
 	</tbody>
 </table>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$('.btn-excel-report').click(function(){
+        var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=excel';
+        window.open(url);
+    });
+    
+	$('.btn-print-report').click(function(){
+	    var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=print';
+	    window.open(url);
+	});
+});
+
+<?php if(@$_GET['export_type']=='print'):?>
+setTimeout("window.print();",2000);
+<?php endif;?>
+</script>
