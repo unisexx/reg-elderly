@@ -30,8 +30,8 @@
 <li>ที่อยู่ปัจจุบัน
 <div>บ้านเลขที่ <span><?=$rs->now_home_no?></span> หมู่ที่ <span><?=$rs->now_moo?></span> ซอย <span><?=$rs->now_soi?></span> ตำบล <span><?=@get_district_name($rs->now_province_id,$rs->now_amphur_id,$rs->now_district_id)?></span> อำเภอ <span><?=@get_amphur_name($rs->now_province_id,$rs->now_amphur_id)?></span> จังหวัด <span><?=@get_province_name($rs->now_province_id)?></span> รหัสไปรษณีย์ <span></span> </div>
 </li>
-<li>สถานภาพ <span><?=$rs->marital_status?> <?=$rs->marital_status_other?></span></li>
-<li>การศึกษา <span><?=$rs->education?> <?=$rs->education_other?></span></li>
+<li>สถานภาพ <span><?=get_marital_status_name($rs->marital_status)?> <?=$rs->marital_status_other?></span></li>
+<li>การศึกษา <span><?=get_education_name($rs->education)?> <?=$rs->education_other?></span></li>
 <li>อาชีพปัจจุบัน <span><?=$rs->current_occupation?></span> รายละเอียด  (ถ้ามี) <span><?=$rs->current_occupation_detail?></span></li>
 <li>อาชีพเดิม <span><?=$rs->old_occupation?></span> รายละเอียด  (ถ้ามี) <span><?=$rs->old_occupation_detail?></span></li>
 <li>ท่านเป็นภูมิปัญญาในสาขา  (ตอบได้มากกว่า  ๑  ข้อ) 

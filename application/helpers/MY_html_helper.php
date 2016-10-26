@@ -133,6 +133,31 @@ if(!function_exists('get_education_name'))
 	}
 }
 
+if(!function_exists('get_marital_status_name'))
+{
+	function get_marital_status_name($id=false){
+			if($id == 1){
+				$name = "โสด";
+			}elseif($id == 2){
+				$name = "สมรสอยู่ด้วยกัน";
+			}elseif($id == 3){
+				$name = "หม้าย / แยกกันอยู่";
+			}elseif($id == 4){
+				$name = "สมรสแยกกันอยู่";
+			}elseif($id == 5){
+				$name = "หม้ายคู่สมรสเสียชีวิต";
+			}elseif($id == 6){
+				$name = "อยู่ด้วยกันโดยไม่สมรส";
+			}elseif($id == 99999){
+				$name = "อื่นๆ";
+			}else{
+				$name = "";
+			}
+		
+		return $name;
+	}
+}
+
 if(!function_exists('addLog')){
 	function addLog($module=false,$detail=false,$url=false){
 		$rs = new log();
