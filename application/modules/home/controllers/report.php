@@ -4,6 +4,7 @@ class report extends Public_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		ini_set('memory_limit', '-1');
 	}
 
 	function report_1(){

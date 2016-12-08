@@ -6,7 +6,7 @@ class Admin_Controller extends Master_Controller
 	{
 		parent::__construct();
 		
-		ini_set("memory_limit","512M");	
+		ini_set('memory_limit', '-1');
 		
 		// check login
 		if(user_login()->id == "") redirect('admin');
