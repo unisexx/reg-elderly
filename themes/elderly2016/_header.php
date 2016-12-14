@@ -34,10 +34,10 @@
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">รายงาน <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                <li><a href="home/report/report_1">รายชื่อผู้ขึ้นทะเบียน</a></li>
-                <li><a href="home/report/report_2">จำนวนผู้ขึ้นทะเบียน</a></li>
-                <li><a href="home/report/report_3">รายงานผล คปญ.</a></li>
-                <li><a href="home/report/report_4">ผู้ขึ้นทะเบียนเสียชีวิต</a></li>
+                <li><a href="home/report/report_1?type=view">รายชื่อผู้ขึ้นทะเบียน</a></li>
+                <li><a href="home/report/report_2?type=view">จำนวนผู้ขึ้นทะเบียน</a></li>
+                <li><a href="home/report/report_3?type=view">รายงานผล คปญ.</a></li>
+                <li><a href="home/report/report_4?type=view">ผู้ขึ้นทะเบียนเสียชีวิต</a></li>
                 </ul>
             </li>
           </ul>

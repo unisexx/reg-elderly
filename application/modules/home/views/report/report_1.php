@@ -159,12 +159,12 @@ function wisdom_detail($row){
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
 	$('.btn-excel-report').click(function(){
-        var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>?export_type=excel';
+        var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=excel';
         window.open(url);
     });
     
 	$('.btn-print-report').click(function(){
-	    var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>?export_type=print';
+	    var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=print';
 	    window.open(url);
 	});
 });
