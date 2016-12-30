@@ -43,7 +43,7 @@
   <th>วัน/เดือน/ปีเกิด <span class="Txt_red_12">*</span> (อายุ) </th>
   <td><span class="form-inline">
     <select name="birth_day" class="form-control" style="width:auto;">
-      <option value="">+ วัน +</option>
+      <!-- <option value="">+ วัน +</option> -->
       <?php 
 		for ($x = 1; $x <= 31; $x++) {
 			$selected_day = ($x == $rs->birth_day)?"selected=selected":"";
@@ -53,10 +53,11 @@
     </select>
     /
     <?$month_th = array( 1 =>'มกราคม',2 => 'กุมภาพันธ์',3=>'มีนาคม',4=>'เมษายน',5=>'พฤษภาคม',6=>'มิถุนายน',7=>'กรกฏาคม',8=>'สิงหาคม',9=>'กันยายน',10=>'ตุลาคม',11=>'พฤศจิกายน',12=>'ธันวาคม');?>
-    <?=form_dropdown('birth_month',$month_th,@$rs->birth_month,'class="form-control" style="width:auto;"','+ เดือน +');?>
+    <?//=form_dropdown('birth_month',$month_th,@$rs->birth_month,'class="form-control" style="width:auto;"','+ เดือน +');?>
+    <?=form_dropdown('birth_month',$month_th,@$rs->birth_month,'class="form-control" style="width:auto;"');?>
     /
     <select name="birth_year" class="form-control" style="width:auto;">
-      <option value="">+ ปี +</option>
+      <!-- <option value="">+ ปี +</option> -->
       <?php 
 		for ($x = 2450; $x <= (date("Y")+543); $x++) {
 			$selected_year = ($x == $rs->birth_year)?"selected=selected":"";
