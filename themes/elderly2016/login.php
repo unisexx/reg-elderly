@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <title>ระบบทะเบียนข้อมูลคลังปัญญาผู้สูงอายุ</title>
 <link rel="stylesheet" href="themes/elderly2016/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
 <style>
