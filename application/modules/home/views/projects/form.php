@@ -7,11 +7,11 @@
   <td>
     <select name="budget_year" class="form-control" style="width:auto;">
       <option value="">+ เลือกปีงบประมาณ +</option>
-      <?php 
+      <?php
 		for ($x = (date("Y")+543); $x >= 2550; $x--) {
 			$selected_year = ($x == $rs->budget_year)?"selected=selected":"";
 		    echo "<option value='$x' $selected_year>$x</option>";
-		} 
+		}
 	  ?>
     </select>
 </td>
@@ -19,7 +19,7 @@
 <tr>
   <th>โครงการ <span class="Txt_red_12">*</span> / จังหวัด <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName" placeholder="โครงการ" style="width:500px;" name="name" value="<?=$rs->name?>" /> 
+    <input type="text" class="form-control " id="exampleInputName" placeholder="โครงการ" style="width:500px;" name="name" value="<?=$rs->name?>" />
     / <?=form_dropdown('province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$rs->province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
   </span></td>
 </tr>
@@ -47,7 +47,7 @@
 </tr>
 </table>
 
-<h4 style="margin-top:30px;">รายละเอียดข้อมูลกิจกรรม 
+<h4 style="margin-top:30px;">รายละเอียดข้อมูลกิจกรรม
 	<a id="openActivityForm" class='inline' href="#inline_activity">
 	<button type="submit" class="btn btn-warning"><img src="themes/elderly2016/images/document_add.png" width="16" height="16" /> เพิ่มกิจกรรม</button>
 	</a>
@@ -140,8 +140,8 @@
 <!-- This contains the hidden content for inline calls -->
 <div style='display:none;'>
       <div id='inline_activity' style='padding:10px; background:#fff;'>
-      	
-      	
+
+
       	<form id="activityForm">
 	      <h3>บันทึกรายละเอียดกิจกรรม</h3>
 	      <table class="tbadd">
@@ -162,7 +162,7 @@
 			  <th><span style="width:25%">จำนวนผู้ได้รับประโยชน์ ชาย / หญิง<span class="Txt_red_12"> *</span></span></th>
 			  <td><span class="form-inline">
 			    <div style="margin-bottom:10px;">
-			    0-18  ปี 
+			    0-18  ปี
 			    <input type="number" min="0" class="form-control " id="exampleInputName4" placeholder="ชาย" style="width:100px;" name="b1m"/> /
 			    <input type="number" min="0" class="form-control " id="exampleInputName4" placeholder="หญิง" style="width:100px; margin-right:30px;" name="b1f" />
 			    18-25 ปี
@@ -174,7 +174,7 @@
 			    60 ปีขึ้นไป
 			    <input type="number" min="0" class="form-control " id="exampleInputName4" placeholder="ชาย" style="width:100px;" name="b4m" /> /
 			    <input type="number" min="0" class="form-control " id="exampleInputName4" placeholder="หญิง" style="width:100px;" name="b4f" />
-			    
+
 			  </span></td>
 			</tr>
 			<tr>
@@ -199,15 +199,15 @@
 			  </td>
 			</tr>
 			</table>
-			
+
 			<div id="btnBoxAdd">
 			  <input type="hidden" name="id" value="">
 			  <input type="hidden" name="trRow" value="">
 			  <input id="activityBtn" name="input" type="submit" title="บันทึกกิจกรรม" value="บันทึกกิจกรรม" class="btn btn-primary"/>
 			</div>
 		</form>
-			 
-			 
+
+
       </div>
   </div>
 
@@ -239,17 +239,17 @@ $(document).ready(function(){
 		},
         errorPlacement: function(error, element)
         {
-	            if ( element.is(":radio,:checkbox")) 
+	            if ( element.is(":radio,:checkbox"))
 	            {
 	                error.appendTo( element.parents('td') );
 	            }
-	            else 
-	            { // This is the default behavior 
+	            else
+	            { // This is the default behavior
 	                error.insertAfter( element );
 	            }
 		}
 	});
-	
+
 	// validate colorbox form
 	$("#activityForm").validate({
 		rules: {
@@ -266,12 +266,12 @@ $(document).ready(function(){
 		},
         errorPlacement: function(error, element)
         {
-	             if ( element.is(":radio,:checkbox,[name=activity_date],[name=budget]")) 
+	             if ( element.is(":radio,:checkbox,[name=activity_date],[name=budget]"))
 	            {
 	                error.appendTo( element.parents('td') );
 	            }
-	            else 
-	            { // This is the default behavior 
+	            else
+	            { // This is the default behavior
 	                error.insertAfter( element );
 	            }
 		},
@@ -293,7 +293,7 @@ $(document).ready(function(){
 			var area = $this.closest('#inline_activity').find('textarea[name=area]').val();
 			var activity_date = $this.closest('#inline_activity').find('input[name=activity_date]').val();
 			var budget = $this.closest('#inline_activity').find('input[name=budget]').val();
-			
+
 			// วนลูปหา ชื่อวิทยากร
 			var multiInput = '';
 			var multiHiddenForm = '';
@@ -302,12 +302,12 @@ $(document).ready(function(){
 			   if(expertName != ""){
 					var dataTxt = '<div class="expertName">'+expertName+'</div>';
 					multiInput += dataTxt;
-				   
+
 					var dataForm = '<input type="hidden" name="expert_name" value="'+expertName+'">';
 					multiHiddenForm += dataForm;
 			   }
 			});
-			
+
 			var hiddenForm = "";
 			hiddenForm += "<input type='hidden' name='activity_name[]' value='"+activity_name+"'>";
 			hiddenForm += "<input type='hidden' name='b1m[]' value='"+b1m+"'>";
@@ -322,7 +322,7 @@ $(document).ready(function(){
 			hiddenForm += "<input type='hidden' name='activity_date[]' value='"+activity_date+"'>";
 			hiddenForm += "<input type='hidden' name='budget[]' value='"+budget+"'>";
 			hiddenForm += "<input type='hidden' name='activity_id[]' value='"+id+"'>";
-			
+
 			var txtInsert = "";
 			txtInsert += '<tr class="box">';
 			txtInsert += '<td></td>';
@@ -342,10 +342,10 @@ $(document).ready(function(){
 			txtInsert += '<td>'+numberWithCommas(budget)+'</td>';
 			txtInsert += '<td>'+hiddenForm+multiHiddenForm+'<button class="act_delete">ลบ</button></td>';
 			txtInsert += '</tr>';
-			
-			
+
+
 			console.log(hiddenForm);
-			
+
 			// ถ้าเป็น edit ให้แทนแถวเดิม ถ้าเป็นเพิ่มใหม่ให้ใส่แถวสุดท้าย
 			if(trRow != ""){
 				$('.tbActivities').find("td:first-child:contains('"+trRow+"')").parent().replaceWith(txtInsert);
@@ -354,35 +354,35 @@ $(document).ready(function(){
 				$('.tbActivities tr:last').after(txtInsert);
 				$(".inline").colorbox({inline:true, width:"90%"}); // reload colorbox
 			}
-	
+
 			// เคลียร์ค่า input ของฟอร์มใน colorbox
 			$this.closest('#inline_activity').find("input[type=hidden], input[type=text], input[type=number], textarea").val("");
-	
+
 			// คำนวนใส่ตัวเลขแถว
 			autoCountTableRow('tbActivities');
         }
 	});
-	
+
 	// เพิ่มกิจกรรมใหม่
 	$('#openActivityForm').click(function(){
 		// เคลียร์ค่า input ของฟอร์มใน colorbox
 		$('#inline_activity').find("input[type=hidden], input[type=text], input[type=number], textarea").val("");
 	});
-	
+
 	// เพิ่มวิทยากร
 	$('#addExpert').click(function(){
 		// var rancomClassName = "r"+Math.floor((Math.random() * 100) + 1);
 		$('.inputExpert:last').after('<br><input class="inputExpert form-control typeahead" type="text" placeholder="ชื่อวิทยากรภูมิปัญญา" style="width:500px;" name="expert_name"/>');
 		autoComplete();
 	});
-	
+
 	// submit button
 	$('#projectForm input[type=submit]').click(function(){
 		$("#projectForm input[name=expert_name]").each(function(){
 			$(this).attr('name','expert_name['+ $('form .box').index($(this).closest('.box')) +'][]');
 		})
 	});
-	
+
 	// แก้ไขกิจกรรม
 	$('table.tbActivities').on('click', '.inline', function() {
 		// alert($(this).attr('data-edit-id'));
@@ -400,14 +400,14 @@ $(document).ready(function(){
 		var area = $(this).closest('tr').find('td:eq(12)').text();
 		var activity_date = $(this).closest('tr').find('td:eq(13)').text();
 		var budget = $(this).closest('tr').find('td:eq(14)').text().replace(/,/g, "");
-		
+
 		var expertInput = '';
 		$(this).closest('tr').find('.expertName').each(function() {
 		   var expertName = $(this).text();
 		   var dataTxt = '<input class="inputExpert form-control typeahead" type="text" id="exampleInputName" placeholder="ชื่อวิทยากรภูมิปัญญา" style="width:500px;" name="expert_name" value="'+expertName+'"><br>';
 		   expertInput += dataTxt;
 		});
-		
+
 		$('.expertEditBlk').html(expertInput);
 		$('input[name=activity_name]').val(activity_name);
 		$('input[name=b1m]').val(b1m);
@@ -423,19 +423,19 @@ $(document).ready(function(){
 		$('input[name=budget]').val(budget);
 		$('input[name=id]').val(id);
 		$('input[name=trRow]').val(trRow);
-		
+
 		autoComplete();
 	});
-	
+
 	// ลบกิจกรรม
 	$(document).on('click', ".act_delete", function() {
 		if (!confirm('ยืนยันการลบกิจกรรม')) return false;
-		
+
 		var actId = $(this).attr('data-row-id');
 		if(actId != ''){
 			$.get('home/ajax/delete_activity/'+actId);
 		}
-		
+
 		$(this).closest('tr').fadeOut(300, function() { $(this).remove(); });
 		return false;
 	});
@@ -459,7 +459,8 @@ function numberWithCommas(x) {
 
 
 <!-- <input type="text" data-provide="typeahead"> -->
-<script src="media/js/bootstrap3-typeahead.min.js"></script>
+<!-- <script src="media/js/bootstrap3-typeahead.min.js"></script> -->
+<script src="media/js/bootstrap3-typeahead.js"></script>
 <script>
 $(document).ready(function(){
 	autoComplete();
