@@ -345,11 +345,11 @@ $(document).ready(function(){
 
 
 			// console.log(hiddenForm);
-      console.log(trRow);
-
+      		console.log(trRow);
+			trRow = parseInt(trRow)+2; // บวกหัวตารางไป 2 แถว
 			// ถ้าเป็น edit ให้แทนแถวเดิม ถ้าเป็นเพิ่มใหม่ให้ใส่แถวสุดท้าย
 			if(trRow != ""){
-				$('.tbActivities').find("td:first-child:contains('"+trRow+"')").parent().replaceWith(txtInsert);
+				$('.tbActivities').find("tr:eq("+trRow+")").replaceWith(txtInsert);
 				$(".inline").colorbox({inline:true, width:"90%"}); // reload colorbox
 			}else{
 				$('.tbActivities tr:last').after(txtInsert);
