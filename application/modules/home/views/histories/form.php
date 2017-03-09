@@ -1,13 +1,13 @@
 <h3>ประวัติคลังปัญญาผู้สูงอายุ (คปญ.1) [เพิ่ม/แก้ไข]</h3>
 
 <form method="post" enctype="multipart/form-data" action="home/histories/save/<?=$rs->id?>">
-	
+
 <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#data" aria-controls="data" role="tab" data-toggle="tab">ข้อมูลทั่วไป</a></li>
     <li role="presentation"><a href="#know" aria-controls="know" role="tab" data-toggle="tab">ภูมิปัญญาในสาขา</a></li>
-  </ul>  
-  
+  </ul>
+
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="data">
 <table class="tbadd">
@@ -17,7 +17,7 @@
   <span class="form-inline">
     <div class="input-group date">
 	  <input type="text" class="form-control datepickerTH" name="regis_date" data-date-language="th-th" value="<?=DB2Date($rs->regis_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-	</div> // 
+	</div> //
 	  <?=form_dropdown('regis_province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$rs->regis_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
     </span>
   </td>
@@ -44,11 +44,11 @@
   <td><span class="form-inline">
     <select name="birth_day" class="form-control" style="width:auto;">
       <!-- <option value="">+ วัน +</option> -->
-      <?php 
+      <?php
 		for ($x = 1; $x <= 31; $x++) {
 			$selected_day = ($x == $rs->birth_day)?"selected=selected":"";
 		    echo "<option value='$x' $selected_day>".sprintf("%02d", $x)."</option>";
-		} 
+		}
 	  ?>
     </select>
     /
@@ -58,11 +58,11 @@
     /
     <select name="birth_year" class="form-control" style="width:auto;">
       <!-- <option value="">+ ปี +</option> -->
-      <?php 
+      <?php
 		for ($x = 2450; $x <= (date("Y")+543); $x++) {
 			$selected_year = ($x == $rs->birth_year)?"selected=selected":"";
 		    echo "<option value='$x' $selected_year>$x</option>";
-		} 
+		}
 	  ?>
     </select>
   </span>(<span class="calAge"></span> ปี)</td>
@@ -78,11 +78,11 @@
 <tr>
   <th>เลขประจำตัวประชาชน <span class="Txt_red_12">*</span> / วันที่ออกบัตร / วันที่บัตรหมดอายุ / สถานที่ออกบัตร</th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName13" placeholder="เลขประจำตัวประชาชน" style="width:160px;" maxlength="13" name="id_card" value="<?=$rs->id_card?>" />
-  / 
+    <input type="text" class="form-control" id="exampleInputName13" placeholder="เลขประจำตัวประชาชน" style="width:200px;" maxlength="13" name="id_card" value="<?=$rs->id_card?>" />
+  /
   <div class="input-group date">
 	  <input type="text" class="form-control datepickerTH" placeholder="วันออกบัตร" name="issue_date" data-date-language="th-th" value="<?=DB2Date($rs->issue_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-	</div> / 
+	</div> /
   <div class="input-group date">
 	  <input type="text" class="form-control datepickerTH" placeholder="วันบัตรหมดอายุ" name="expire_date" data-date-language="th-th" value="<?=DB2Date($rs->expire_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> /
@@ -92,7 +92,7 @@
 <tr>
   <th>เชื้อชาติ / สัญชาติ / ศาสนา</th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName17" placeholder="เชื้อชาติ" name="race" value="<?=$rs->race?>" style="width:180px;" /> / 
+    <input type="text" class="form-control " id="exampleInputName17" placeholder="เชื้อชาติ" name="race" value="<?=$rs->race?>" style="width:180px;" /> /
     <input type="text" class="form-control " id="exampleInputName17" placeholder="สัญชาติ" name="nationality" value="<?=$rs->nationality?>" style="width:180px;" /> /
     <input type="text" class="form-control " id="exampleInputName17" placeholder="ศาสนา" name="religion" value="<?=$rs->religion?>" style="width:180px;" />
     </span></td>
@@ -108,7 +108,7 @@
 <tr>
   <th>โทรศัพท์มือถือ / e-mail</th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName19" placeholder="โทรศัพท์มือถือ" name="mobile" value="<?=$rs->mobile?>" style="width:250px;" />
+    <input type="text" class="form-control" id="exampleInputName19" placeholder="โทรศัพท์มือถือ" name="mobile" value="<?=$rs->mobile?>" style="width:250px;" />
 /
 <input type="text" class="form-control " id="exampleInputName20" placeholder="e-mail" style="width:300px;" name="email" value="<?=$rs->email?>" />
   </span></td>
@@ -371,7 +371,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	
+
 	// validate
 	$("form").validate({
 		rules: {
@@ -383,10 +383,14 @@ $(document).ready(function(){
 			// birth_month:"required",
 			birth_year:"required",
 			status:"required",
-			id_card:"required",
-			issue_date:"required",
-			expire_date:"required",
-			issue_place:"required",
+			id_card:  {
+          required: true,
+					minlength: 13,
+          remote: "home/ajax/check_id_card?id=<?=@$rs->id?>"
+      },
+			// issue_date:"required",
+			// expire_date:"required",
+			// issue_place:"required",
 			reg_home_no:"required",
 			reg_moo:"required",
 			reg_soi:"required",
@@ -413,10 +417,14 @@ $(document).ready(function(){
 			// birth_month:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			birth_year:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			status:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			id_card:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			issue_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			expire_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
-			issue_place:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			id_card:{
+            required: "ฟิลด์นี้ห้ามเป็นค่าว่าง",
+						minlength: "กรุณากรอกเลขประจำตัวประชาชน 13 หลัก",
+            remote: "เลขประจำตัวประชาชนนี้มีในระบบแล้ว"
+        },
+			// issue_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// expire_date:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
+			// issue_place:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			reg_home_no:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			reg_moo:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
 			reg_soi:"ฟิลด์นี้ห้ามเป็นค่าว่าง",
@@ -436,17 +444,17 @@ $(document).ready(function(){
 		},
         errorPlacement: function(error, element)
         {
-	            if ( element.is(":radio,:checkbox")) 
+	            if ( element.is(":radio,:checkbox"))
 	            {
 	                error.appendTo( element.parents('td') );
 	            }
-	            else 
-	            { // This is the default behavior 
+	            else
+	            { // This is the default behavior
 	                error.insertAfter( element );
 	            }
 		}
 	});
-	
+
 	//คำนวนอายุ
 	$("select[name=birth_year]").change(function(){
 		var birth_year = $(this).val();
@@ -460,7 +468,7 @@ $(document).ready(function(){
 			$('.calAge').html("(xx ปี)");
 		}
 	});
-	
+
 	<?php if(@$rs->id != ""):?>
 	var birth_year = '<?=$rs->birth_year?>';
 	$.get('home/ajax/calAge',{
@@ -469,7 +477,7 @@ $(document).ready(function(){
 		$('.calAge').html(data);
 	});
 	<?php endif;?>
-	
+
 	// อื่นๆ ระบุ
 	$('input:radio[name=marital_status],input:radio[name=education]').change(function() {
         if (this.value == '99999') {
@@ -478,7 +486,7 @@ $(document).ready(function(){
         	$(this).closest('td').find('input[type=text]').attr('disabled','disabled');
         }
     });
-	
+
 	// ที่อยู่ตามทะเบียนบ้าน * --------------------------------------------------------
 	// select จังหวัด หา อำเภอ
 	$('table').on('change', "select[name=reg_province_id]", function() {
@@ -511,19 +519,19 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
+
 	<?php if(@$rs->id != ""):?>
 	var reg_province_id = '<?=$rs->reg_province_id?>';
 	var reg_amphur_id = '<?=$rs->reg_amphur_id?>';
 	var reg_district_id = '<?=$rs->reg_district_id?>';
-	
+
 	$.get('home/ajax/get_select_reg_amphur',{
 		'province_id' : reg_province_id,
 		'amphur_id' : reg_amphur_id
 	},function(data){
 		$('select[name=reg_amphur_id]').closest('.spanAmphur').html(data);
 	});
-	
+
 	$.get('home/ajax/get_select_reg_district',{
 		'province_id' : reg_province_id,
 		'amphur_id' : reg_amphur_id,
@@ -533,7 +541,7 @@ $(document).ready(function(){
 	});
 	<?php endif;?>
 	// ที่อยู่ตามทะเบียนบ้าน * --------------------------------------------------------
-	
+
 	// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
 	// select จังหวัด หา อำเภอ
 	$('table').on('change', "select[name=now_province_id]", function() {
@@ -566,19 +574,19 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
+
 	<?php if(@$rs->id != ""):?>
 	var now_province_id = '<?=$rs->now_province_id?>';
 	var now_amphur_id = '<?=$rs->now_amphur_id?>';
 	var now_district_id = '<?=$rs->now_district_id?>';
-	
+
 	$.get('home/ajax/get_select_now_amphur',{
 		'province_id' : now_province_id,
 		'amphur_id' : now_amphur_id
 	},function(data){
 		$('select[name=now_amphur_id]').closest('.spanAmphur').html(data);
 	});
-	
+
 	$.get('home/ajax/get_select_now_district',{
 		'province_id' : now_province_id,
 		'amphur_id' : now_amphur_id,
@@ -588,6 +596,6 @@ $(document).ready(function(){
 	});
 	<?php endif;?>
 	// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
-	
+
 });
 </script>

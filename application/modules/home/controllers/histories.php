@@ -10,20 +10,20 @@ class histories extends Public_Controller {
 	{
 		$condition = " 1=1 ";
 		if(!is_admin()){ $condition .= ' and regis_province_id = '.user_login()->province_id; }
-		if(@$_GET['search']){ $condition .= ' and name LIKE "%'.$_GET['search'].'%" ';}
+		if(@$_GET['search']){ $condition .= ' and (name LIKE "%'.$_GET['search'].'%" or id_card = "'.$_GET['search'].'") ';}
 		if(@$_GET['regis_province_id']){ $condition .= ' and regis_province_id = '.$_GET['regis_province_id']; }
 		if(@$_GET['regis_year']){ $condition .= ' and regis_date LIKE "%'.($_GET['regis_year']-543).'%" ';}
 		if(@$_GET['now_province_id']){ $condition .= ' and now_province_id = '.$_GET['now_province_id']; }
 		if(@$_GET['now_amphur_id']){ $condition .= ' and now_amphur_id = '.$_GET['now_amphur_id']; }
 		if(@$_GET['now_district_id']){ $condition .= ' and now_district_id = '.$_GET['now_district_id']; }
-		
+
 		// condition for wisdom (ความเชี่ยวชาญ)
 		$condition .= " and ( 1=1 ";
-		
+
 		$operator = "and";
-		
+
 		if(@$_GET['wis_study']){
-			 $condition .= ' '.$operator.' wis_study <> ""'; 
+			 $condition .= ' '.$operator.' wis_study <> ""';
 			 $operator = "or";
 		}
 
@@ -31,22 +31,22 @@ class histories extends Public_Controller {
 			 $condition .=  ' '.$operator.' wis_medical <> ""';
 			 $operator = "or";
 		}
-		
+
 		if(@$_GET['wis_agriculture']){
-			$condition .= ' '.$operator.' wis_agriculture <> ""'; 
+			$condition .= ' '.$operator.' wis_agriculture <> ""';
 			$operator = "or";
 		}
 
 		if(@$_GET['wis_natural']){
-			$condition .= ' '.$operator.' wis_natural <> ""'; 
+			$condition .= ' '.$operator.' wis_natural <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_science']){
-			$condition .= ' '.$operator.' wis_science <> ""'; 
+			$condition .= ' '.$operator.' wis_science <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_engineer']){
 			$condition .= ' '.$operator.' wis_engineer <> ""';
 			$operator = "or";
@@ -71,7 +71,7 @@ class histories extends Public_Controller {
 			$condition .= ' '.$operator.' wis_politics <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_art']){
 			$condition .= ' '.$operator.' wis_art <> ""';
 			$operator = "or";
@@ -81,7 +81,7 @@ class histories extends Public_Controller {
 			$condition .= ' '.$operator.' wis_religion <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_commercial']){
 			$condition .= ' '.$operator.' wis_commercial <> ""';
 			$operator = "or";
@@ -96,32 +96,32 @@ class histories extends Public_Controller {
 			$condition .= ' '.$operator.' wis_management <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_publicity']){
 			$condition .= ' '.$operator.' wis_publicity <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_transport']){
 			$condition .= ' '.$operator.' wis_transport <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_energy']){
 			$condition .= ' '.$operator.' wis_energy <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_foreign']){
 			$condition .= ' '.$operator.' wis_foreign <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_materials']){
 			$condition .= ' '.$operator.' wis_materials <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_language']){
 			$condition .= ' '.$operator.' wis_language <> ""';
 			$operator = "or";
@@ -131,14 +131,14 @@ class histories extends Public_Controller {
 			$condition .= ' '.$operator.' wis_rhetoric <> ""';
 			$operator = "or";
 		}
-		
+
 		if(@$_GET['wis_other']){
 			$condition .= ' '.$operator.' wis_other <> ""';
 			$operator = "or";
 		}
-		
+
 		$condition .= " )";
-		
+
 		$sql = "select * from histories where ".$condition." order by id desc";
 		// echo $sql;
 		$histories = new history();
@@ -146,16 +146,16 @@ class histories extends Public_Controller {
 		$data['pagination'] = $histories->sql_pagination;
 		$this->template->build('histories/index',$data);
 	}
-	
+
 	function form($id=false){
 		$data['rs'] = new history($id);
 		$this->template->build('histories/form',$data);
 	}
-	
+
 	function save($id=false){
 		if($_POST){
 			$rs = new history($id);
-			
+
 			if($_FILES['picture']['name'])
 			{
 				if($rs->id){
@@ -163,15 +163,15 @@ class histories extends Public_Controller {
 				}
 				$_POST['picture'] = $rs->upload($_FILES['picture'],'uploads/histories/');
 			}
-			
+
 			$_POST['regis_date'] = Date2DB($_POST['regis_date']);
 			$_POST['issue_date'] = Date2DB($_POST['issue_date']);
 			$_POST['expire_date'] = Date2DB($_POST['expire_date']);
-			
+
 			$rs->from_array($_POST);
 			$rs->save();
 			set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
-			
+
 			// logs
 			if($id != ""){
 				addLog('histories','แก้ไขประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑) '.$_POST['name'],$_POST['current']);
@@ -183,25 +183,25 @@ class histories extends Public_Controller {
 		// redirect($_SERVER['HTTP_REFERER']);
 		redirect($_POST['referer']);
 	}
-	
+
 	function delete($id){
 		if($id){
 			$rs = new history($id);
-			
+
 			// logs
 			addLog('users','ลบประวัติคลังปัญญาผู้สูงอายุ (คปญ.๑) '.$rs->name,current_url());
-			
+
 			$rs->delete();
 			set_notify('success', 'ลบข้อมูลเรียบร้อย');
 		}
 		redirect('home/histories/index');
 	}
-	
+
 	function view($id){
 		$data['rs'] = new history($id);
-		
+
 		$filename = "(คปญ.๑)_ประวัติคลังปัญญาผู้สูงอายุ_จังหวัด".get_province_name($data['rs']->regis_province_id)."_".get_prefix($data['rs']->title).$data['rs']->name;
-		
+
 		if(@$_GET['type'] == "word"){
 			header("Content-type: application/vnd.ms-word");
 			header("Content-Disposition: attachment;Filename=".$filename.".doc");
@@ -214,16 +214,16 @@ class histories extends Public_Controller {
 			$this->template->build('histories/view',$data);
 		}
 	}
-	
+
 	// function test(){
 		// $sql = "select id, person_id from histories where now_province_id is null order by id asc";
 		// $rs = $this->db->query($sql)->result_array();
 		// foreach($rs as $row){
-// 					
+//
 					// $sql = "select ADDRESS_NO, MOO, SOI, PROVINCE_CODE, DISTRICT_CODE, SUBDISTRICT_CODE, TELEPHONE, FAX,  POSTCODE from _mn_address_01 where person_id = ".$row['person_id'];
 					// $q = $this->db->query($sql)->row_array();
-// 		
-					// $sql = "UPDATE histories SET 
+//
+					// $sql = "UPDATE histories SET
 						// now_home_no = '".@$q['ADDRESS_NO']."',
 						// now_moo = '".@$q['MOO']."',
 						// now_soi = '".@$q['SOI']."',
@@ -234,22 +234,22 @@ class histories extends Public_Controller {
 						// tel = '".@$q['TELEPHONE']."',
 						// fax = '".@$q['FAX']."'
 					// where id = ".$row['id'];
-//  
+//
 					// $this->db->query($sql);
-// 					
+//
 					// echo 'update '.$row['id'].' success<br>';
 		// }
 	// }
-	
+
 	// function test2(){
 		// $sql = "select id, person_id from histories where reg_province_id is null order by id asc";
 		// $rs = $this->db->query($sql)->result_array();
 		// foreach($rs as $row){
-// 					
+//
 					// $sql = "select ADDRESS_NO, MOO, SOI, PROVINCE_CODE, DISTRICT_CODE, SUBDISTRICT_CODE, TELEPHONE, FAX,  POSTCODE  from _mn_address_02 where person_id = ".$row['person_id'];
 					// $q = $this->db->query($sql)->row_array();
-// 		
-					// $sql = "UPDATE histories SET 
+//
+					// $sql = "UPDATE histories SET
 						// reg_home_no = '".@$q['ADDRESS_NO']."',
 						// reg_moo = '".@$q['MOO']."',
 						// reg_soi = '".@$q['SOI']."',
@@ -260,12 +260,12 @@ class histories extends Public_Controller {
 						// tel = '".@$q['TELEPHONE']."',
 						// fax = '".@$q['FAX']."'
 					// where id = ".$row['id'];
-//  
+//
 					// $this->db->query($sql);
-// 					
+//
 					// echo 'update '.$row['id'].' success<br>';
 		// }
 	// }
-	
+
 }
 ?>

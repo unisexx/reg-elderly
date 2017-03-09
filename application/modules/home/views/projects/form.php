@@ -344,7 +344,8 @@ $(document).ready(function(){
 			txtInsert += '</tr>';
 
 
-			console.log(hiddenForm);
+			// console.log(hiddenForm);
+      console.log(trRow);
 
 			// ถ้าเป็น edit ให้แทนแถวเดิม ถ้าเป็นเพิ่มใหม่ให้ใส่แถวสุดท้าย
 			if(trRow != ""){
