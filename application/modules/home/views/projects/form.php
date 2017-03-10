@@ -344,14 +344,15 @@ $(document).ready(function(){
 			txtInsert += '</tr>';
 
 
-			// console.log(hiddenForm);
-      		console.log(trRow);
+      // console.log(hiddenForm);
+      // console.log(trRow);
 			trRow = parseInt(trRow)+2; // บวกหัวตารางไป 2 แถว
+			console.log(trRow);
 			// ถ้าเป็น edit ให้แทนแถวเดิม ถ้าเป็นเพิ่มใหม่ให้ใส่แถวสุดท้าย
-			if(trRow != ""){
+			if(trRow > 2){
 				$('.tbActivities').find("tr:eq("+trRow+")").replaceWith(txtInsert);
 				$(".inline").colorbox({inline:true, width:"90%"}); // reload colorbox
-			}else{
+			}else{ // ยังไม่มีข้อมูลมาก่อน
 				$('.tbActivities tr:last').after(txtInsert);
 				$(".inline").colorbox({inline:true, width:"90%"}); // reload colorbox
 			}
