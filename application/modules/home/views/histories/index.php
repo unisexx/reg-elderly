@@ -62,7 +62,7 @@
 </div>
 
 <div id="btnBox">
-  <input type="button" title="เพิ่มโครงการ" value="เพิ่มรายการ" onclick="document.location='home/histories/form'" class="btn btn-warning vtip" />
+  <input type="button" title="เพิ่มโครงการ" value="เพิ่มรายการ" onclick="document.location='<?=current_url()?>/form'" class="btn btn-warning vtip" />
 </div>
 
 <?// =$rs->pagination();?>

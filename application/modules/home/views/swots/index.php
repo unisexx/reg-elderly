@@ -24,7 +24,7 @@
 <?if(@$_GET['project_id']):?>
 
 <div id="btnBox">
-  <input type="button" title="เพิ่มรายงาน คปญ.03 ตารางวิเคราะห์ SWOT" value="เพิ่มรายงาน คปญ.03" onclick="document.location='home/swots/form/<?=$project->id?>'" class="btn btn-warning vtip" />
+  <input type="button" title="เพิ่มรายงาน คปญ.03 ตารางวิเคราะห์ SWOT" value="เพิ่มรายงาน คปญ.03" onclick="document.location='<?=current_url()?>/form/<?=$project->id?>'" class="btn btn-warning vtip" />
 </div>
 
 
