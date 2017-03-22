@@ -27,7 +27,7 @@
 </div>
 
 <div id="btnBox">
-  <input type="button" title="เพิ่มรายงาน คปญ.2 รายงานผลการดำเนินงานโครงการ" value="เพิ่มรายงาน คปญ.2" onclick="document.location='<?=current_url()?>/form'" class="btn btn-warning vtip" />
+  <a href="home/projects/form"><input type="button" title="เพิ่มรายงาน คปญ.2 รายงานผลการดำเนินงานโครงการ" value="เพิ่มรายงาน คปญ.2" class="btn btn-warning vtip" /></a>
 </div>
 
 <?=$rs->pagination();?>

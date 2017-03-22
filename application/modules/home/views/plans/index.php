@@ -20,7 +20,7 @@
 
 
 <div id="btnBox">
-  <input type="button" title="เพิ่มรายงาน คปญ.04 แผนการดำเนินงาน" value="เพิ่มรายงาน คปญ.04" onclick="document.location='<?=current_url()?>/form'" class="btn btn-warning vtip" />
+  <a href="home/plans/form"><input type="button" title="เพิ่มรายงาน คปญ.04 แผนการดำเนินงาน" value="เพิ่มรายงาน คปญ.04" class="btn btn-warning vtip" /></a>
 </div>
 
 

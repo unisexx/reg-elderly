@@ -116,9 +116,9 @@
 <tr>
   <th>ที่อยู่ตามทะเบียนบ้าน <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName21" placeholder="บ้านเลขที่" style="width:100px;" name="reg_home_no" value="<?=$rs->reg_home_no?>" />
-    <input type="text" class="form-control " id="exampleInputName21" placeholder="หมู่ที่" style="width:70px;" name="reg_moo" value="<?=$rs->reg_moo?>" />
-    <input type="text" class="form-control " id="exampleInputName21" placeholder="ซอย" style="width:200px;" name="reg_soi" value="<?=$rs->reg_soi?>" />
+    <input type="text" class="form-control " id="reg_home_no" placeholder="บ้านเลขที่" style="width:100px;" name="reg_home_no" value="<?=$rs->reg_home_no?>" />
+    <input type="text" class="form-control " id="reg_moo" placeholder="หมู่ที่" style="width:70px;" name="reg_moo" value="<?=$rs->reg_moo?>" />
+    <input type="text" class="form-control " id="reg_soi" placeholder="ซอย" style="width:200px;" name="reg_soi" value="<?=$rs->reg_soi?>" />
     <div style="margin-top:10px;">
 	  <span class="spanProvince">
       	<?=form_dropdown('reg_province_id',get_option('code','name','province order by name asc'),@$rs->reg_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
@@ -133,15 +133,16 @@
 	        	<option>+ เลือกตำบล +</option>
 	        </select>
       </span>
-      <input type="text" class="form-control " id="exampleInputName22" placeholder="รหัสไปรณีย์" style="width:120px;" maxlength="5" name="reg_post_code" value="<?=$rs->reg_post_code?>" /></div>
+      <input type="text" class="form-control " id="reg_post_code" placeholder="รหัสไปรณีย์" style="width:120px;" maxlength="5" name="reg_post_code" value="<?=$rs->reg_post_code?>" /></div>
     </span></td>
 </tr>
 <tr>
   <th>ที่อยู่ปัจจุบัน <span class="Txt_red_12">*</span></th>
   <td><span class="form-inline">
-    <input type="text" class="form-control " id="exampleInputName23" placeholder="บ้านเลขที่" style="width:100px;" name="now_home_no" value="<?=$rs->now_home_no?>" />
-    <input type="text" class="form-control " id="exampleInputName23" placeholder="หมู่ที่" style="width:70px;" name="now_moo" value="<?=$rs->now_moo?>" />
-    <input type="text" class="form-control " id="exampleInputName23" placeholder="ซอย" style="width:200px;" name="now_soi" value="<?=$rs->now_soi?>" />
+  	<input type="button" id="sameAddress" value=" เหมือนที่อยู่ตามทะเบียนบ้าน " style="margin-bottom: 10px;"> <br>
+    <input type="text" class="form-control " id="now_home_no" placeholder="บ้านเลขที่" style="width:100px;" name="now_home_no" value="<?=$rs->now_home_no?>" />
+    <input type="text" class="form-control " id="now_moo" placeholder="หมู่ที่" style="width:70px;" name="now_moo" value="<?=$rs->now_moo?>" />
+    <input type="text" class="form-control " id="now_soi" placeholder="ซอย" style="width:200px;" name="now_soi" value="<?=$rs->now_soi?>" />
     <div style="margin-top:10px;">
       <span class="spanProvince">
       	<?=form_dropdown('now_province_id',get_option('code','name','province order by name asc'),@$rs->now_province_id,'class="form-control" style="width:auto;"','+ เลือกจังหวัด +');?>
@@ -156,7 +157,7 @@
 	        	<option>+ เลือกตำบล +</option>
 	        </select>
       </span>
-      <input type="text" class="form-control " id="exampleInputName24" placeholder="รหัสไปรณีย์" style="width:120px;" maxlength="5" name="now_post_code" value="<?=$rs->now_post_code?>" />
+      <input type="text" class="form-control " id="now_post_code" placeholder="รหัสไปรณีย์" style="width:120px;" maxlength="5" name="now_post_code" value="<?=$rs->now_post_code?>" />
     </div>
   </span></td>
 </tr>
@@ -596,6 +597,34 @@ $(document).ready(function(){
 	});
 	<?php endif;?>
 	// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
+	
+	// checkbox ที่อยู่เดียวกับที่อยู่ตามทะเบียนบ้าน
+	$("#sameAddress").click(function() {
+	        $("#now_home_no").val($("#reg_home_no").val());
+	        $("#now_moo").val($("#reg_moo").val());
+	        $("#now_soi").val($("#reg_soi").val());
+	        $("#now_post_code").val($("#reg_post_code").val());
+	        $("select[name=now_province_id]").val($("select[name=reg_province_id]").val());
+	        
+	        var reg_province_id = $("select[name=reg_province_id]").val();
+			var reg_amphur_id = $("select[name=reg_amphur_id]").val();
+			var reg_district_id = $("select[name=reg_district_id]").val();
+			
+			$.get('home/ajax/get_select_now_amphur',{
+				'province_id' : reg_province_id,
+				'amphur_id' : reg_amphur_id
+			},function(data){
+				$('select[name=now_amphur_id]').closest('.spanAmphur').html(data);
+			});
+			
+			$.get('home/ajax/get_select_now_district',{
+				'province_id' : reg_province_id,
+				'amphur_id' : reg_amphur_id,
+				'district_id' : reg_district_id
+			},function(data){
+				$('select[name=now_district_id]').closest('.spanDistrict').html(data);
+			});
+	});
 
 });
 </script>

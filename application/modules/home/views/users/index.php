@@ -11,7 +11,7 @@
 </div>
 </div>
 <div id="btnBox">
-  <input type="button" title="เพิ่มผู้ใช้งาน" value="เพิ่มผู้ใช้งาน" onclick="document.location='home/users/form'" class="btn btn-warning vtip" />
+  <a href="home/users/form"><input type="button" title="เพิ่มผู้ใช้งาน" value="เพิ่มผู้ใช้งาน" class="btn btn-warning vtip" /></a>
 </div>
 
 <?=$rs->pagination();?>
