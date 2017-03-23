@@ -52,7 +52,10 @@ Class ajax extends Public_Controller
 
 	function get_expert_name_autocomplete(){
 		// if($_GET){
-			$sql = 'select id,name from histories';
+			// ให้ where เฉพาะจังหวัดของตัวเอง
+			$condition = !is_admin()? " where regis_province_id = ".user_login()->province_id : "" ;
+
+			$sql = 'select id,name from histories '.@$condition;
 			$rs = $this->db->query($sql)->result();
 			$rows = array();
 			foreach($rs as $item){

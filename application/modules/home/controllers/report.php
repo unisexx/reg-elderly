@@ -12,13 +12,13 @@ class report extends Public_Controller {
 		if(@$_GET['regis_province_id']){ $condition .= ' and regis_province_id = '.$_GET['regis_province_id'];}
 		if(@$_GET['regis_year']){ $condition .= ' and regis_date LIKE "%'.($_GET['regis_year']-543).'%" ';}
 		$sql = "select * from histories where ".$condition." order by id desc";
-		
+
 		// $data['rs'] = $this->db->query($sql)->result();
 		// echo $sql;
-		
+
 		if(@$_GET['export_type']!=''){
 			$data['rs'] = $this->db->query($sql)->result();
-			
+
 			if(@$_GET['export_type']=='excel'){
 				if(@$_GET['regis_province_id']){$txt = "จังหวัด".get_province_name($_GET['regis_province_id']);}
 				if(@$_GET['regis_year']){ $txt .= "ปี พ.ศ. ".$_GET['regis_year']; }
@@ -30,11 +30,11 @@ class report extends Public_Controller {
 			$histories = new history();
 	        $data['rs'] = $histories->sql_page($sql, 20);
 			$data['pagination'] = $histories->sql_pagination;
-		
+
 			$this->template->build('report/report_1',$data);
 		}
 	}
-	
+
 	function report_2(){
 		$condition = " 1=1 ";
 		if(@$_GET['regis_year']){ $condition .= ' and regis_date LIKE "%'.($_GET['regis_year']-543).'%" ';}
@@ -57,7 +57,7 @@ class report extends Public_Controller {
 		// echo $sql;
 		$data['rs'] = $this->db->query($sql)->result();
 		// $histories = new history();
-		
+
 		if(@$_GET['export_type']!=''){
 			if(@$_GET['export_type']=='excel'){
 				if(@$_GET['regis_year']){ $txt = "ปี พ.ศ. ".$_GET['regis_year']; }
@@ -68,8 +68,10 @@ class report extends Public_Controller {
 		}else{
 			$this->template->build('report/report_2',$data);
 		}
+
+		$this->output->cache(2880);
 	}
-	
+
 	function report_3(){
 		$condition = " 1=1 ";
 		if(@$_GET['budget_year']){ $condition .= ' and projects.budget_year = '.$_GET['budget_year']; }
@@ -93,7 +95,7 @@ class report extends Public_Controller {
 		// echo $sql;
 		$data['rs'] = $this->db->query($sql)->result();
 		// $histories = new history();
-		
+
 		if(@$_GET['export_type']!=''){
 			if(@$_GET['export_type']=='excel'){
 				if(@$_GET['budget_year']){ $txt = "ปี พ.ศ. ".$_GET['budget_year']; }
@@ -104,8 +106,10 @@ class report extends Public_Controller {
 		}else{
 			$this->template->build('report/report_3',$data);
 		}
+
+		$this->output->cache(2880);
 	}
-	
+
 	function report_4(){
 		$condition = " 1=1 ";
 		if(@$_GET['regis_year']){ $condition .= ' and regis_date LIKE "%'.($_GET['regis_year']-543).'%" ';}
@@ -117,12 +121,12 @@ class report extends Public_Controller {
 						(select count(id) from histories LEFT JOIN prefix ON histories.title = prefix.prefix_code WHERE ".$condition." and regis_province_id = province_code and status = 2 and sex IS NULL) count_unknow,
 						(select count(id) from histories WHERE ".$condition." and regis_province_id = province_code and status = 2) count_total
 					FROM
-						province 
+						province
 					ORDER BY province_name ASC";
 		// echo $sql;
 		$data['rs'] = $this->db->query($sql)->result();
 		// $histories = new history();
-		
+
 		if(@$_GET['export_type']!=''){
 			if(@$_GET['export_type']=='excel'){
 				if(@$_GET['regis_year']){ $txt = "ปี พ.ศ. ".$_GET['regis_year']; }
@@ -133,7 +137,9 @@ class report extends Public_Controller {
 		}else{
 			$this->template->build('report/report_4',$data);
 		}
+
+		$this->output->cache(2880);
 	}
-	
+
 }
 ?>
