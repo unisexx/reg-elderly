@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>ระบบทะเบียนข้อมูลคลังปัญญาผู้สูงอายุ</title>
 <link rel="stylesheet" href="themes/elderly2016/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
 <style>
@@ -71,5 +71,11 @@ body {
     </div> -->
     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
   </form>
+
+<br><br>
+<center>
+<div><a href="https://goo.gl/SPMLDv" target="_blank" style="font-size:18px;">- แบบทดสอบก่อนอบรม ระบบคลังปัญญาผู้สูงอายุ</a></div>
+<div><a href="http://goo.gl/bYl4UD" target="_blank" style="font-size:18px;">- แบบประเมินความพึงพอใจการฝึกอบรมหลักสูตรการใช้งานระบบทะเบียนข้อมูลคลังปัญญาผู้สูงอายุ</a></div>
+</center>
 
 </div> <!-- /container -->
