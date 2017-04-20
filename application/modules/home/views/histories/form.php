@@ -87,6 +87,8 @@
 	  <input type="text" class="form-control datepickerTH" placeholder="วันบัตรหมดอายุ" name="expire_date" data-date-language="th-th" value="<?=DB2Date($rs->expire_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> /
   <input type="text" class="form-control " id="exampleInputName16" placeholder="สถานที่ออกบัตร" name="issue_place" value="<?=$rs->issue_place?>" style="width:300px;" />
+  <input type="hidden" name="lifelong" value="0">
+  <input type="checkbox" value="1" name="lifelong" <?=@$rs->lifelong == 1 ? 'checked' : '' ;?>> บัตรประชาชนตลอดชีพ
   </span></td>
 </tr>
 <tr>
@@ -597,7 +599,7 @@ $(document).ready(function(){
 	});
 	<?php endif;?>
 	// ที่อยู่ปัจจุบัน  * -----------------------------------------------------------------
-	
+
 	// checkbox ที่อยู่เดียวกับที่อยู่ตามทะเบียนบ้าน
 	$("#sameAddress").click(function() {
 	        $("#now_home_no").val($("#reg_home_no").val());
@@ -605,18 +607,18 @@ $(document).ready(function(){
 	        $("#now_soi").val($("#reg_soi").val());
 	        $("#now_post_code").val($("#reg_post_code").val());
 	        $("select[name=now_province_id]").val($("select[name=reg_province_id]").val());
-	        
+
 	        var reg_province_id = $("select[name=reg_province_id]").val();
 			var reg_amphur_id = $("select[name=reg_amphur_id]").val();
 			var reg_district_id = $("select[name=reg_district_id]").val();
-			
+
 			$.get('home/ajax/get_select_now_amphur',{
 				'province_id' : reg_province_id,
 				'amphur_id' : reg_amphur_id
 			},function(data){
 				$('select[name=now_amphur_id]').closest('.spanAmphur').html(data);
 			});
-			
+
 			$.get('home/ajax/get_select_now_district',{
 				'province_id' : reg_province_id,
 				'amphur_id' : reg_amphur_id,

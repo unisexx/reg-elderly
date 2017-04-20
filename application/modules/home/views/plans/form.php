@@ -1,18 +1,18 @@
 <h3>แผนการดำเนินงาน (คปญ. 4) [เพิ่ม/แก้ไข]</h3>
 
 <form method="post" action="home/plans/save/<?=$rs->id?>">
-	
+
 <table class="tbadd">
   <tr>
     <th>ปีงบประมาณ <span class="Txt_red_12">*</span></th>
     <td>
     	<select name="budget_year" class="form-control" style="width:auto;">
 	      <option value="">+ เลือกปีงบประมาณ +</option>
-		  <?php 
+		  <?php
 			for ($x = (date("Y")+545); $x >= 2550; $x--) {
 				$selected_year = ($x == $rs->budget_year)?"selected=selected":"";
 			    echo "<option value='$x' $selected_year>$x</option>";
-			} 
+			}
 		  ?>
 	    </select>
     </td>
@@ -64,6 +64,7 @@
   		<input type='hidden' name='activity_name[]' value='<?=$act->activity_name?>'>
   		<input type='hidden' name='area[]' value='<?=$act->area?>'>
   		<input type='hidden' name='activity_date[]' value='<?=DB2Date($act->activity_date)?>'>
+			<input type='hidden' name='activity_date_detail[]' value='<?=$act->activity_date_detail?>'>
   		<input type='hidden' name='budget[]' value='<?=$act->budget?>'>
   		<input type='hidden' name='product[]' value='<?=$act->product?>'>
   		<input type='hidden' name='result[]' value='<?=$act->result?>'>
@@ -90,7 +91,7 @@
 <div style='display:none'>
       <div id='inline_activity' style='padding:10px; background:#fff;'>
       <h3>บันทึกรายละเอียดกิจกรรม</h3>
-      
+
       <table class="tbadd">
 <tr>
   <th><span style="width:25%">ชื่อกิจกรรม  <span class="Txt_red_12">*</span></span></th>
@@ -109,8 +110,9 @@
   <td>
   	<span class="form-inline">
     <div class="input-group date">
-	  <input type="text" class="form-control datepickerTH" name="activity_date" data-date-language="th-th" value=""><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-	</div>
+		  <input type="text" class="form-control datepickerTH" name="activity_date" data-date-language="th-th" value=""><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		</div>
+		<input type="text" class="form-control" name="activity_date_detail" placeholder="รายละเอียดเพิ่มเติม" style="width:450px;">
     </span>
   </td>
   </tr>
@@ -158,17 +160,17 @@ $(document).ready(function(){
 		},
         errorPlacement: function(error, element)
         {
-	            if ( element.is(":radio,:checkbox")) 
+	            if ( element.is(":radio,:checkbox"))
 	            {
 	                error.appendTo( element.parents('td') );
 	            }
-	            else 
-	            { // This is the default behavior 
+	            else
+	            { // This is the default behavior
 	                error.insertAfter( element );
 	            }
 		}
 	});
-	
+
 	// ดึงข้อมูลที่เลือกลงฟอร์มหลัก
 	$('#activityBtn').click(function(){
 		// ปิด colorbox
@@ -179,19 +181,21 @@ $(document).ready(function(){
 		var activity_name = $(this).closest('#inline_activity').find('input[name=activity_name]').val();
 		var area = $(this).closest('#inline_activity').find('textarea[name=area]').val();
 		var activity_date = $(this).closest('#inline_activity').find('input[name=activity_date]').val();
+		var activity_date_detail = $(this).closest('#inline_activity').find('input[name=activity_date_detail]').val();
 		var budget = $(this).closest('#inline_activity').find('input[name=budget]').val();
 		var product = $(this).closest('#inline_activity').find('textarea[name=product]').val();
 		var result = $(this).closest('#inline_activity').find('textarea[name=result]').val();
-		
+
 		var hiddenForm = "";
 		hiddenForm += "<input type='hidden' name='activity_name[]' value='"+activity_name+"'>";
 		hiddenForm += "<input type='hidden' name='area[]' value='"+area+"'>";
 		hiddenForm += "<input type='hidden' name='activity_date[]' value='"+activity_date+"'>";
+		hiddenForm += "<input type='hidden' name='activity_date_detail[]' value='"+activity_date_detail+"'>";
 		hiddenForm += "<input type='hidden' name='budget[]' value='"+budget+"'>";
 		hiddenForm += "<input type='hidden' name='product[]' value='"+product+"'>";
 		hiddenForm += "<input type='hidden' name='result[]' value='"+result+"'>";
 		hiddenForm += "<input type='hidden' name='activity_id[]' value='"+id+"'>";
-		
+
 		var txtInsert = "";
 		txtInsert += '<tr class="box">';
 		txtInsert += '<td></td>';
@@ -203,9 +207,9 @@ $(document).ready(function(){
 		txtInsert += '<td>'+result+'</td>';
 		txtInsert += '<td>'+hiddenForm+'<button class="act_delete">ลบ</button></td>';
 		txtInsert += '</tr>';
-		
+
 		// console.log(hiddenForm);
-		
+
 		// ถ้าเป็น edit ให้แทนแถวเดิม ถ้าเป็นเพิ่มใหม่ให้ใส่แถวสุดท้าย
 		if(trRow != ""){
 			$('.tbActivities').find("td:first-child:contains('"+trRow+"')").parent().replaceWith(txtInsert);
@@ -221,8 +225,8 @@ $(document).ready(function(){
 		// คำนวนใส่ตัวเลขแถว
 		autoCountTableRow('tbActivities');
 	});
-	
-	
+
+
 	// แก้ไขกิจกรรม
 	$('table.tbActivities').on('click', '.inline', function() {
 		// alert($(this).attr('data-edit-id'));
@@ -231,34 +235,36 @@ $(document).ready(function(){
 		var activity_name = $(this).closest('tr').find('td:eq(1)').text();
 		var area = $(this).closest('tr').find('td:eq(2)').text();
 		var activity_date = $(this).closest('tr').find('td:eq(3)').text();
+		var activity_date_detail = $(this).closest('tr').find("input[name='activity_date_detail[]']").val();
 		var budget = $(this).closest('tr').find('td:eq(4)').text().replace(/,/g, "");
 		var product = $(this).closest('tr').find('td:eq(5)').text();
 		var result = $(this).closest('tr').find('td:eq(6)').text();
-		
-		
+
+
 		$('input[name=activity_name]').val(activity_name);
 		$('textarea[name=area]').val(area);
 		$('input[name=activity_date]').val(activity_date);
+		$('input[name=activity_date_detail]').val(activity_date_detail);
 		$('input[name=budget]').val(budget);
 		$('textarea[name=product]').val(product);
 		$('textarea[name=result]').val(result);
 		$('input[name=id]').val(id);
 		$('input[name=trRow]').val(trRow);
 	});
-	
+
 	// ลบกิจกรรม
 	$(document).on('click', ".act_delete", function() {
 		if (!confirm('ยืนยันการลบกิจกรรม')) return false;
-		
+
 		var actId = $(this).attr('data-row-id');
 		if(actId != ''){
 			$.get('home/ajax/delete_plan_activity/'+actId);
 		}
-		
+
 		$(this).closest('tr').fadeOut(300, function() { $(this).remove(); });
 		return false;
 	});
-	
+
 });
 
 // นับจำนวนใส่ตัวเลขหน้าแถว

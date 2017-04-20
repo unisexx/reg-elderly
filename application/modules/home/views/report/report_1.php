@@ -15,11 +15,11 @@
 <form class="form-inline">
     <select name="regis_year" class="form-control" style="width:auto;">
       <option value="">-- ปีงบประมาณที่ขึ้นทะเบียน --</option>
-      <?php 
+      <?php
 		for ($x = (date("Y")+543); $x >= 2533; $x--) {
 			$selected_year = ($x == @$_GET['regis_year'])?"selected=selected":"";
 		    echo "<option value='$x' $selected_year>$x</option>";
-		} 
+		}
 	  ?>
     </select>
     <?=form_dropdown('regis_province_id',get_option('code','name','province '.select_province_condition().' order by name asc'),@$_GET['regis_province_id'],'class="form-control" style="width:200px;"','-- จังหวัดที่ขึ้นทะเบียน --');?>
@@ -31,7 +31,7 @@
 <div align="right"><button class="btn-excel-report">Excel</button></div><br>
 
 <?php else:?>
-	
+
 	<h3>รายงานรายชื่อผู้ขึ้นทะเบียน<?if(@$_GET['regis_province_id']){ echo "จังหวัด".get_province_name($_GET['regis_province_id']); }?> <?if(@$_GET['regis_year']){ echo "ปี พ.ศ. ".$_GET['regis_year']; }?></h3>
 
 <?php endif;?>
@@ -60,7 +60,7 @@
 			<td><?=$i?></td>
 			<td><?=get_amphur_name($row->reg_province_id,$row->reg_amphur_id)?></td>
 			<td class="text"><?=$row->id_card?></td>
-			<td><?=$row->name?></td>
+			<td><?=get_prefix($row->title)?><?=$row->name?></td>
 			<td><?=@calculate_age($row->birth_day,$row->birth_month,$row->birth_year)?></td>
 			<td><?=wisdom_list($row)?></td>
 			<td><?=wisdom_detail($row)?></td>
@@ -74,7 +74,7 @@
 			  	<?=$row->reg_province_id != "" ? get_province_name($row->reg_province_id) : "" ;?>
 			  	<?=$row->reg_post_code != "" ? $row->reg_post_code : "" ;?>
 			</td>
-			<td><?=$row->mobile != "" ? $row->mobile : "" ;?></td>
+			<td><?=$row->tel != "" ? $row->tel."<br>" : "" ;?> <?=$row->mobile != "" ? $row->mobile : "" ;?></td>
 			<td>
 				<?if($row->picture != ""):?>
 					<img src="uploads/histories/<?=$row->picture?>" width="110" height="110" />
@@ -162,7 +162,7 @@ $(document).ready(function(){
         var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=excel';
         window.open(url);
     });
-    
+
 	$('.btn-print-report').click(function(){
 	    var url = 'http://<?=$_SERVER['SERVER_NAME']?><?=$_SERVER['REQUEST_URI']?>&export_type=print';
 	    window.open(url);
