@@ -87,6 +87,7 @@
 	  <input type="text" class="form-control datepickerTH" placeholder="วันบัตรหมดอายุ" name="expire_date" data-date-language="th-th" value="<?=DB2Date($rs->expire_date)?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 	</div> /
   <input type="text" class="form-control " id="exampleInputName16" placeholder="สถานที่ออกบัตร" name="issue_place" value="<?=$rs->issue_place?>" style="width:300px;" />
+  <br>
   <input type="hidden" name="lifelong" value="0">
   <input type="checkbox" value="1" name="lifelong" <?=@$rs->lifelong == 1 ? 'checked' : '' ;?>> บัตรประชาชนตลอดชีพ
   </span></td>
@@ -628,5 +629,9 @@ $(document).ready(function(){
 			});
 	});
 
+  // บัตรประชาชนตลอดชีพ disabled วันที่บัตรหมดอายุ
+  $('input[name=lifelong]').click(function() {
+      $('input[name=expire_date]').attr('disabled',this.checked)
+  });
 });
 </script>

@@ -74,7 +74,7 @@ body {
 
 <br><br>
 <center>
-<div><a href="https://goo.gl/SPMLDv" target="_blank" style="font-size:18px;">- แบบทดสอบก่อนอบรม ระบบคลังปัญญาผู้สูงอายุ</a></div>
+<div><a href="https://goo.gl/SPMLDv" target="_blank" style="font-size:18px;">- แบบทดสอบก่อน-หลังอบรม ระบบคลังปัญญาผู้สูงอายุ</a></div>
 <div><a href="http://goo.gl/bYl4UD" target="_blank" style="font-size:18px;">- แบบประเมินความพึงพอใจการฝึกอบรมหลักสูตรการใช้งานระบบทะเบียนข้อมูลคลังปัญญาผู้สูงอายุ</a></div>
 </center>
 
